@@ -23,10 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //rotas com o prefixo admin utilizam  os controller na pasta Controller\Admin
 Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], function()
 {
-    Route::get('/users/create', ['middleware' => ['permission:create_user'], 'uses' => 'UserController@create']);
-    $this->get('user/list',function (){
-        return view('dashboard/users/list');
-    });
+    Route::get('/users/create', ['middleware' => ['permission:create-user'], 'uses' => 'UserController@create']);
+    $this->get('/users/list','UserController@list');
 
     $this->post("users/create",'UserController@store');
     $this->get('test','SectorController@store');

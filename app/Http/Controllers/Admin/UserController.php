@@ -11,16 +11,27 @@ class UserController extends Controller
 {
     public function create(Role $role,Sector $sector,User $user)
     {
+
         $roles = $role->all();
         $sectors = $sector->all();
-        return view("dashboard/users/create",compact('roles','sectors'));
+       
        
         return view('dashboard/users/create',compact('roles','sectors'));
+    }
+
+    public function list(User $user,Sector $sector)
+    {
+        $users = $user->with('setor')->get();
+       
+        //$sectors = $sector->find(1)->user;
+        //dd($sectors);
+        return view('dashboard/users/list',compact("users"));
     }
 
     public function testPermission(User $user)
     {
         $myUser = $user->find(1);
+        
         
         
         if($myUser->hasRole('admin_super'))
@@ -32,10 +43,10 @@ class UserController extends Controller
 
     public function store(User $user,Role $role,Request $request)
     {
-        $newUser         = $user->create([
+
+        $newUser         = $user->setor()->create([
             'name'      => $request->name,
             'email'     => $request->email,
-            'sector_id' => 1,
             'password'  => bcrypt($request->password),
             
         ]);
@@ -44,6 +55,6 @@ class UserController extends Controller
     
         //atribuindo permições
         $newUser->attachRole($role);
-        return $newUser;
+        //return $newUser;
     }
 }

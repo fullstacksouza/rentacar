@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'red',
+    'skin' => 'purple',
 
     /*
     |--------------------------------------------------------------------------
@@ -116,7 +116,7 @@ return [
         ],
 
         [
-            'text'        => 'Pages',
+            'text'        => 'Paginas',
             'url'         => 'admin/pages',
             'icon'        => 'comments',
             'label'       => 4,
@@ -130,7 +130,7 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        'ACCOUNT SETTINGS',
+        'CONFIGURAÇOES DA CONTA',
         [
             'text' => 'Perfil',
             'url'  => 'admin/settings',
@@ -141,14 +141,16 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
+       
+        'GERENCIAMENTO',
         [
             'text'    => 'Usuários',
             'icon'    => 'users',
             'submenu' => [
                 [
                     'text' => 'Listar',
-                    'icon'    => 'list-ul',
-                    'url'  => '#',
+                    'icon' => 'list-ul',
+                    'url'  => 'admin/users/list',
                 ],
                 [
                     'text'    => 'Cadastrar',
@@ -157,20 +159,25 @@ return [
                 ],
             ],
         ],
-        'LABELS',
         [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
-        ],
+            'text'    => 'Controle de Acesso',
+            'icon'    => 'lock',
+            'submenu' => [  
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'Cadastrar',
+                    'icon'    => 'user-plus',
+                    'url'     => 'admin/roles/create'
+                ],
+            ],
+        ]
+
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

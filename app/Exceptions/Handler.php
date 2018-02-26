@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate \ Database \ QueryException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -52,6 +53,12 @@ class Handler extends ExceptionHandler
         {
             return redirect()->back()->with('database_connect_error','Erro ao conectar com o banco de dados, por favor verifique a conexão com o servidor e tente novamente');
         }
+        else if($exception instanceof HttpException)
+        {
+            return redirect()->back()->with('unauthorized',
+            'Você não tem permissão para acessar essa página. Entre em contato com o Administrador(a) para mais detalhes');
+        }
+
         return parent::render($request, $exception);
     }
 }

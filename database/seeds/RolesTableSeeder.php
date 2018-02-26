@@ -14,30 +14,31 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         
-       /* $adminRole               = new Role();
-        $adminRole->name         = "admin_super";
-        $adminRole->display_name = "Administrador";
+        $adminRole               = new Role();
+        $adminRole->name         = "super-admin";
+        $adminRole->display_name = "Administrador Total";
         $adminRole->description  = "Administrador do Sistema com controle total dos dados";
         $adminRole->save();
 
         //permissão para criar pesquisa
         $createSearch               = new Permission();
-        $createSearch->name         = "create-search";
-        $createSearch->display_name = "Criar Pesquisas";
-        $createSearch->description  = "Permissão para criar pesquisas no sistema";
-        $createSearch->save();*/
+        $createSearch->name         = "create-user";
+        $createSearch->display_name = "Criar Usuários";
+        $createSearch->description  = "Permissão para criar Usuarios no sistema";
+        $createSearch->save();
+
 
 
         //Atribuindo Permissão ao perfil 
 
         $adminRole = Role::find(1);
-        $createSearchPermission = Permission::find(1);
-        $adminRole->attachPermission($createSearchPermission);
+        $createUserPermission = Permission::find(1);
+        $adminRole->attachPermission($createUserPermission);
 
         //Atribuindo regras ao usuario
-        /*
+        
         $user = User::find(1);
-        $user->attachRole($adminRole);*/
+        $user->attachRole($adminRole);
 
     }
 }

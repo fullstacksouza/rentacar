@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
-
+use App\Admin\Sector;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
@@ -28,4 +28,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setor()
+    {
+        return $this->belongsTo(Sector::class,'sector_id');
+    }
+
+
 }
