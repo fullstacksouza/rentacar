@@ -36,8 +36,8 @@
        
           <td>{{$user->name}}</td>
           <td>{{$user->email  }}</td>
-          <td>{{$user->setor->name}}</td>
-          <td>{{$user->setor->responsible_email}}</td>
+          <td>{{$user->setor->name or "Não Cadastrado" }}</td>
+          <td>{{$user->setor->responsible_email or "Não Cadastrado"}}</td>
           <td>
           <a   class='btn btn-primary'>Vizualizar</a>
           <a class='btn btn-warning'>Editar</a>

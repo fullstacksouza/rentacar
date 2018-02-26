@@ -111,6 +111,5 @@
 @section('js')
 {!! Charts::scripts() !!}
         {!! $chart->script() !!}
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-{!! Toastr::render() !!}
+
 @stop

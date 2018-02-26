@@ -11,6 +11,7 @@
         "jeroennoten/laravel-adminlte": "^1.23",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
         "oriceon/toastr-5-laravel": "dev-master",
         "santigarcor/laratrust": "5.0.*",
         "yajra/laravel-datatables-oracle": "~8.0"

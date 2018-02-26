@@ -9,8 +9,8 @@ class Sector extends Model
     //
     protected $fillable = ['name','responsible_email'];
 
-    public function user()
+    public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

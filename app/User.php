@@ -10,6 +10,7 @@ class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use Notifiable;
+   
 
     /**
      * The attributes that are mass assignable.
@@ -29,9 +30,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function setor()
+    public function sectors()
     {
-        return $this->belongsTo(Sector::class,'sector_id');
+        return $this->belongsToMany(Sector::class)->withTimestamps();
+    }
+
+    public function roles()
+    {
+      return $this->belongsToMany('App\Role');
     }
 
 
