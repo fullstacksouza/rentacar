@@ -19,13 +19,11 @@ class UserController extends Controller
         return view('dashboard/users/create',compact('roles','sectors'));
     }
 
-    public function list(User $user,Sector $sector)
+    public function list(User $user)
     {
-        $users = $user->with('setor')->get();
-       
-        //$sectors = $sector->find(1)->user;
-        //dd($sectors);
-        return view('dashboard/users/list',compact("users"));
+    $users = $user->all();
+   
+       return view('dashboard/users/list',compact("users"));
     }
 
     public function testPermission(User $user)
@@ -43,18 +41,16 @@ class UserController extends Controller
 
     public function store(User $user,Role $role,Request $request)
     {
-
-        $newUser         = $user->setor()->create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => bcrypt($request->password),
-            
-        ]);
-        
         $role            = $role->find(1);
-    
-        //atribuindo permições
-        $newUser->attachRole($role);
-        //return $newUser;
+        $sector  = Sector::find(1);
+
+            $user->name = $request->name;
+            $user->password = bcrypt($request->password);
+            $user->email = $request->email;
+            $user->sector()->associate($sector);
+            
+            $user->save();
+            $user->attachRole($role);
+        return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');
     }
 }

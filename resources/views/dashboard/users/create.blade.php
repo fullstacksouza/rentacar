@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+@include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
 <div class="box box-info">
     <div class="box-header with-border">

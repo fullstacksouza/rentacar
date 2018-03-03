@@ -29,10 +29,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function setor()
+    public function sector()
     {
-        return $this->belongsTo(Sector::class,'sector_id');
+        return $this->belongsTo(Sector::class);
     }
 
+    public function teste()
+    {
+        return $this->belongsTo(Sector::class);
+    }
 
 }

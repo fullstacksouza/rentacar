@@ -18,7 +18,7 @@
     <div class="box-header">
       <h3 class="box-title">Tabela de  Usuários Cadastrados</h3>
     </div>
-    <!-- /.box-header -->
+
     <div class="box-body">
       <table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -36,11 +36,11 @@
        
           <td>{{$user->name}}</td>
           <td>{{$user->email  }}</td>
-          <td>{{$user->setor->name}}</td>
-          <td>{{$user->setor->responsible_email}}</td>
+          <td>{{$user->sector->name}}</td>
+          <td>{{$user->sector->responsible_email}}</td>
           <td>
           <a   class='btn btn-primary'>Vizualizar</a>
-          <a class='btn btn-warning'>Editar</a>
+          <a class='btn btn-warning' href='{{url("admin/users/$user->id/edit")}}'>Editar</a>
           <a class='btn btn-danger'>Excluir</a>
           </td>
         </tr>

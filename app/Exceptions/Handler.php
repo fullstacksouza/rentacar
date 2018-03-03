@@ -49,11 +49,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof  QueryException)
-        {
-            return redirect()->back()->with('database_connect_error','Erro ao conectar com o banco de dados, por favor verifique a conexão com o servidor e tente novamente');
-        }
-        else if($exception instanceof HttpException)
+         if($exception instanceof HttpException)
         {
             return redirect()->back()->with('unauthorized',
             'Você não tem permissão para acessar essa página. Entre em contato com o Administrador(a) para mais detalhes');
