@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function testPermission(User $user)
     {
-        $myUser = $user->find(1);
+        $myUser = $user->find(2);
         
         
         
