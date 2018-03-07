@@ -174,8 +174,24 @@ return [
                     'url'     => 'admin/roles/create'
                 ],
             ],
+        ],
+        [
+            'text'    => 'Setores',
+            'icon'    => 'users',
+            'submenu' => [  
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'Cadastrar',
+                    'icon'    => 'user-plus',
+                    'url'     => 'admin/roles/create'
+                ],
+            ],
         ]
-
+            
     ],
     
 
