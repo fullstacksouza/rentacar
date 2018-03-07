@@ -42,7 +42,7 @@ class UserController extends Controller
     public function store(User $user,Role $role,Request $request)
     {
         $role            = $role->find(1);
-        $sector  = Sector::find(1);
+        $sector  = Sector::find($request->sector_id);
 
             $user->name = $request->name;
             $user->password = bcrypt($request->password);
