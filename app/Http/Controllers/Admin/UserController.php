@@ -53,4 +53,11 @@ class UserController extends Controller
             $user->attachRole($role);
         return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');
     }
+
+    public function edit(Request $request)
+    {
+        $roles = Role::all();
+        $userEdit = User::findOrFail($request->id);
+        return view("dashboard/users/edit",compact('userEdit','roles'));
+    }
 }

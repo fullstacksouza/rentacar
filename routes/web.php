@@ -25,7 +25,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 {
     Route::get('/users/create', ['middleware' => ['permission:create-user'], 'uses' => 'UserController@create']);
     $this->get('/users/list','UserController@list');
-
+    $this->get('users/{id}/edit','UserController@edit');
     $this->post("users/create",'UserController@store');
     $this->get('test','SectorController@store');
 });
