@@ -182,12 +182,12 @@ return [
                 [
                     'text' => 'Listar',
                     'icon' => 'list-ul',
-                    'url'  => '#',
+                    'url'  => 'admin/sectors/list',
                 ],
                 [
                     'text'    => 'Cadastrar',
                     'icon'    => 'user-plus',
-                    'url'     => 'admin/roles/create'
+                    'url'     => 'admin/sectors/create'
                 ],
             ],
         ]

@@ -44,7 +44,12 @@
             <select  class="form-control" name="role">
              
               @forelse($roles as $role)
-            <option value="{{$role->id}}">{{$role->display_name}}</option>
+                
+                @if($role->id == $userEdit->role)
+            <option value="{{$role->id}}" selected>{{$role->display_name}}</option>
+                @else
+                    <option value="{{$role->id}}">{{$role->display_name}}</option>
+                @endif
             @empty
               <option value="0"></option>
               @endforelse
@@ -53,13 +58,36 @@
             </div>
         </div>
 
-
+        
         <div class="form-group">
-            {{ Form::label('name', 'Nome Completo',['class'=>"col-sm-2 control-label"]) }}
+            {{ Form::label('setor', 'Setor',['class'=>"col-sm-2 control-label"]) }}
             <div class="col-sm-10">
-            {{ Form::text('name',null,['class'=>'form-control','readonly'])}}
+
+            <select  class="form-control" name="sector">
+             
+              @forelse($sectors as $sector)
+                @if($sector->id == $userEdit->sector->id)
+            <option value="{{$sector->id}}" selected>{{$sector->name}}</option>
+                @else
+                <option value="{{$sector->id}}">{{$sector->name}}</option>
+            @endif
+                
+            @empty
+              <option value="0"></option>
+              @endforelse
+              
+            </select>
             </div>
         </div>
+
+        
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label" name="">Senha</label>
+  
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Senha" name="password">
+            </div>
+          </div>
         
       </div>
       <!-- /.box-body -->

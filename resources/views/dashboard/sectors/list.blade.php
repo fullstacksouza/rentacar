@@ -6,7 +6,7 @@
 @section('content_header')
 {{--alertas --}}
 @include('dashboard/alerts/alerts')
-    <h1>Lista de usuários</h1>
+    <h1>Lista de Setores</h1>
 @stop
 
 @section('css')
@@ -16,7 +16,7 @@
 
 <div class="box">
     <div class="box-header">
-      <h3 class="box-title">Tabela de  Usuários Cadastrados</h3>
+      <h3 class="box-title">Tabela de  Setores Cadastrados</h3>
     </div>
 
     <div class="box-body">
@@ -24,23 +24,19 @@
         <thead>
         <tr>
           <th>Nome</th>
-          <th>Email</th>
-          <th>Setor</th>
           <th>Email do responsavel</th>
           <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-         @forelse ($users as $user)
+         @forelse ($sectors as $sector)
         <tr>
        
-          <td>{{$user->name}}</td>
-          <td>{{$user->email  }}</td>
-          <td>{{$user->sector->name or 'Não Cadastrado'}}</td>
-          <td>{{$user->sector->responsible_email or 'Não Cadastrado' }}</td>
+          <td>{{$sector->name}}</td>
+          <td>{{$sector->responsible_email or 'Não Cadastrado' }}</td>
           <td>
           <a   class='btn btn-primary'>Vizualizar</a>
-          <a class='btn btn-warning' href='{{url("admin/users/$user->id/edit")}}'>Editar</a>
+          <a class='btn btn-warning' href='{{url("admin/sectors/$sector->id/edit")}}'>Editar</a>
           <a class='btn btn-danger'>Excluir</a>
           </td>
         </tr>
@@ -52,8 +48,6 @@
         <tfoot>
         <tr>
           <th>Nome</th>
-          <th>Email</th>
-          <th>Setor</th>
           <th>Email do responsavel</th>
           <th>Ações</th>
         </tr>

@@ -11,18 +11,42 @@ class SectorController extends Controller
     //mostrar view para cadastrar
     public function create()
     {
-        
+
+        return view("dashboard/sectors/create");
+    }
+
+    public function list()
+    {
+        $sectors = Sector::all();
+        return view('dashboard/sectors/list',compact('sectors'));
     }
 
     //metodo para salvar
-    public function store(Sector $sector)
+    public function store(Request $request,Sector $sector)
     {
-        $newSector = $sector->create([
-            'name'              => 'Administrativo',
-            'responsible_email' => 'responsalvel@setoradm.com'
+        $sector->name              = $request->name;
+        $sector->responsible_email = $request->responsible_email;
+        $sector->save();
 
-        ]);
+        
+        return redirect()->back()->with('info','Setor Cadastrado com Sucesso');
+    }
 
-        return $newSector;
+    public function edit(Request $request)
+    {
+        $sectorEdit = Sector::findOrFail($request->id);
+
+        return view('dashboard/sectors/edit',compact('sectorEdit'));
+    }
+
+    public function update(Request $request,Sector $sector)
+    {
+        $sectorEdit = $sector->findOrFail($request->id);
+        $sectorEdit->name              = $request->name;
+        $sectorEdit->responsible_email = $request->responsible_email;
+        $sectorEdit->save();
+
+        
+        return redirect()->back()->with('info','Setor Atualizado com Sucesso');
     }
 }
