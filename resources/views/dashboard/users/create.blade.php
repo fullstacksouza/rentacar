@@ -28,6 +28,31 @@
             <input type="text" class="form-control" id="inputEmail3" placeholder="Nome Completo" name="name">
           </div>
         </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Data de Nascimento </label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Data de Nascimento" name="dob">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">RG </label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Numero do RG" name="rg">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Matricula </label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Matrícula" name="registration">
+          </div>
+        </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 

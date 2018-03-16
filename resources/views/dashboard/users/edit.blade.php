@@ -62,11 +62,12 @@
         <div class="form-group">
             {{ Form::label('setor', 'Setor',['class'=>"col-sm-2 control-label"]) }}
             <div class="col-sm-10">
-
+            
             <select  class="form-control" name="sector">
              
               @forelse($sectors as $sector)
-                @if($sector->id == $userEdit->sector->id)
+              {{$sector}}
+                @if($sector->id === $userEdit->sector->id)
             <option value="{{$sector->id}}" selected>{{$sector->name}}</option>
                 @else
                 <option value="{{$sector->id}}">{{$sector->name}}</option>

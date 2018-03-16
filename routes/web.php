@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], function()
 {
     //USERS ROUTES
-    Route::get('/users/create', ['middleware' => ['permission:create-user'], 'uses' => 'UserController@create']);
+    Route::get('/users/create', 'UserController@create');
     $this->post("users/create",'UserController@store');
 
     $this->get('/users/list','UserController@list');

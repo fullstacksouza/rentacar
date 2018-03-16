@@ -48,6 +48,7 @@ class UserController extends Controller
     {
         $roles    = Role::all();
         $sectors  = Sector::all();
+        
         $userEdit = User::findOrFail($request->id);
         return view("dashboard/users/edit",compact('userEdit','roles','sectors'));
     }
@@ -61,11 +62,14 @@ class UserController extends Controller
         
         $currentRole = $editUser->roles;
         $roles = $role->find($request->role);
+        if($roles)
+        {
         //verificando se houve alteração de perfil no formulario
         if(!$currentRole = $roles->id)
         {
             $editUser->attachRole($roles);
         }
+    }
         
         $currentSector = $user->sector;
        
