@@ -29,6 +29,8 @@ class UserController extends Controller
 
     public function store(User $user,Role $role,Request $request)
     {
+        dd($request->all());
+        /*
         $role               = $role->find(1);
         $sector             = Sector::find($request->sector_id);
 
@@ -41,7 +43,7 @@ class UserController extends Controller
         $user->save();
         //atribuindo o perfil
         $user->attachRole($role);
-        return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');
+        return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');*/
     }
 
     public function edit(Request $request)

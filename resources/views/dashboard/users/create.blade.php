@@ -33,7 +33,7 @@
           <label for="inputEmail3" class="col-sm-2 control-label">Data de Nascimento </label>
 
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Data de Nascimento" name="dob">
+             {{ Form::date('dob',null,['class'=>'form-control','placeholder'=>'Data de Nascimento'])}}
           </div>
         </div>
 

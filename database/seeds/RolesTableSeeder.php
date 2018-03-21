@@ -37,7 +37,11 @@ class RolesTableSeeder extends Seeder
 
         //Atribuindo regras ao usuario
         
-        $user = User::find(1);
+        $user = User::create([
+            'name'=>'Matheus Souza',
+            'email' => 'matheus.souzadv@gmail.com',
+            'password'=>bcrypt('05092013')
+        ]);
         $user->attachRole($adminRole);
 
     }
