@@ -35,12 +35,12 @@ class UserController extends Controller
         $role               = $role->find($request->role);
         $sector             = Sector::find($request->sector);
 
-        $user->name     = $request->name;
-        $user->password = bcrypt($request->password);
-        $user->email    = $request->email;
-        $user->rg    = $request->rg;
-        $user->registration    = $request->registration;
-        $user->dob    = $request->dob;
+        $user->name         = $request->name;
+        $user->password     = bcrypt($request->password);
+        $user->email        = $request->email;
+        $user->rg           = $request->rg;
+        $user->registration = $request->registration;
+        $user->dob          = $request->dob;
         //atribuindo o setor
         $user->sector()->associate($sector);
             
@@ -61,12 +61,12 @@ class UserController extends Controller
 
     public function update(Request $request, User $user,Role $role)
     {
-        $sector = Sector::find($request->sector);
-        $editUser  = $user->findOrFail($request->id);
+        $sector         = Sector::find($request->sector);
+        $editUser       = $user->findOrFail($request->id);
         $editUser->name = $request->name;
 
         
-        $currentRole = $editUser->roles;
+        $currentRole    = $editUser->roles;
         $roles = $role->find($request->role);
         if($roles)
         {

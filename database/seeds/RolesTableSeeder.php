@@ -19,7 +19,7 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         
-        /*$adminRole               = new Role();
+        $adminRole               = new Role();
         $adminRole->name         = "super-admin";
         $adminRole->display_name = "Administrador Total";
         $adminRole->description  = "Administrador do Sistema com controle total dos dados";
@@ -53,7 +53,7 @@ class RolesTableSeeder extends Seeder
 
 
         ]);
-        $user->attachRole($adminRole);*/
+        $user->attachRole($adminRole);
         
         
 

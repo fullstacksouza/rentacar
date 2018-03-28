@@ -66,13 +66,14 @@
             <select  class="form-control" name="sector">
              
               @forelse($sectors as $sector)
-              {{$sector}}
+         
                @if(isset($sector))
-                @if($sector === $userEdit->sector)
+                @if($sector == $userEdit->sector)
             <option value="{{$sector->id}}" selected>{{$sector->name}}</option>
                 @else
+                
                 <option value="{{$sector->id}}">{{$sector->name}}</option>
-            @endif
+                @endif
                 @endif
             @empty
               <option value="0"></option>
