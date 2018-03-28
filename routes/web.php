@@ -41,4 +41,6 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 
     $this->get('sectors/{id}/edit','SectorController@edit');
     $this->post('sectors/{id}/edit','SectorController@update');
+
+    $this->get("user/{id}/delete","UserController@delete");
 });

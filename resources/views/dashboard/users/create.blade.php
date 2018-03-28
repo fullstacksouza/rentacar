@@ -16,7 +16,16 @@
     <!-- /.box-header -->
     <!-- form start -->
 
-   
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
   <form class="form-horizontal" action="{{url('admin/users/create')}}" method="post">
 
     {{csrf_field()}}
@@ -69,7 +78,7 @@
             <select  class="form-control" name="role">
              
               @forelse($roles as $role)
-            <option value="{{$role->id}}">{{$role->display_name}}</option>
+            <option value="{{$role->id}}" selected>{{$role->display_name}}</option>
             @empty
               <option value="0"></option>
               @endforelse
@@ -84,7 +93,7 @@
             <select class="form-control"  name="sector">
 
               @forelse($sectors as $sector)
-            <option value="{{$sector->id}}">{{$sector->name}}</option>
+            <option value="{{$sector->id}}" selected>{{$sector->name}}</option>
             @empty
               <option value="0"></option>
             @endforelse

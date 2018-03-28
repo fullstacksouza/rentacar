@@ -8,4 +8,13 @@ class Question extends Model
 {
     //
     protected $fillable = ['search_id','question'];
+
+    public function search()
+    {
+        return $this->belongsTo(Search::class);
+    }
+    public function answerOptions()
+    {
+        return $this->hasMany(AnswerOption::class);
+    }
 }

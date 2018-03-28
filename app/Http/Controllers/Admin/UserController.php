@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
@@ -27,23 +28,26 @@ class UserController extends Controller
     }
 
 
-    public function store(User $user,Role $role,Request $request)
+    public function store(User $user,Role $role,UserRequest $request)
     {
-        dd($request->all());
-        /*
-        $role               = $role->find(1);
-        $sector             = Sector::find($request->sector_id);
+
+        //dd($request->all());        
+        $role               = $role->find($request->role);
+        $sector             = Sector::find($request->sector);
 
         $user->name     = $request->name;
         $user->password = bcrypt($request->password);
         $user->email    = $request->email;
+        $user->rg    = $request->rg;
+        $user->registration    = $request->registration;
+        $user->dob    = $request->dob;
         //atribuindo o setor
         $user->sector()->associate($sector);
             
         $user->save();
         //atribuindo o perfil
         $user->attachRole($role);
-        return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');*/
+        return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');
     }
 
     public function edit(Request $request)
@@ -87,5 +91,12 @@ class UserController extends Controller
         
         return redirect()->back()->with('info','Usuario Atualizado com Sucesso');
 
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->delete();
+        return response()->json(['success'=>'usuario apagado']);
     }
 }

@@ -3,7 +3,7 @@
 @section('title', 'Realiza Rent a car | Cadastrar Usuário')
 
 @section('content_header')
-    <h1>Criar Usuário</h1>
+    <h1>Editar Usuário</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
 <!-- Horizontal Form -->
 <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Informe os dados do usuario a ser cadastrado</h3>
+      <h3 class="box-title">Informe os dados do usuario a ser atualizado</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
@@ -67,12 +67,13 @@
              
               @forelse($sectors as $sector)
               {{$sector}}
-                @if($sector->id === $userEdit->sector->id)
+               @if(isset($sector))
+                @if($sector === $userEdit->sector)
             <option value="{{$sector->id}}" selected>{{$sector->name}}</option>
                 @else
                 <option value="{{$sector->id}}">{{$sector->name}}</option>
             @endif
-                
+                @endif
             @empty
               <option value="0"></option>
               @endforelse
@@ -100,6 +101,7 @@
     </form>
   </div>
   <!-- /.box -->
+
 @stop
 
 @section('css')
