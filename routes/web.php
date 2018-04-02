@@ -46,4 +46,10 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->post('sectors/{id}/edit','SectorController@update');
 
     $this->get("user/{id}/delete","UserController@delete");
+
+    $this->get('user/change-pass',function(){
+        return view("dashboard/users/change-password");
+    });
+
+    $this->post('users/change-pass','UserController@changePass');
 });

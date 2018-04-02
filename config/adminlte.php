@@ -138,7 +138,7 @@ return [
         ],
         [
             'text' => 'Mudar senha',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/user/change-pass',
             'icon' => 'lock',
         ],
        

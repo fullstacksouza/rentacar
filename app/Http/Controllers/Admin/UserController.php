@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
@@ -98,5 +99,38 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->delete();
         return response()->json(['success'=>'usuario apagado']);
+    }
+
+    public function changePass(ChangePasswordRequest $request)
+    {
+       // dd($request->all());
+
+        /*$credentials = [
+            'email' => \Auth::user()->email,
+            'password' => $request->current_pass
+        ];
+
+        $userExist = \Auth::attempt($credentials);
+        $passwordEquals = false;
+        if($request->new_pass_confirmation == $request->new_pass)
+        {
+            $passwordEquals = true;
+        }
+        else
+        {
+            return redirect()->back()->withErrors([
+                'confirm_new_pass' => 'As senhas não Coferem'
+                ]);
+        }
+        if($userExist && $passwordEquals == true)
+        {
+            
+        }*/
+            $user = \Auth::user();
+            $user->password = $request->new_pass;
+            $user->save();
+
+            return redirect()->back()->with('info','Senha Alterada com Sucesso');
+        
     }
 }
