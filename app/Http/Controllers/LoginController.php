@@ -25,8 +25,9 @@ class LoginController extends Controller
 
         if(Auth::check())
         {
-             return redirect()->intended('home');
+            return redirect()->intended('home');
         }
+        
 
         return redirect()->back()->withErrors(['email'=>'credenciais invalidas']);
 

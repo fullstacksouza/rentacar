@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Charts;
+use App\Admin\TypeQuestion;
 class HomeController extends Controller
 {
     /**
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -31,5 +32,14 @@ class HomeController extends Controller
         ->responsive(true);
 
          return view('home',compact('chart'));
+    }
+
+    public function teste(TypeQuestion $tipo)
+    {
+        $t = $tipo->find(2);
+        foreach($t->answers as $ans)
+        {
+            echo "$ans->answer <br>";
+        }
     }
 }

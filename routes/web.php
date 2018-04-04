@@ -12,14 +12,14 @@
 */
 
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
-
+Route::get('teste','HomeController@teste');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('login','LoginController@auth');
 
 Route::post('/logout','Auth\LoginController@logout');
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 

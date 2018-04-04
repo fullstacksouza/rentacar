@@ -7,6 +7,7 @@ use App\User;
 use App\Admin\Question;
 use App\Admin\Search;
 use App\Admin\Sector;
+use App\Admin\Answer;
 use App\Admin\AnsweOption;
 
 class RolesTableSeeder extends Seeder
@@ -55,6 +56,7 @@ class RolesTableSeeder extends Seeder
         ]);
         $user->attachRole($adminRole);
         
+
         
 
     }
