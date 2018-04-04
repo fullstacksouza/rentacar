@@ -52,4 +52,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     });
 
     $this->post('users/change-pass','UserController@changePass');
+
+    $this->get('searches/create','SearchController@create');
+    $this->post('searches/create','SearchController@store');
 });

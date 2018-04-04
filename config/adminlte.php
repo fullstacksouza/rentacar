@@ -144,6 +144,40 @@ return [
        
         'GERENCIAMENTO',
         [
+            'text'    => 'Pesquisas',
+            'icon'    => 'users',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url'  => 'admin/users/list',
+                    
+                ],
+                [
+                    'text'    => 'Cadastrar',
+                    'icon'    => 'user-plus',
+                    'url'     => 'admin/searches/create'
+                ],
+                [
+                    'text'    => 'Modelos de Perguntas',
+                    'icon'    => 'question',
+                    'url'     => 'admin/users/create',
+                    'submenu' => [
+                        [
+                            'text' => 'Listar',
+                            'icon' => 'list-ul',
+                            'url'  => 'admin/users/list',
+                        ],
+                        [
+                            'text'    => 'Cadastrar',
+                            'icon'    => 'user-plus',
+                            'url'     => 'admin/users/create'
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
             'text'    => 'Usuários',
             'icon'    => 'users',
             'submenu' => [
