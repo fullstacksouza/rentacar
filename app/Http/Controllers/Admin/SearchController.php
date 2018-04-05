@@ -10,13 +10,23 @@ class SearchController extends Controller
 {
     public function create()
     {
-        return view('dashboard/searches/question-search');
+        return view('dashboard/searches/create');
     }
 
     public function store(SearchRequest $request,Search $search)
     {
+        
        $s = $search->create($request->all());
-        $searchId = $s->id;
-        return view("dashboard/searches/question-search",compact('searchId'));
+       $id = $s->id;
+       return view('dashboard/searches/question-search',compact('id'));
+
+    }
+
+    public function addQuestions(Request $request)
+    {
+        $pesquisa = $request->all();
+        dd($pesquisa);
+       // return response()->json(['pesquisa'=>$pesquisa]);
+       return redirect("create/search");    
     }
 }

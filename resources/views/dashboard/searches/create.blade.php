@@ -27,10 +27,6 @@
     </div>
 @endif
 
-<div id="app">
-  
-  <example></example>
-</div>
 
   <form class="form-horizontal" action="{{url('admin/searches/create')}}" method="post">
  
@@ -84,13 +80,6 @@
 
 @section('js')
 
-    <script> $(function(){
-      $('.clickable').on('click',function(){
-          var effect = $(this).data('effect');
-              $(this).closest('.panel')[effect]();
-        })
-      })
-      </script>
 @stop
 
  

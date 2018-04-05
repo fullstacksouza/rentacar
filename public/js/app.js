@@ -11559,7 +11559,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -11568,9 +11568,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-0ca92eac", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-0ca92eac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11730,19 +11730,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-
+            token: "",
             questions: [{
-                question: '',
-                answer: [{
-                    optionanswer: ''
-                }]
+                question: "",
+                answer: [{ "op": '' }]
             }]
+
         };
     },
     mounted: function mounted() {
@@ -11753,7 +11774,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addNewQuestion: function addNewQuestion() {
             this.questions.push({
                 'question': '',
-                'answer': ''
+                'answer': []
+            });
+        },
+        addNewAnswerOption: function addNewAnswerOption(index) {
+            this.questions[index].answer.push({
+                op: ''
+            });
+        },
+        sendQuestions: function sendQuestions() {
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("http://localhost:8000/admin/search/questions/create", {
+                search: this.questions
+                //body.push
+            }).then(function (response) {
+                console.log(responses);
+            }).catch(function (error) {
+                console.log(error);
             });
         }
     }
@@ -11770,77 +11807,151 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.addNewQuestion } },
-        [_vm._v("Adicionar Pergunta")]
-      ),
+      _c("center", [
+        _c(
+          "a",
+          {
+            staticClass: "btn-lg btn-primary",
+            attrs: { href: "#" },
+            on: { click: _vm.addNewQuestion }
+          },
+          [_vm._v("Adicionar Pergunta")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
       _vm._v(" "),
       _vm._l(_vm.questions, function(question, index) {
-        return _c("div", { staticClass: "panel panel-primary" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("Pergunta do tipo : aberta " + _vm._s(index)),
-            _vm._m(0, true)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-2 control-label",
-                  attrs: { for: "inputEmail3" }
-                },
-                [_vm._v("Pergunta")]
+        return _c(
+          "div",
+          {
+            staticClass: "panel panel-primary copyright-wrap",
+            attrs: { id: "copyright-wrap" }
+          },
+          [
+            _c("div", { staticClass: "panel-heading" }, [
+              _vm._v(
+                "Pergunta " + _vm._s(index + 1) + "\n                     "
               ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-10" }, [
-                _c("input", {
-                  directives: [
+              _vm._m(0, true)
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "panel-body" },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: question.question,
-                      expression: "question.question"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "inputEmail3",
-                    placeholder: "Pergunta",
-                    name: "title"
-                  },
-                  domProps: { value: question.question },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      staticClass: "col-sm-2 control-label",
+                      attrs: { for: "inputEmail3" }
+                    },
+                    [_vm._v("Pergunta")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: question.question,
+                          expression: "question.question"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "inputEmail3",
+                        placeholder: "Digite aqui a pergunta"
+                      },
+                      domProps: { value: question.question },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(question, "question", $event.target.value)
+                        }
                       }
-                      _vm.$set(question, "question", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-2 control-label",
-                  attrs: { for: "inputEmail3" }
-                },
-                [_vm._v("Resposta")]
-              ),
-              _vm._v(" "),
-              _vm._m(1, true)
-            ])
-          ])
-        ])
-      })
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm._l(_vm.questions[index].answer, function(ans, index) {
+                  return _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 control-label",
+                        attrs: { for: "inputEmail3" }
+                      },
+                      [_vm._v("Resposta " + _vm._s(index + 1))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: ans.op,
+                            expression: "ans.op"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "inputEmail3",
+                          placeholder: "Digite aqui a pergunta"
+                        },
+                        domProps: { value: ans.op },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(ans, "op", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("br")
+                  ])
+                }),
+                _vm._v(" "),
+                _c("center", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          _vm.addNewAnswerOption(index)
+                        }
+                      }
+                    },
+                    [_vm._v("Adicionar Opçao de resposta")]
+                  )
+                ])
+              ],
+              2
+            )
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _vm._m(1)
     ],
     2
   )
@@ -11851,29 +11962,37 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "span",
+      "button",
       {
-        staticClass: "pull-right clickable",
-        attrs: { "data-effect": "fadeOut" }
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-target": "#copyright-wrap",
+          "data-dismiss": "alert"
+        }
       },
-      [_c("i", { staticClass: "fa fa-times" })]
+      [
+        _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")]),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Close")])
+      ]
     )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-10" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "inputEmail3",
-          placeholder: "Resposta",
-          name: "title",
-          readonly: ""
-        }
-      })
+    return _c("div", { staticClass: "box-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "submit" } },
+        [_vm._v("Cancelar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-info pull-right", attrs: { type: "submit" } },
+        [_vm._v("Prosseguir")]
+      )
     ])
   }
 ]
@@ -11882,7 +12001,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
   }
 }
 

@@ -9,10 +9,10 @@ class QuestionController extends Controller
 {
     //
 
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
-        
-        return view('dashboard/searches/question-search');
+        $searchId = $id;
+        return view('dashboard/searches/question-search',compact('searchId'));
     }
     public function store(Request $request)
     {

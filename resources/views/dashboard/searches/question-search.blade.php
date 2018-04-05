@@ -1,9 +1,12 @@
 @extends('adminlte::page')
 
 @section('title', 'Realiza Rent a car | Cadastrar Pesquisa')
-
+@section('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
 @section('content_header')
     <h1>Criar Perguntas</h1>
+    
 @stop
 
 @section('content')
@@ -27,23 +30,16 @@
     </div>
 @endif
 
-
     <div id="app">
-  
             <example></example>
+
 
           </div>
 
 
-
+        </form>
       </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancelar</button>
-        <button type="submit" class="btn btn-info pull-right">Prosseguir</button>
-      </div>
-      <!-- /.box-footer -->
-    </form>
+   
   </div>
   <!-- /.box -->
 
@@ -64,6 +60,8 @@
               $(this).closest('.panel')[effect]();
         })
       })
+
+
       </script>
 @stop
 
