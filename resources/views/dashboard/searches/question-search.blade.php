@@ -3,7 +3,7 @@
 @section('title', 'Realiza Rent a car | Cadastrar Pesquisa')
 
 @section('content_header')
-    <h1>Criar Nova Pesquisa</h1>
+    <h1>Criar Perguntas</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
 <!-- Horizontal Form -->
 <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Informe os dados da Pesquisa a ser cadastrado</h3>
+      <h3 class="box-title">Vamos Criar as perguntas</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
@@ -27,39 +27,13 @@
     </div>
 @endif
 
-<div id="app">
+
+    <div id="app">
   
-  <example></example>
-</div>
-
-  <form class="form-horizontal" action="{{url('admin/searches/create')}}" method="post">
- 
-    {{csrf_field()}}
-      <div class="box-body">
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Titulo</label>
-
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder=" Titulo da Pesquisa" name="title">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Data de inicio </label>
-
-          <div class="col-sm-10">
-             {{ Form::date('date_start',null,['class'=>'form-control','placeholder'=>'Data de Nascimento'])}}
+            <example></example>
 
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Data de Expiração </label>
-
-          <div class="col-sm-10">
-             {{ Form::date('date_end',null,['class'=>'form-control','placeholder'=>'Data de Expiração'])}}
-          </div>
-        </div>
 
 
       </div>

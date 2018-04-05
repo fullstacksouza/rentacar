@@ -10,12 +10,13 @@ class SearchController extends Controller
 {
     public function create()
     {
-        return view('dashboard/searches/create');
+        return view('dashboard/searches/question-search');
     }
 
     public function store(SearchRequest $request,Search $search)
     {
-        $search->create($request->all());
-        return redirect()->back()->with('info','Pesquisa Cadastrada com Sucesso!');
+       $s = $search->create($request->all());
+        $searchId = $s->id;
+        return view("dashboard/searches/question-search",compact('searchId'));
     }
 }
