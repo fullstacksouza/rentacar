@@ -28,8 +28,25 @@ class SearchController extends Controller
     public function addQuestions(Request $request)
     {
         $pesquisa = $request->all();
-        dd($pesquisa);
-       // return response()->json(['pesquisa'=>$pesquisa]);
-       return redirect("create/search");    
+        if(is_array($pesquisa))
+        {
+            $i = 0;
+
+            foreach($pesquisa as $p)
+            { 
+              
+                return $p;
+             //  print_r($p);
+             //pergunta
+               // print_r($p[0]['question']);
+               //resposta
+               // print_r($p[0]['answer'][0]['op']);
+                $i++;
+
+            }
+        }else
+        {
+        return "nao e array";
+        }
     }
 }

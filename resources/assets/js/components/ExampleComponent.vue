@@ -1,18 +1,8 @@
 <template>
 
-   <div>           
- <button data-toggle="collapse" data-target="#demo">Collapsible</button>
+   <div> 
 
-<div id="demo" class="collapse">
 
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="   " alt="Card image cap">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-
-</div> 
             <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion">Adicionar Pergunta</button></center>
             <br>
             <br>
@@ -34,17 +24,45 @@
                             <br>
                             <br>
 
-                        <div v-for="(ans,index) in questions[index].answer" class="form-group">
-                            <label   for="inputEmail3" class="col-sm-2 control-label">Resposta {{index+1}}</label>
+                        <!-- teste-->
+                        <div v-for="(ans, i) in questions[index].answer" class="panel panel-info copyright-wrap" id="copyright-wrap">
+                    <div class="panel-heading">Resposta {{i+1}}
+                        <button type="button" @click="deleteAnswer(index,i)" class="close" data-target="#copyright-wrap-[i]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                        </button>
+                    </div>
+                    <div class="panel-body">   
+                            <br>
+                            <br>
+
+                        <div class="form-group">
+                            <label   for="inputEmail3" class="col-sm-2 control-label">Resposta {{i+1}}</label>
                            
                             <div class="col-sm-10">
-                            <input  v-model="ans.op" type="text" class="form-control" id="inputEmail3" placeholder="Digite aqui a pergunta">
+                            <input  v-model="ans.op" type="text" class="form-control" id="inputEmail3" :placeholder="'Digite a '+ (index+1)+'ª de resposta'">
                             </div>
                             <br>
                             <br>
                         
 
                         </div>  
+                        
+                         
+                        
+                        </div>
+                </div>
+                <!--endTEsy-->
+                        <!--<div v-for="(ans, index) in questions[index].answer" class="form-group">
+                            <label   for="inputEmail3" class="col-sm-2 control-label">Resposta {{index+1}}</label>
+                           
+                            <div class="col-sm-10">
+                            <input  v-model="ans.op" type="text" class="form-control" id="inputEmail3" :placeholder="'Digite a '+ (index+1)+'ª de resposta'">
+                            </div>
+                            <br>
+                            <br>
+                        
+
+                        </div>  -->
                         <center><button class="btn btn-primary" @click="addNewAnswerOption(index)">Adicionar Opçao de resposta</button></center>   
                     </div>
                 </div>
@@ -112,7 +130,7 @@ import axios from 'axios';
                 let uri = location.pathname.split("/");
 
                 let searchId  =  uri[3];
-                this.questions.push({"search-id":searchId}),
+                this.questions.push({"search_id":searchId}),
                 axios.post(`http://localhost:8000/admin/search/questions/create`,{
                     search:this.questions,
                  })
@@ -128,6 +146,10 @@ import axios from 'axios';
                 console.log("index da array "+index);
                 this.questions.splice(index,1);
                 console.log(this.questions);
+            },
+            deleteAnswer(iq,index)
+            {
+                this.questions[iq].answer.splice(index,1);
             }
         }
     }

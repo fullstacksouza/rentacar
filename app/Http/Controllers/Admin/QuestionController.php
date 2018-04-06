@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Admin\Search;
 class QuestionController extends Controller
 {
     //
@@ -16,6 +16,9 @@ class QuestionController extends Controller
     }
     public function store(Request $request)
     {
-        return $request->all();
+        //$search = Search::find($request->search_id);
+        //if($request)
+        dd("OK");
+        return $request->search->answer;
     }
 }

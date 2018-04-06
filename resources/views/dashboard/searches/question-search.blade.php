@@ -10,7 +10,6 @@
 @stop
 
 @section('content')
-{{\Session::get('id')}}
 @include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
 <div class="box box-info">
