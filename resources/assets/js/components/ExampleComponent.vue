@@ -1,14 +1,25 @@
 <template>
 
    <div>           
+ <button data-toggle="collapse" data-target="#demo">Collapsible</button>
 
-            <center><a href="#" class="btn-lg btn-primary" @click="addNewQuestion">Adicionar Pergunta</a></center>
+<div id="demo" class="collapse">
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="   " alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+</div> 
+            <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion">Adicionar Pergunta</button></center>
             <br>
             <br>
 
                 <div v-for="(question,index) in questions" class="panel panel-primary copyright-wrap" id="copyright-wrap">
                     <div class="panel-heading">Pergunta {{index+1}}
-                        <button type="button" class="close" data-target="#copyright-wrap" data-dismiss="alert"> <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        <button type="button" @click="deleteQuestion(index)" class="close" data-target="#copyright-wrap-[index]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
                         </button>
                     </div>
@@ -44,7 +55,7 @@
       <div class="box-footer">
 
         <button type="submit" class="btn btn-default">Cancelar</button>
-        <button type="submit" class="btn btn-info pull-right">Prosseguir</button>
+        <button type="submit" @click="sendQuestions" :disabled="questions.length< 1 "  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
 
@@ -59,7 +70,13 @@
 import axios from 'axios';
     export default {
         data(){
+
         return {
+
+
+            uri: location.pathname,
+            params:"",
+            searchId:"",
             token:"",
            questions:[{
                question:"",
@@ -71,7 +88,7 @@ import axios from 'axios';
     },
         
         mounted() {
-            console.log('Component mounted.')
+            console.log(this.questions.length)
         },
         methods:
         {
@@ -92,17 +109,25 @@ import axios from 'axios';
 
             sendQuestions()
             {
+                let uri = location.pathname.split("/");
 
+                let searchId  =  uri[3];
+                this.questions.push({"search-id":searchId}),
                 axios.post(`http://localhost:8000/admin/search/questions/create`,{
-                    search:this.questions
-                    //body.push
-                })
+                    search:this.questions,
+                 })
                 .then(response=>{
                     console.log(responses)
                 })
                 .catch(error =>{
                     console.log(error)
                 })
+            },
+            deleteQuestion(index)
+            {
+                console.log("index da array "+index);
+                this.questions.splice(index,1);
+                console.log(this.questions);
             }
         }
     }

@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-
+{{\Session::get('id')}}
 @include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
 <div class="box box-info">
@@ -53,8 +53,9 @@
 @stop
 
 @section('js')
-
+    
     <script> $(function(){
+       
       $('.clickable').on('click',function(){
           var effect = $(this).data('effect');
               $(this).closest('.panel')[effect]();

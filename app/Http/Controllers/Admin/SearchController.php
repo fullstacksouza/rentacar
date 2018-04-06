@@ -18,7 +18,10 @@ class SearchController extends Controller
         
        $s = $search->create($request->all());
        $id = $s->id;
-       return view('dashboard/searches/question-search',compact('id'));
+       
+       return redirect("/admin/search/$id/questions/create")->with(['id',$id]);
+
+       //return view('dashboard/searches/question-search',compact('id'));
 
     }
 
