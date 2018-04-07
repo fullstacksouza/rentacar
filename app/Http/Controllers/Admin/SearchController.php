@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Admin\Search;
+use App\Admin\Question;
+use App\Admin\AnswerOption;
 class SearchController extends Controller
 {
     public function create()
@@ -25,28 +27,61 @@ class SearchController extends Controller
 
     }
 
-    public function addQuestions(Request $request)
+    public function addQuestions(Request $request,Question $quest,AnswerOption $answOp)
     {
-        $pesquisa = $request->all();
-        if(is_array($pesquisa))
+        $questions = $request->all();
+        $perguntas = [];
+        
+       // return $questions['search'];
+        if(is_array($questions))
         {
             $i = 0;
-
-            foreach($pesquisa as $p)
-            { 
-              
-                return $p;
-             //  print_r($p);
-             //pergunta
-               // print_r($p[0]['question']);
-               //resposta
-               // print_r($p[0]['answer'][0]['op']);
-                $i++;
-
+            //pecorrendo array dos dados enviados pelo vueJs
+            foreach($questions['search'] as $p)
+            {
+                //salvando pergunta
+                $question = $quest->create([
+                    'search_id' => $request->search_id,
+                    'question' => $p['question'],
+                    'type' =>1
+                ]);
+                //criando relacionamento da pergunta com a pesquisa
+                $question->search()->associate($request->search_id)->save();
+                
+                
+                if(is_array($p['answer']))
+                {   
+                    //pecorrendo array de opçoes de respostas
+                    foreach($p['answer'] as $answ)
+                    {
+                        $answer = $answOp->create([
+                            'question_id' => $question->id,
+                            'option' => $answ['op']
+                        ]);
+                        $answer->question()->associate($question->id)->save();
+                        
+                    }
+                }
+               // print_r($p['question']);
             }
-        }else
-        {
-        return "nao e array";
         }
+
+        return response(['status'=>'success']);
     }
+
+    public function previewSearch(Request $request)
+    {
+        $search = Search::find($request->id);
+        
+        foreach($search->questions as $question)
+        {
+            print_r($question->question);
+            
+            foreach($question->answerOptions as $asnp)
+            {
+                print_r($asnp->option);
+            }
+        }
+        return view('dashboard/searches/preview',compact('search'));
+    }   
 }

@@ -130,12 +130,16 @@ import axios from 'axios';
                 let uri = location.pathname.split("/");
 
                 let searchId  =  uri[3];
-                this.questions.push({"search_id":searchId}),
+                //this.questions.push({"search_id":searchId}),
                 axios.post(`http://localhost:8000/admin/search/questions/create`,{
                     search:this.questions,
+                    search_id: searchId 
                  })
                 .then(response=>{
-                    console.log(responses)
+
+                    window.location = "http://localhost:8000/admin/search/"+searchId+"/preview"; 
+                    console.log(response);
+                    
                 })
                 .catch(error =>{
                     console.log(error)
