@@ -61,4 +61,5 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->post('search/questions/create','SearchController@addQuestions');
 
     $this->get("search/{id}/preview",'SearchController@previewSearch');
+    $this->get("search/test",'SearchController@test');
 });

@@ -262,7 +262,7 @@ return [
 
     'plugins' => [
         'datatables' => true,
-        'select2'    => true,
+        'select2'    => false,
         'chartjs'    => true,
     ],
 ];

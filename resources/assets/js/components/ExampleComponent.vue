@@ -96,9 +96,13 @@ import axios from 'axios';
             params:"",
             searchId:"",
             token:"",
-           questions:[{
+            questions:[{
                question:"",
-               answer:[{"op":''}]
+               answer:[{"op":''}],
+               text_answer:[{
+                   'qty':'0',
+                   'text-answer':''
+               }]
            }]
                
            

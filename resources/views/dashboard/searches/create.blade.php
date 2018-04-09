@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('css')
-<link rel="stylecheet/css" href="{{asset('plugins/bootstrap-select/css/bootstrap-select.css')}}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 @stop
 @section('title', 'Realiza Rent a car | Cadastrar Pesquisa')
 
@@ -58,15 +58,21 @@
              {{ Form::date('date_end',null,['class'=>'form-control','placeholder'=>'Data de Expiração'])}}
           </div>
         </div>
-        
-        <div class="form-group">
-          <select class="selectpicker" multiple>
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </select>
 
-        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Setores Destinados</label>
+  
+            <div class="col-sm-10">
+                <select class="form-control selectpicker" name="sector[]" multiple data-live-search="true"  data-actions-box="true">
+                  @foreach($sectors as $sector)
+                <option value="{{$sector->id}}">{{$sector->name}}</option>
+                    @endforeach
+                  </select>
+                  
+            </div>
+          </div>
+        
+        
         
 
       </div>
@@ -91,12 +97,17 @@
 
 @section('js')
 
-  <script src="{{asset('plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
-  <script type="text/javascript">
-  $(document).ready(function(){
-    $(".selectpicker").selectpicker();
-  });
-  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-pt_BR.js"></script>
+
+<script>
+  $('.selectpicker').selectpicker({
+  language:'BR'
+});
+
+  
+</script>
 @stop
 
  

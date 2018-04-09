@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Admin\Search;
+use App\Admin\Sector;
 use App\Admin\Question;
 use App\Admin\AnswerOption;
 class SearchController extends Controller
 {
     public function create()
     {
-        return view('dashboard/searches/create');
+        $sectors = Sector::all();
+        return view('dashboard/searches/create',compact('sectors'));
     }
 
     public function list(Search $search)
@@ -20,13 +22,45 @@ class SearchController extends Controller
         $searches = $search->all();
         return view('dashboard/searches/list',compact('searches'));
     }
+    public function test()
+    {
+        $search = Search::find(43);
+        
+        $sectors = $search->sectors;
+       
+        foreach($sectors as $sec)
+        {
+            $sector = $sec->find($sec->id);
+            foreach($sector->user as $u)
+            {
+                echo $u->name."<br>";
+            }
+            
+            echo $sec->name."<br>";
+        }
+
+    }
     public function store(SearchRequest $request,Search $search)
     {
         
        $s = $search->create($request->all());
        $id = $s->id;
+       $current_search = $search->find($id);
+
        
-       return redirect("/admin/search/$id/questions/create")->with(['id',$id]);
+       /*if(is_array($request->sector) || is_object($request->sector))
+       {
+            foreach($request->sector as $sec)
+            {
+                $current_search->sectors()->attach($sec);
+            }
+       }*/
+       $current_search->sectors()->sync($request->sector);
+       $sectors = $current_search->sectors;
+       
+       
+       
+       //return redirect("/admin/search/$id/questions/create");
 
        //return view('dashboard/searches/question-search',compact('id'));
 
