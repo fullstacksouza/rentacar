@@ -12,3 +12,11 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js');
+
+mix.styles([
+    'node_modules/bootstrap-select/dist/css/bootstrap-select.css',
+], 'public/plugins/bootstrap-select/css/bootstrap-select.css');
+
+mix.js('node_modules/bootstrap-select/dist/js/bootstrap-select.js','public/plugins/bootstrap-select/js');
+
+

@@ -15,6 +15,11 @@ class SearchController extends Controller
         return view('dashboard/searches/create');
     }
 
+    public function list(Search $search)
+    {
+        $searches = $search->all();
+        return view('dashboard/searches/list',compact('searches'));
+    }
     public function store(SearchRequest $request,Search $search)
     {
         

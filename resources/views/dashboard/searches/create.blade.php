@@ -1,5 +1,7 @@
 @extends('adminlte::page')
-
+@section('css')
+<link rel="stylecheet/css" href="{{asset('plugins/bootstrap-select/css/bootstrap-select.css')}}"/>
+@stop
 @section('title', 'Realiza Rent a car | Cadastrar Pesquisa')
 
 @section('content_header')
@@ -29,7 +31,7 @@
 
 
   <form class="form-horizontal" action="{{url('admin/searches/create')}}" method="post">
- 
+    
     {{csrf_field()}}
       <div class="box-body">
         <div class="form-group">
@@ -56,7 +58,16 @@
              {{ Form::date('date_end',null,['class'=>'form-control','placeholder'=>'Data de Expiração'])}}
           </div>
         </div>
+        
+        <div class="form-group">
+          <select class="selectpicker" multiple>
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
 
+        </div>
+        
 
       </div>
       <!-- /.box-body -->
@@ -67,11 +78,11 @@
       <!-- /.box-footer -->
     </form>
   </div>
+  
   <!-- /.box -->
 
   
 
-<script src="{{asset('js/app.js')}}"></script>
 @stop
 
 @section('css')
@@ -80,6 +91,12 @@
 
 @section('js')
 
+  <script src="{{asset('plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".selectpicker").selectpicker();
+  });
+  </script>
 @stop
 
  

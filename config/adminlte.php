@@ -150,7 +150,7 @@ return [
                 [
                     'text' => 'Listar',
                     'icon' => 'list-ul',
-                    'url'  => 'admin/users/list',
+                    'url'  => 'admin/searches/list',
                     
                 ],
                 [
