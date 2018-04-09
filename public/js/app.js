@@ -13440,18 +13440,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("center", [
-        _c(
-          "button",
-          {
-            staticClass: "btn-lg btn-success",
-            attrs: { href: "#" },
-            on: { click: _vm.addNewQuestion }
-          },
-          [_vm._v("Adicionar Pergunta")]
-        )
-      ]),
-      _vm._v(" "),
       _c("br"),
       _vm._v(" "),
       _c("br"),
@@ -13668,6 +13656,18 @@ var render = function() {
             on: { click: _vm.sendQuestions }
           },
           [_vm._v("Prosseguir")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("center", [
+        _c(
+          "button",
+          {
+            staticClass: "btn-lg btn-success",
+            attrs: { href: "#" },
+            on: { click: _vm.addNewQuestion }
+          },
+          [_vm._v("Adicionar Pergunta")]
         )
       ])
     ],

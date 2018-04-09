@@ -18,5 +18,6 @@ mix.styles([
 ], 'public/plugins/bootstrap-select/css/bootstrap-select.css');
 
 mix.js('node_modules/bootstrap-select/dist/js/bootstrap-select.js','public/plugins/bootstrap-select/js');
-
-
+mix.js('node_modules/jquery/dist/jquery.min.js','public/vendor/adminlte/vendor/jquery/dist');
+mix.js('node_modules/jquery-slimscroll/jquery.slimscroll.min.js','public/vendor/adminlte/vendor/jquery/dist');
+    

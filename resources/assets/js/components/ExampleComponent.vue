@@ -3,7 +3,6 @@
    <div> 
 
 
-            <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion">Adicionar Pergunta</button></center>
             <br>
             <br>
 
@@ -76,6 +75,7 @@
         <button type="submit" @click="sendQuestions" :disabled="questions.length< 1 "  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
+            <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion">Adicionar Pergunta</button></center>
 
                   </div>     
 
