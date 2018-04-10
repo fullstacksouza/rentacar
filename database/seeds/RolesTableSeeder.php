@@ -56,7 +56,19 @@ class RolesTableSeeder extends Seeder
         ]);
         $user->attachRole($adminRole);
         
+        $user = User::create([
+            'name'         => 'Administrador(a)',
+            'email'        => 'adm@rentacar.com',
+            'password'     => bcrypt('rentacar'),
+            'rg'           => 112233355,
+            'registration' => 111224514,
+            'dob'          => '2018-03-28',
 
+
+
+        ]);
+
+        $user->attachRole($adminRole);
         
 
     }
