@@ -47,6 +47,8 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 
     $this->get("user/{id}/delete","UserController@delete");
 
+   
+
     $this->get('user/change-pass',function(){
         return view("dashboard/users/change-password");
     });
@@ -62,4 +64,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 
     $this->get("search/{id}/preview",'SearchController@previewSearch');
     $this->get("search/test",'SearchController@test');
+
+    $this->get("user/searches","UserController@getSearches");
+
 });

@@ -979,19 +979,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var router = new VueRouter({
-    mode: 'history',
-    routes: [{
-        path: '/home',
-        name: 'home'
-        //component: Home
-    }, {
-        path: '/hello',
-        name: 'hello'
-        //component: Hello,
-    }]
-});
-
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     components: {

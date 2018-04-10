@@ -4,6 +4,7 @@ namespace App\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Admin\Search;
 class Sector extends Model
 {
     //
@@ -12,5 +13,9 @@ class Sector extends Model
     public function user()
     {
         return $this->hasMany(User::class);
+    }
+    public function searches()
+    {
+            return $this->belongsToMany(Search::class);
     }
 }

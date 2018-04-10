@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 use App\Admin\Sector;
+use App\Admin\Search;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
@@ -39,4 +40,8 @@ class User extends Authenticatable
         return $this->belongsTo(Sector::class);
     }
 
+    public function searches()
+    {
+        return $this->belongsToManY(Search::class,'user_searches');
+    }
 }

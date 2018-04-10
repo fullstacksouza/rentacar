@@ -103,34 +103,22 @@ class UserController extends Controller
 
     public function changePass(ChangePasswordRequest $request)
     {
-       // dd($request->all());
 
-        /*$credentials = [
-            'email' => \Auth::user()->email,
-            'password' => $request->current_pass
-        ];
+        $user = \Auth::user();
+        $user->password = $request->new_pass;
+        $user->save();
 
-        $userExist = \Auth::attempt($credentials);
-        $passwordEquals = false;
-        if($request->new_pass_confirmation == $request->new_pass)
-        {
-            $passwordEquals = true;
-        }
-        else
-        {
-            return redirect()->back()->withErrors([
-                'confirm_new_pass' => 'As senhas não Coferem'
-                ]);
-        }
-        if($userExist && $passwordEquals == true)
-        {
-            
-        }*/
-            $user = \Auth::user();
-            $user->password = $request->new_pass;
-            $user->save();
-
-            return redirect()->back()->with('info','Senha Alterada com Sucesso');
+        return redirect()->back()->with('info','Senha Alterada com Sucesso');
         
+    }
+
+    public function getSearches()
+    {
+
+        $user = \Auth::user();
+        $searches = $user->searches()->whereDate('date_start','=',date('y-m-d'))->get();
+       
+        return view("dashboard/users/searches",compact('searches'));
+       
     }
 }

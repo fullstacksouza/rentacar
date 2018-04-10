@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/css/bootstrap-select.min.css">
 @stop
 @section('title', 'Realiza Rent a car | Cadastrar Pesquisa')
 
@@ -63,7 +63,7 @@
             <label for="inputEmail3" class="col-sm-2 control-label">Setores Destinados</label>
   
             <div class="col-sm-10">
-                <select class="form-control selectpicker" name="sector[]" multiple data-live-search="true"  data-actions-box="true">
+                <select class="form-control selectpicker" name="sector[]" multiple   data-actions-box="true">
                   @foreach($sectors as $sector)
                 <option value="{{$sector->id}}">{{$sector->name}}</option>
                     @endforeach
@@ -71,7 +71,6 @@
                   
             </div>
           </div>
-        
         
         
 
@@ -98,13 +97,17 @@
 @section('js')
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-pt_BR.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/i18n/defaults-pt_BR.js"></script>
 
 <script>
   $('.selectpicker').selectpicker({
-  language:'BR'
-});
+    liveSearch:true
+  })
+  .on('hidden.bs.select',
+        function () {
+            $(this).data('selectpicker').$searchbox.val('').trigger('propertychange');
+        });
 
   
 </script>

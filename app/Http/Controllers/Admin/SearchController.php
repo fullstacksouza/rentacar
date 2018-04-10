@@ -33,7 +33,7 @@ class SearchController extends Controller
             $sector = $sec->find($sec->id);
             foreach($sector->user as $u)
             {
-                echo $u->name."<br>";
+                $u->searches()->sync($current_search);
             }
             
             echo $sec->name."<br>";
@@ -46,23 +46,26 @@ class SearchController extends Controller
        $s = $search->create($request->all());
        $id = $s->id;
        $current_search = $search->find($id);
-
-       
-       /*if(is_array($request->sector) || is_object($request->sector))
-       {
-            foreach($request->sector as $sec)
-            {
-                $current_search->sectors()->attach($sec);
-            }
-       }*/
        $current_search->sectors()->sync($request->sector);
+       //setores para qual a pesquisa foi destinada
        $sectors = $current_search->sectors;
+       //direcionar a pesquisa para as pessoas dos setores
+       foreach($sectors as $sec)
+       {
+           $sector = $sec->find($sec->id);
+           foreach($sector->user as $u)
+           {
+               $u->searches()->attach($current_search);
+           }
+           
+           echo $sec->name."<br>";
+       }
        
        
        
-       //return redirect("/admin/search/$id/questions/create");
+       
+       return redirect("/admin/search/$id/questions/create");
 
-       //return view('dashboard/searches/question-search',compact('id'));
 
     }
 
