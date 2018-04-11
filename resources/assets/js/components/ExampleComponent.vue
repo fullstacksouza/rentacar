@@ -6,7 +6,7 @@
             <br>
             <br>
 
-                <div v-for="(question,index) in questions" class="panel panel-primary copyright-wrap" :id="'copyright-wrap-'+index" >
+                <div v-for="(question,index) in questions" class="panel panel-primary copyright-wrap" :id="'copyright-wrap-'+index">
                     <div class="panel-heading">Pergunta {{index+1}}
                         <button type="button" @click="deleteQuestion(index)" class="close" data-target="#copyright-wrap-[index]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
@@ -24,7 +24,7 @@
                             <br>
 
                         <!-- teste-->
-                        <div v-for="(ans, i) in questions[index].answer" class="panel panel-info copyright-wrap" id="copyright-wrap">
+                        <div v-for="(ans, i) in questions[index].answer" class="panel panel-info copyright-wrap" :id="'copyright-wrap-ans-'+index+'-'+i">
                     <div class="panel-heading">Resposta {{i+1}}
                         <button type="button" @click="deleteAnswer(index,i)" class="close" data-target="#copyright-wrap-[i]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
@@ -35,11 +35,13 @@
                             <br>
 
                         <div class="form-group">
-                            <label   for="inputEmail3" class="col-sm-2 control-label">Resposta {{i+1}}</label>
+                            <label   for="inputEmail3" class="col-sm-2 control-label" white-space: nowrap>Resposta {{i+1}}</label>
                            
                             <div class="col-sm-10">
-                            <input  v-model="ans.op" type="text" class="form-control" id="inputEmail3" :placeholder="'Digite a '+ (index+1)+'ª de resposta'">
+                            
+                            <input  v-model="ans.op" type="text" class="form-control" id="inputEmail3" :placeholder="'Digite a '+ (i+1)+'ª opção de resposta'">
                             </div>
+
                             <br>
                             <br>
                         
@@ -61,8 +63,8 @@
                             <br>
                         
 
-                        </div>  -->
-                        <center><button class="btn btn-primary" @click="addNewAnswerOption(index)">Adicionar Opçao de resposta</button></center>   
+                        </div>  -->                                                                                            
+                        <center><button class="btn btn-primary" @click="addNewAnswerOption(index)" v-scroll-to="'#copyright-wrap-ans-'+index+'-'+(answerLen(index)-1)">Adicionar Opçao de resposta</button></center>   
                     </div>
                 </div>
    
@@ -75,7 +77,7 @@
         <button type="submit" @click="sendQuestions" :disabled="questions.length< 1 "  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
-            <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion">Adicionar Pergunta</button></center>
+            <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion"  >Adicionar Pergunta</button></center>
 
                   </div>     
 
@@ -86,11 +88,11 @@
 
 
 import axios from 'axios';
+    import scroller from 'vue-scrollto/src/scrollTo';
     export default {
         data(){
 
         return {
-
 
             uri: location.pathname,
             params:"",
@@ -109,6 +111,12 @@ import axios from 'axios';
     }
     },
         
+        watch:{
+            questions: function(val){
+                //metodo de scroller
+                  this.scroll();
+            }
+        },  
        
         methods:
         {
@@ -118,8 +126,8 @@ import axios from 'axios';
                     'question':'',
                     'answer': []
                 });
-
-                this.scroll(1);
+                   
+                //this.scroll();
             },
 
             addNewAnswerOption(index)
@@ -149,6 +157,11 @@ import axios from 'axios';
                     console.log(error)
                 })
             },
+
+            answerLen(index)
+            {
+                return this.questions[index].answer.length;
+            },
             deleteQuestion(index)
             {
                 console.log("index da array "+index);
@@ -160,16 +173,14 @@ import axios from 'axios';
                 this.questions[iq].answer.splice(index,1);
             },
 
-            scroll(index)
-            {
-                let i  = index+1;
-                console.log(document.getElementById("copyright-wrap-"+i));
-                var container = document.getElementById('copyright-wrap-1');
-                var scrollHeight = container.scrollHeight;
-                container.scrollTo = scrollHeight; 
+            scroll()
+            {   
+                var index  = ((this.questions.length)-1);
+                scroller("#copyright-wrap-"+(index-1));
             },
+
              mounted() {
-            this.scroll();
+                 this.questions.length;
         },
         }
     }

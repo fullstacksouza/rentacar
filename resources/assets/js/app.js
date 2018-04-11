@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Example from './components/ExampleComponent.vue';
-
+var VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo);
 
 
 

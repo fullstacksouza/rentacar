@@ -12,6 +12,7 @@
 
 @include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
+
 <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Informe os dados da Pesquisa a ser cadastrado</h3>
