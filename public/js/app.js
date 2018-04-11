@@ -401,8 +401,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -502,6 +501,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
+/* 3 */,
 /* 4 */
 /***/ (function(module, exports) {
 
@@ -983,8 +983,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     components: {
         'example': __WEBPACK_IMPORTED_MODULE_1__components_ExampleComponent_vue___default.a
-    },
-    router: router
+    }
+
 });
 
 /***/ }),
@@ -12239,7 +12239,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -12248,9 +12248,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
+    hotAPI.createRecord("data-v-7168fb6a", Component.options)
   } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
+    hotAPI.reload("data-v-7168fb6a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -12543,7 +12543,7 @@ module.exports = __webpack_require__(19);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(5);
 var Axios = __webpack_require__(21);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -12626,7 +12626,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(30);
 var dispatchRequest = __webpack_require__(31);
@@ -13167,7 +13167,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(32);
 var isCancel = __webpack_require__(8);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(2);
 var isAbsoluteURL = __webpack_require__(33);
 var combineURLs = __webpack_require__(34);
 
@@ -13668,7 +13668,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
   }
 }
 

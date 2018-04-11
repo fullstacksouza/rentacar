@@ -96,13 +96,15 @@
 
 @section('js')
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/i18n/defaults-pt_BR.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/i18n/defaults-pt_BR.js"></script>
+
 
 <script>
   $('.selectpicker').selectpicker({
-    liveSearch:true
+    liveSearch:true,
+    selectAllText:"Selecionar todos",
+    deselectAllText:"Desmarcar todos"
   })
   .on('hidden.bs.select',
         function () {

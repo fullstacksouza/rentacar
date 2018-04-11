@@ -1,6 +1,5 @@
 {
     "/js/app.js": "/js/app.js",
-    "/vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js": "/vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js",
     "/plugins/bootstrap-select/js/bootstrap-select.js": "/plugins/bootstrap-select/js/bootstrap-select.js",
     "/vendor/adminlte/vendor/jquery/dist/jquery.js": "/vendor/adminlte/vendor/jquery/dist/jquery.js",
     "/vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js": "/vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js",

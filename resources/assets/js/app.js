@@ -9,6 +9,6 @@ const app = new Vue({
     el: '#app',
     components:{
         'example':Example
-    },
-    router
+    }
+    
 });
