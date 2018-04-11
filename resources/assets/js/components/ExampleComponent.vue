@@ -6,7 +6,7 @@
             <br>
             <br>
 
-                <div v-for="(question,index) in questions" class="panel panel-primary copyright-wrap" id="copyright-wrap">
+                <div v-for="(question,index) in questions" class="panel panel-primary copyright-wrap" :id="'copyright-wrap-'+index" >
                     <div class="panel-heading">Pergunta {{index+1}}
                         <button type="button" @click="deleteQuestion(index)" class="close" data-target="#copyright-wrap-[index]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
@@ -109,9 +109,7 @@ import axios from 'axios';
     }
     },
         
-        mounted() {
-            console.log(this.questions.length)
-        },
+       
         methods:
         {
             addNewQuestion()
@@ -120,13 +118,15 @@ import axios from 'axios';
                     'question':'',
                     'answer': []
                 });
+
+                this.scroll(1);
             },
 
             addNewAnswerOption(index)
             {
                 this.questions[index].answer.push({
                     op:''
-                })
+                });
             },
 
             sendQuestions()
@@ -158,7 +158,19 @@ import axios from 'axios';
             deleteAnswer(iq,index)
             {
                 this.questions[iq].answer.splice(index,1);
-            }
+            },
+
+            scroll(index)
+            {
+                let i  = index+1;
+                console.log(document.getElementById("copyright-wrap-"+i));
+                var container = document.getElementById('copyright-wrap-1');
+                var scrollHeight = container.scrollHeight;
+                container.scrollTo = scrollHeight; 
+            },
+             mounted() {
+            this.scroll();
+        },
         }
     }
 </script>

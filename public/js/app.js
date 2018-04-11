@@ -12484,9 +12484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         };
     },
-    mounted: function mounted() {
-        console.log(this.questions.length);
-    },
+
 
     methods: {
         addNewQuestion: function addNewQuestion() {
@@ -12494,6 +12492,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'question': '',
                 'answer': []
             });
+
+            this.scroll(1);
         },
         addNewAnswerOption: function addNewAnswerOption(index) {
             this.questions[index].answer.push({
@@ -12523,6 +12523,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         deleteAnswer: function deleteAnswer(iq, index) {
             this.questions[iq].answer.splice(index, 1);
+        },
+        scroll: function scroll(index) {
+            var i = index + 1;
+            console.log(document.getElementById("copyright-wrap-" + i));
+            var container = document.getElementById('copyright-wrap-1');
+            var scrollHeight = container.scrollHeight;
+            container.scrollTo = scrollHeight;
+        },
+        mounted: function mounted() {
+            this.scroll();
         }
     }
 });
@@ -13437,7 +13447,7 @@ var render = function() {
           "div",
           {
             staticClass: "panel panel-primary copyright-wrap",
-            attrs: { id: "copyright-wrap" }
+            attrs: { id: "copyright-wrap-" + index }
           },
           [
             _c("div", { staticClass: "panel-heading" }, [
