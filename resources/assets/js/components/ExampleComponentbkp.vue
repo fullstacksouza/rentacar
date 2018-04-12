@@ -1,10 +1,11 @@
 <template>
 
-   <div class="col-md-8"> 
+   <div> 
+
 
             <br>
             <br>
-   
+
                 <div v-for="(question,index) in questions" class="panel panel-primary copyright-wrap" :id="'copyright-wrap-'+index">
                     <div class="panel-heading">Pergunta {{index+1}}
                         <button type="button" @click="deleteQuestion(index)" class="close" data-target="#copyright-wrap-[index]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -22,6 +23,7 @@
                             <br>
                             <br>
 
+                        <!-- teste-->
                         <div v-for="(ans, i) in questions[index].answer" class="panel panel-info copyright-wrap" :id="'copyright-wrap-ans-'+index+'-'+i">
                     <div class="panel-heading">Resposta {{i+1}}
                         <button type="button" @click="deleteAnswer(index,i)" class="close" data-target="#copyright-wrap-[i]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -33,7 +35,7 @@
                             <br>
 
                         <div class="form-group">
-                            <label   for="inputEmail3" class="col-sm-2 control-label" white-space: nowrap>Opçao de resposta selecionavel</label>
+                            <label   for="inputEmail3" class="col-sm-2 control-label" white-space: nowrap>Resposta {{i+1}}</label>
                            
                             <div class="col-sm-10">
                             
@@ -91,7 +93,7 @@
 
 
 import axios from 'axios';
-import scroller from 'vue-scrollto/src/scrollTo';
+    import scroller from 'vue-scrollto/src/scrollTo';
     export default {
         data(){
 
@@ -129,9 +131,6 @@ import scroller from 'vue-scrollto/src/scrollTo';
                     'answer': []
                 });
                    
-                  this.$on('teste',function(data){
-                       console.log(data);
-                   })
                 //this.scroll();
             },
 

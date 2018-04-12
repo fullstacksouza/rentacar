@@ -13,7 +13,7 @@
 @include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
 <div class="row">
-    <div class="col-md-9">
+
 <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Vamos Criar as perguntas</h3>
@@ -32,31 +32,24 @@
     @endif
 
     <div id="app">
+
             <example></example>
-
-
+            <type-question></type-question>
+            
+            
           </div>
 
 
       </div>
    
-    </div>
-
-    <div class="col-lg-3">
-            <div class="affix">
-                <div class="well">
-                    <h3>Adicionar Perguntas</h3>
-                </div>
-                <!--/.well -->
-            </div>
-            <!--/sidebar-nav-fixed -->
-        </div>
+   
+    
+    
         <!--/span-->
 
     </div>
 
 
-    </div>
   <!-- /.box -->
 
   
