@@ -32,7 +32,7 @@
 
 
   <form class="form-horizontal" action="{{url('admin/searches/create')}}" method="post">
-    
+    {{date('d-m-Y')}}
     {{csrf_field()}}
       <div class="box-body">
         <div class="form-group">

@@ -51,6 +51,8 @@
                          
                         
                         </div>
+
+                        <div :id="'endanswer'+index+'-'+i"></div>
                 </div>
                 <!--endTEsy-->
                         <!--<div v-for="(ans, index) in questions[index].answer" class="form-group">
@@ -64,7 +66,7 @@
                         
 
                         </div>  -->                                                                                            
-                        <center><button class="btn btn-primary" @click="addNewAnswerOption(index)" v-scroll-to="'#copyright-wrap-ans-'+index+'-'+(answerLen(index)-1)">Adicionar Opçao de resposta</button></center>   
+                        <center><button class="btn btn-primary" @click="addNewAnswerOption(index)" v-scroll-to="'#endanswer'+index+'-'+(answerLen(index)-1)">Adicionar Opçao de resposta</button></center>   
                     </div>
                 </div>
    
@@ -79,8 +81,10 @@
       <!-- /.box-footer -->
             <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion"  >Adicionar Pergunta</button></center>
 
-                  </div>     
 
+                    <div id="end"></div>
+
+                  </div>     
 
 </template>
 
@@ -93,7 +97,7 @@ import axios from 'axios';
         data(){
 
         return {
-
+             index:0,
             uri: location.pathname,
             params:"",
             searchId:"",
@@ -174,9 +178,22 @@ import axios from 'axios';
             },
 
             scroll()
-            {   
-                var index  = ((this.questions.length)-1);
-                scroller("#copyright-wrap-"+(index-1));
+            {  
+                if(this.index == 0)
+                {
+                    this.index = 1
+                    var index  = ((this.questions.length)-1);
+                    scroller("#end");
+                }else{
+                    var prevIndex = this.questions.length;
+                    var lastAnswerIndex = (prevIndex-1);
+                    //$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+                    //scroller("#copyright-wrap-"+((this.questions.length-2)));
+                    scroller("#end");
+                    //CRIAR UMA DIV ABAIXO DAS PERGUNTAS COM ID END, E CHAMAR O SCROLLER DIRECIONANDO PRA LALO
+                    //scroller("#copyright-wrap-"+lastAnswerIndex+"-"+this.questions[lastAnswerIndex-1].answer.length);
+                }
+                
             },
 
              mounted() {
