@@ -141,9 +141,10 @@ return [
             'url'  => 'admin/user/change-pass',
             'icon' => 'lock',
         ],
-       
+
         'GERENCIAMENTO',
-        [
+
+        [   'can'=>'manager',
             'text'    => 'Pesquisas',
             'icon'    => 'users',
             'submenu' => [
@@ -151,7 +152,8 @@ return [
                     'text' => 'Listar',
                     'icon' => 'list-ul',
                     'url'  => 'admin/searches/list',
-                    
+
+
                 ],
                 [
                     'text'    => 'Cadastrar',
@@ -177,7 +179,7 @@ return [
                 ],
             ],
         ],
-        [
+        [   'can'=>'manager',
             'text'    => 'Usuários',
             'icon'    => 'users',
             'submenu' => [
@@ -193,10 +195,10 @@ return [
                 ],
             ],
         ],
-        [
+        [   'can'=>'manager',
             'text'    => 'Controle de Acesso',
             'icon'    => 'lock',
-            'submenu' => [  
+            'submenu' => [
                 [
                     'text' => 'Listar',
                     'icon' => 'list-ul',
@@ -209,10 +211,10 @@ return [
                 ],
             ],
         ],
-        [
+        [   'can'=>'manager',
             'text'    => 'Setores',
             'icon'    => 'users',
-            'submenu' => [  
+            'submenu' => [
                 [
                     'text' => 'Listar',
                     'icon' => 'list-ul',
@@ -224,10 +226,32 @@ return [
                     'url'     => 'admin/sectors/create'
                 ],
             ],
-        ]
-            
+        ],
+        'MAIN NAVIGATION',
+        [
+            'text' => 'Blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
+        ],
+
+        [
+            'text'        => 'Paginas',
+            'url'         => 'admin/pages',
+            'icon'        => 'comments',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
+
+        [
+            'text'        => 'Pesquisas',
+            'url'         => 'admin/pages',
+            'icon'        => 'file',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
+
     ],
-    
+
 
     /*
     |--------------------------------------------------------------------------
@@ -246,7 +270,8 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        //JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        App\Admin\MenuFilter::class,
     ],
 
     /*

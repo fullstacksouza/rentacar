@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->get('users/{id}/edit','UserController@edit');
     $this->post('users/{id}/edit','UserController@update');
 
-   
+
     //SECTORS ROUTES
     $this->get('sectors/create','SectorController@create');
     $this->post('sectors/create','SectorController@store');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 
     $this->get("user/{id}/delete","UserController@delete");
 
-   
+
 
     $this->get('user/change-pass',function(){
         return view("dashboard/users/change-password");

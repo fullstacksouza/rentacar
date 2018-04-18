@@ -33,7 +33,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
+
                             @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
+
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -134,5 +136,5 @@
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @stack('js')
     @yield('js')
-    
+
 @stop
