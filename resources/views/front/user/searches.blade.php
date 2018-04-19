@@ -6,7 +6,7 @@
 @section('content_header')
 {{--alertas --}}
 @include('dashboard/alerts/alerts')
-    <h1>Lista de usuários</h1>
+    <h1>Lista de Pesquisas</h1>
 @stop
 
 @section('css')

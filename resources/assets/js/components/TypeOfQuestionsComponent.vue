@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-3">
-            <div class="affix">
-                <div class="well">
+            <div class="affix" style="margin-top:20px">
+
                     <h3>Escolha um tipo de pergunta</h3>
-                </div>
+
                 <!--/.well -->
                 <div class="row">
                 <div class="col-sm-6">
@@ -11,7 +11,7 @@
                         <a href=""><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Concordância</h4>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                         <a href=""><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Satisfatória</h4>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -43,5 +43,5 @@
             eventBus.$emit("teste",this.title);
         }
     }
-        
+
 </script>

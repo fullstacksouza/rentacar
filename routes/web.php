@@ -11,18 +11,23 @@
 |
 */
 
-Route::get('/','Auth\LoginController@showLoginForm')->name('login');
-Route::get('teste','HomeController@teste');
+$this->get('/','Auth\LoginController@showLoginForm')->name('login');
+$this->get('teste','HomeController@teste');
 
-Route::get('/home', 'HomeController@index')->name('home');
+$this->get('/home', 'HomeController@index')->name('home');
 
-Route::post('login','LoginController@auth');
+$this->post('login','LoginController@auth');
 
-Route::post('/logout','Auth\LoginController@logout');
+$this->post('/logout','Auth\LoginController@logout');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+$this->get('user/change-pass',function(){
+    return view("dashboard/users/change-password");
+});
 
+$this->get("user/searches","Admin\UserController@getSearches");
+$this->get("user/searches/{id}/","UserController@replySearch");
 //rotas com o prefixo admin utilizam  os controller na pasta Controller\Admin
 Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], function()
 {
@@ -47,12 +52,6 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 
     $this->get("user/{id}/delete","UserController@delete");
 
-
-
-    $this->get('user/change-pass',function(){
-        return view("dashboard/users/change-password");
-    });
-
     $this->post('users/change-pass','UserController@changePass');
 
     $this->get('searches/create','SearchController@create');
@@ -65,6 +64,5 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->get("search/{id}/preview",'SearchController@previewSearch');
     $this->get("search/test",'SearchController@test');
 
-    $this->get("user/searches","UserController@getSearches");
 
 });

@@ -6,7 +6,7 @@
 @stop
 @section('content_header')
     <h1>Criar Perguntas</h1>
-    
+
 @stop
 
 @section('content')
@@ -35,16 +35,16 @@
 
             <example></example>
             <type-question></type-question>
-            
-            
+
+
           </div>
 
 
       </div>
-   
-   
-    
-    
+
+
+
+
         <!--/span-->
 
     </div>
@@ -52,7 +52,7 @@
 
   <!-- /.box -->
 
-  
+
 
 <script src="{{asset('js/app.js')}}"></script>
 @stop
@@ -62,9 +62,9 @@
 @stop
 
 @section('js')
-    
+
     <script> $(function(){
-       
+
       $('.clickable').on('click',function(){
           var effect = $(this).data('effect');
               $(this).closest('.panel')[effect]();
@@ -74,8 +74,7 @@
 
       </script>
 
-     
+
 @stop
 
- 
- 
+

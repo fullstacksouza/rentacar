@@ -20,7 +20,7 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
 
-       /* $adminRole               = new Role();
+        $adminRole               = new Role();
         $adminRole->name         = "super-admin";
         $adminRole->display_name = "Administrador Total";
         $adminRole->description  = "Administrador do Sistema com controle total dos dados";
@@ -31,13 +31,13 @@ class RolesTableSeeder extends Seeder
         $createSearch->name         = "create-user";
         $createSearch->display_name = "Criar Usuários";
         $createSearch->description  = "Permissão para criar Usuarios no sistema";
-        $createSearch->save();*/
+        $createSearch->save();
         //permissao para gerenciamento
-        /*$manager               = new Permission();
+        $manager               = new Permission();
         $manager->name         = "manager";
         $manager->display_name = "Gerenciar Conteúdo";
         $manager->description  = "Permissão para gerenciar o sistema";
-        $manager->save();*/
+        $manager->save();
 
 
         //Atribuindo Permissão ao perfil
@@ -50,7 +50,7 @@ class RolesTableSeeder extends Seeder
        // $adminRole->attachPermission($mangerPermission);
         //Atribuindo regras ao usuario
 
-        /*$user = User::create([
+        $user = User::create([
             'name'         => 'Matheus Souza',
             'email'        => 'matheus.souzadv@gmail.com',
             'password'     => bcrypt('05092013'),
@@ -74,7 +74,7 @@ class RolesTableSeeder extends Seeder
 
 
         ]);
-*/
+
         $user = User::find(1);
 
         $user->attachPermission($mangerPermission);

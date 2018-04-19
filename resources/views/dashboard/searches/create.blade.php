@@ -62,18 +62,18 @@
 
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Setores Destinados</label>
-  
+
             <div class="col-sm-10">
                 <select class="form-control selectpicker" name="sector[]" multiple   data-actions-box="true">
                   @foreach($sectors as $sector)
                 <option value="{{$sector->id}}">{{$sector->name}}</option>
                     @endforeach
                   </select>
-                  
+
             </div>
           </div>
-        
-        
+
+
 
       </div>
       <!-- /.box-body -->
@@ -84,10 +84,10 @@
       <!-- /.box-footer -->
     </form>
   </div>
-  
+
   <!-- /.box -->
 
-  
+
 
 @stop
 
@@ -97,7 +97,7 @@
 
 @section('js')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/i18n/defaults-pt_BR.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/i18n/defaults-pt_BR.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
 
 
@@ -112,9 +112,8 @@
             $(this).data('selectpicker').$searchbox.val('').trigger('propertychange');
         });
 
-  
+
 </script>
 @stop
 
- 
- 
+

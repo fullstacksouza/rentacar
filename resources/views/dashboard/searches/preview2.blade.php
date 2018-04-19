@@ -24,28 +24,13 @@
       <div class="panel-heading"><h2 class="text-center">{{$question->question}}</h2></div>
 
         @foreach($question->answerOptions as $asnw)
-            @if(strcmp($asnw->option,"text") != 0)
-            <div class="form-group">
-                    <div class="radio">
-                            <label>
-                              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                              {{$asnw->option}}
-                            </label>
-                        </div>
-             </div>
-
-             @else
-             <div class="form-group">
-                            <label>Nenhuma das opçoes acima?</label>
-                                <textarea type="text" class="form-control" id="inputEmail3" placeholder=" Titulo da Pesquisa" name="title"></textarea>
-
-
-             </div>
-
-             @endif
+            <div class="form-control">
+         <label class="radio-inline">
+                <input type="radio" name="optradio" disabled> {{$asnw->option}}
+        </label>
+           </div>
         @endforeach
-        </div>
-
+    </div>
     @empty
 
     @endforelse

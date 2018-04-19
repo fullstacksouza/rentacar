@@ -25,9 +25,9 @@ class SearchController extends Controller
     public function test()
     {
         $search = Search::find(43);
-        
+
         $sectors = $search->sectors;
-       
+
         foreach($sectors as $sec)
         {
             $sector = $sec->find($sec->id);
@@ -35,17 +35,23 @@ class SearchController extends Controller
             {
                 $u->searches()->sync($current_search);
             }
-            
+
             echo $sec->name."<br>";
         }
 
     }
     public function store(SearchRequest $request,Search $search)
     {
-        
+
        $s = $search->create($request->all());
        $id = $s->id;
-       $current_search = $search->find($id);
+       $current_search = $search->find(2);
+
+       $carbon  = new  \Carbon\Carbon(($current_search->date_end));
+       $carbon->addHours(24);
+
+       $current_search->date_end = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$carbon);
+       $current_search->save();
        $current_search->sectors()->sync($request->sector);
        //setores para qual a pesquisa foi destinada
        $sectors = $current_search->sectors;
@@ -57,13 +63,13 @@ class SearchController extends Controller
            {
                $u->searches()->attach($current_search);
            }
-           
+
            echo $sec->name."<br>";
        }
-       
-       
-       
-       
+
+
+
+
        return redirect("/admin/search/$id/questions/create");
 
 
@@ -71,9 +77,10 @@ class SearchController extends Controller
 
     public function addQuestions(Request $request,Question $quest,AnswerOption $answOp)
     {
+
         $questions = $request->all();
         $perguntas = [];
-        
+
        // return $questions['search'];
         if(is_array($questions))
         {
@@ -89,11 +96,10 @@ class SearchController extends Controller
                 ]);
                 //criando relacionamento da pergunta com a pesquisa
                 $question->search()->associate($request->search_id)->save();
-                
-                
+
+
                 if(is_array($p['answer']))
-                {   
-                    //pecorrendo array de opçoes de respostas
+                {
                     foreach($p['answer'] as $answ)
                     {
                         $answer = $answOp->create([
@@ -101,7 +107,19 @@ class SearchController extends Controller
                             'option' => $answ['op']
                         ]);
                         $answer->question()->associate($question->id)->save();
-                        
+                    }
+                }
+                    ///verificando se existe opçao de resposta como campo de texto
+                if(isset($p['text_answer']))
+                {
+                    foreach($p['text_answer'] as $text)
+                    {
+                        $answer = $answOp->create([
+                            'question_id' => $question->id,
+                            'option' => 'text'
+                        ]);
+                        $answer->question()->associate($question->id)->save();
+
                     }
                 }
                // print_r($p['question']);
@@ -114,16 +132,8 @@ class SearchController extends Controller
     public function previewSearch(Request $request)
     {
         $search = Search::find($request->id);
-        
-        foreach($search->questions as $question)
-        {
-            print_r($question->question);
-            
-            foreach($question->answerOptions as $asnp)
-            {
-                print_r($asnp->option);
-            }
-        }
+
+
         return view('dashboard/searches/preview',compact('search'));
-    }   
+    }
 }

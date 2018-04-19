@@ -138,7 +138,7 @@ return [
         ],
         [
             'text' => 'Mudar senha',
-            'url'  => 'admin/user/change-pass',
+            'url'  => 'user/change-pass',
             'icon' => 'lock',
         ],
 
@@ -227,28 +227,16 @@ return [
                 ],
             ],
         ],
-        'MAIN NAVIGATION',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        'MINHAS PESQUISAS',
 
         [
-            'text'        => 'Paginas',
-            'url'         => 'admin/pages',
+            'text'        => 'Responder',
+            'url'         => 'user/searches',
             'icon'        => 'comments',
             'label'       => 4,
             'label_color' => 'success',
         ],
 
-        [
-            'text'        => 'Pesquisas',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
 
     ],
 

@@ -6,7 +6,7 @@
 @section('content_header')
 {{--alertas --}}
 @include('dashboard/alerts/alerts')
-    <h1>Lista de usuários</h1>
+    <h1>Lista de Pesquisas</h1>
 @stop
 
 @section('css')
@@ -32,7 +32,7 @@
         <tbody>
          @forelse ($searches as $search)
         <tr>
-       
+
           <td>{{$search->title}}</td>
           <td>{{date('d/m/y',strtotime($search->date_start))}}</td>
           <td>
@@ -46,18 +46,19 @@
           <td>
               <a href="#" class="btn btn-primary">Responder</a>
           </td>
-          
+
         </tr>
         @empty
         Sem Registros
         @endforelse
-        
+
         </tbody>
         <tfoot>
         <tr>
           <th>Titulo</th>
           <th>Data de Inicio</th>
           <th>Prazo</th>
+          <th>Ações</th>
         </tr>
         </tfoot>
       </table>
