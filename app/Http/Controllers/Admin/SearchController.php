@@ -45,7 +45,8 @@ class SearchController extends Controller
 
        $s = $search->create($request->all());
        $id = $s->id;
-       $current_search = $search->find(2);
+       $current_search = $search->find($id);
+
 
        $carbon  = new  \Carbon\Carbon(($current_search->date_end));
        $carbon->addHours(24);

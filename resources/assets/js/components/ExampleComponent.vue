@@ -1,6 +1,6 @@
 <template>
 
-   <div class="col-md-8">
+   <div class="col-md-12">
 
             <br>
             <br>
@@ -55,7 +55,7 @@
                 </div>
 
 
-                <div v-for="(ans, i) in questions[index].text_answer" class="panel panel-info copyright-wrap" :id="'copyright-wrap-ans-'+index+'-'+i">
+                <div v-for="(ans, i) in questions[index].text_answer" class="panel panel-warning copyright-wrap" :id="'copyright-wrap-ans-'+index+'-'+i">
                     <div class="panel-heading">Resposta do tipo  Campo de Texto
                         <button type="button" @click="deleteTextAnswer(index,i)" class="close" data-target="#copyright-wrap-[i]" data-dismiss="alert">  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
@@ -99,7 +99,7 @@
                         </div>  -->
                         <center><button class="btn btn-primary" @click="addNewAnswerOption(index)" v-scroll-to="'#endanswer'+index+'-'+(answerLen(index)-1)">Adicionar Opçao de resposta</button></center>
                     <br>
-                        <center><button class="btn btn-warning" @click="addNewAnswerTextOption(index)" v-scroll-to="'#endanswer'+index+'-'+(answerLen(index)-1)">Adicionar Campo de Texto</button></center>
+                        <center><button v-if="questions[index].text_answer.length < 1"  class="btn btn-warning" @click="addNewAnswerTextOption(index)" v-scroll-to="'#endanswer'+index+'-'+(answerLen(index)-1)">Adicionar Campo de Texto</button></center>
                     </div>
                 </div>
 
@@ -112,11 +112,45 @@
         <button type="submit" @click="sendQuestions" :disabled="questions.length< 1 "  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
-            <center><button href="#" class="btn-lg btn-success" @click="addNewQuestion"  >Adicionar Pergunta</button></center>
+            <center><button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"  href="#" class="btn-lg btn-success" >Adicionar Pergunta</button></center>
 
 
                     <div id="end"></div>
 
+
+<div class="collapse" id="collapseExample">
+  <div class="well">
+     <div class="row">
+                <div class="col-sm-2">
+                    <div class="card">
+                        <a href="#"><img @click="addNewQuestion"   class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <div class="card-block">
+                            <h4 class="card-title">Concordância</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="card">
+                        <a href=""><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <div class="card-block">
+                            <h4 class="card-title">Satisfatória</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="card">
+                        <a href=""><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <div class="card-block">
+                            <h4 class="card-title">Campo de texto</h4>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+  </div>
+</div>
 
                   </div>
 
@@ -161,7 +195,11 @@ import scroller from 'vue-scrollto/src/scrollTo';
             {
                 this.questions.push({
                     'question':'',
-                    'answer': [],
+                    'answer': [
+                        {"op" : "Concordo"},
+                        {"op" : "Discordo"},
+                        {"op" : "Concordo"},
+                        ],
                     'text_answer':[]
                 });
 

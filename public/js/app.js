@@ -12356,7 +12356,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -12365,9 +12365,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
+    hotAPI.createRecord("data-v-7168fb6a", Component.options)
   } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
+    hotAPI.reload("data-v-7168fb6a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -12386,6 +12386,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_scrollto_src_scrollTo__ = __webpack_require__(37);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12546,7 +12580,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addNewQuestion: function addNewQuestion() {
             this.questions.push({
                 'question': '',
-                'answer': [],
+                'answer': [{ "op": "Concordo" }, { "op": "Discordo" }, { "op": "Concordo" }],
                 'text_answer': []
             });
 
@@ -13916,7 +13950,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-md-8" },
+    { staticClass: "col-md-12" },
     [
       _c("br"),
       _vm._v(" "),
@@ -13932,7 +13966,7 @@ var render = function() {
           [
             _c("div", { staticClass: "panel-heading" }, [
               _vm._v(
-                "Pergunta " + _vm._s(index + 1) + "\n                     "
+                "Pergunta " + _vm._s(index + 1) + "\n                        "
               ),
               _c(
                 "button",
@@ -14017,7 +14051,7 @@ var render = function() {
                         _vm._v(
                           "Resposta " +
                             _vm._s(i + 1) +
-                            " - Selecionavel\n                     "
+                            " - Selecionavel\n                        "
                         ),
                         _c(
                           "button",
@@ -14110,13 +14144,13 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "panel panel-info copyright-wrap",
+                      staticClass: "panel panel-warning copyright-wrap",
                       attrs: { id: "copyright-wrap-ans-" + index + "-" + i }
                     },
                     [
                       _c("div", { staticClass: "panel-heading" }, [
                         _vm._v(
-                          "Resposta do tipo  Campo de Texto\n                     "
+                          "Resposta do tipo  Campo de Texto\n                        "
                         ),
                         _c(
                           "button",
@@ -14240,31 +14274,33 @@ var render = function() {
                 _c("br"),
                 _vm._v(" "),
                 _c("center", [
-                  _c(
-                    "button",
-                    {
-                      directives: [
+                  _vm.questions[index].text_answer.length < 1
+                    ? _c(
+                        "button",
                         {
-                          name: "scroll-to",
-                          rawName: "v-scroll-to",
-                          value:
-                            "#endanswer" +
-                            index +
-                            "-" +
-                            (_vm.answerLen(index) - 1),
-                          expression:
-                            "'#endanswer'+index+'-'+(answerLen(index)-1)"
-                        }
-                      ],
-                      staticClass: "btn btn-warning",
-                      on: {
-                        click: function($event) {
-                          _vm.addNewAnswerTextOption(index)
-                        }
-                      }
-                    },
-                    [_vm._v("Adicionar Campo de Texto")]
-                  )
+                          directives: [
+                            {
+                              name: "scroll-to",
+                              rawName: "v-scroll-to",
+                              value:
+                                "#endanswer" +
+                                index +
+                                "-" +
+                                (_vm.answerLen(index) - 1),
+                              expression:
+                                "'#endanswer'+index+'-'+(answerLen(index)-1)"
+                            }
+                          ],
+                          staticClass: "btn btn-warning",
+                          on: {
+                            click: function($event) {
+                              _vm.addNewAnswerTextOption(index)
+                            }
+                          }
+                        },
+                        [_vm._v("Adicionar Campo de Texto")]
+                      )
+                    : _vm._e()
                 ])
               ],
               2
@@ -14296,25 +14332,104 @@ var render = function() {
           "button",
           {
             staticClass: "btn-lg btn-success",
-            attrs: { href: "#" },
-            on: { click: _vm.addNewQuestion }
+            attrs: {
+              "data-toggle": "collapse",
+              "data-target": "#collapseExample",
+              "aria-expanded": "false",
+              "aria-controls": "collapseExample",
+              href: "#"
+            }
           },
           [_vm._v("Adicionar Pergunta")]
         )
       ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "end" } })
+      _c("div", { attrs: { id: "end" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
+        _c("div", { staticClass: "well" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: { click: _vm.addNewQuestion }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ])
+      ])
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Concordância")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("a", { attrs: { href: "" } }, [
+          _c("img", {
+            staticClass: "card-img-top img-fluid",
+            attrs: { src: "//placehold.it/100x100", alt: "Card image cap" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-block" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("Satisfatória")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("a", { attrs: { href: "" } }, [
+          _c("img", {
+            staticClass: "card-img-top img-fluid",
+            attrs: { src: "//placehold.it/100x100", alt: "Card image cap" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-block" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("Campo de texto")])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
   }
 }
 
@@ -14344,7 +14459,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\TypeOfQuestionsComponent.vue"
+Component.options.__file = "resources/assets/js/components/TypeOfQuestionsComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -14353,9 +14468,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2ca3e6b8", Component.options)
+    hotAPI.createRecord("data-v-5bfa8d10", Component.options)
   } else {
-    hotAPI.reload("data-v-2ca3e6b8", Component.options)
+    hotAPI.reload("data-v-5bfa8d10", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -14489,7 +14604,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2ca3e6b8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5bfa8d10", module.exports)
   }
 }
 

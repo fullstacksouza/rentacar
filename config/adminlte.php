@@ -108,28 +108,6 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-
-        [
-            'text'        => 'Paginas',
-            'url'         => 'admin/pages',
-            'icon'        => 'comments',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-
-        [
-            'text'        => 'Pesquisas',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
         'CONFIGURAÇOES DA CONTA',
         [
             'text' => 'Perfil',

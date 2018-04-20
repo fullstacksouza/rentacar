@@ -25,10 +25,12 @@
 
         @foreach($question->answerOptions as $asnw)
             @if(strcmp($asnw->option,"text") != 0)
+
+
             <div class="form-group">
                     <div class="radio">
                             <label>
-                              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                             <input type="radio" name="optionsRadios" id="optionsRadios1" value="{{$asnw->id}}" checked>
                               {{$asnw->option}}
                             </label>
                         </div>
@@ -36,8 +38,9 @@
 
              @else
              <div class="form-group">
-                            <label>Nenhuma das opçoes acima?</label>
-                                <textarea type="text" class="form-control" id="inputEmail3" placeholder=" Titulo da Pesquisa" name="title"></textarea>
+                            <label>                               <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked>
+ Nenhuma das opçoes acima?</label>
+                                <textarea type="text" class="form-control" id="inputEmail3"  name="text_answer"></textarea>
 
 
              </div>

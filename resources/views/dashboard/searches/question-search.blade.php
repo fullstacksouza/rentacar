@@ -34,7 +34,6 @@
     <div id="app">
 
             <example></example>
-            <type-question></type-question>
 
 
           </div>
