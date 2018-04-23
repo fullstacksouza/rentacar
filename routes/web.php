@@ -26,8 +26,6 @@ $this->get('user/change-pass',function(){
     return view("dashboard/users/change-password");
 });
 
-$this->get("user/searches","Admin\UserController@getSearches");
-$this->get("user/searches/{id}/","UserController@replySearch");
 //rotas com o prefixo admin utilizam  os controller na pasta Controller\Admin
 Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], function()
 {
@@ -64,5 +62,13 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->get("search/{id}/preview",'SearchController@previewSearch');
     $this->get("search/test",'SearchController@test');
 
+
+});
+
+Route::group(['namespace'=>"Front"],function(){
+
+    $this->get("user/searches","UserController@getSearches");
+    $this->get("user/searches/{id}/reply","UserController@replySearch")->name("search.reply");
+    $this->get("user/searches/{id}/get","UserController@searchJson");
 
 });

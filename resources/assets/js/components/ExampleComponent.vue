@@ -16,7 +16,8 @@
                             <label for="inputEmail3" class="col-sm-2 control-label">Pergunta</label>
 
                             <div class="col-sm-10">
-                            <input v-model="question.question" type="text" class="form-control" id="inputEmail3" placeholder="Digite aqui a pergunta">
+                            <input v-validate="'required'"  v-model="question.question" type="text" class="form-control" id="inputEmail3" placeholder="Digite aqui a pergunta">
+
                             </div>
                         </div>
                             <br>
@@ -38,7 +39,7 @@
 
                             <div class="col-sm-10">
 
-                            <input  v-model="ans.op" type="text" class="form-control" id="inputEmail3" :placeholder="'Digite a '+ (i+1)+'ª opção de resposta'">
+                            <input v-validate="'required'" v-model="ans.op" type="text" class="form-control" id="inputEmail3" :placeholder="'Digite a '+ (i+1)+'ª opção de resposta'">
                             </div>
 
                             <br>
@@ -70,7 +71,7 @@
 
                             <div class="col-sm-10">
 
-                            <input readonly v-model="ans.text_answer" type="text" class="form-control" id="inputEmail3" placeholder="Campo de texto aberto">
+                            <input  readonly v-model="ans.text_answer" type="text" class="form-control" id="inputEmail3" placeholder="Campo de texto aberto">
                             </div>
 
                             <br>
@@ -109,7 +110,7 @@
       <div class="box-footer">
 
         <button type="submit" class="btn btn-default">Cancelar</button>
-        <button type="submit" @click="sendQuestions" :disabled="questions.length< 1 "  class ="btn btn-info pull-right">Prosseguir</button>
+        <button type="submit" @click="sendQuestions" :disabled="this.validate()"  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
             <center><button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"  href="#" class="btn-lg btn-success" >Adicionar Pergunta</button></center>
@@ -132,7 +133,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="card">
-                        <a href=""><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Satisfatória</h4>
 
@@ -141,9 +142,18 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="card">
-                        <a href=""><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Campo de texto</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="card">
+                        <a href="#"><img @click="addMultipleChoiceQuestion()" class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <div class="card-block">
+                            <h4 class="card-title">Multipla Escolha</h4>
 
                         </div>
                     </div>
@@ -160,6 +170,8 @@
 
 
 import axios from 'axios';
+
+import VeeValidate from 'vee-validate';
 import scroller from 'vue-scrollto/src/scrollTo';
     export default {
         data(){
@@ -169,6 +181,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
             uri: location.pathname,
             params:"",
             searchId:"",
+            form: true,
             token:"",
             questions:[{
                question:"",
@@ -191,6 +204,18 @@ import scroller from 'vue-scrollto/src/scrollTo';
 
         methods:
         {
+            validate()
+            {
+                  this.$validator.validateAll().then(res=>{
+                if(res) {
+                    this.form = false;
+
+                } else {
+                    this.form = true;
+                }
+            });
+            return this.form;
+            },
             addNewQuestion()
             {
                 this.questions.push({
@@ -200,6 +225,20 @@ import scroller from 'vue-scrollto/src/scrollTo';
                         {"op" : "Discordo"},
                         {"op" : "Concordo"},
                         ],
+                    'text_answer':[]
+                });
+
+                  this.$on('teste',function(data){
+                       console.log(data);
+                   })
+                //this.scroll();
+            },
+            //pergunta de multipla escolha
+             addMultipleChoiceQuestion()
+            {
+                this.questions.push({
+                    'question':'',
+                    'answer': [],
                     'text_answer':[]
                 });
 

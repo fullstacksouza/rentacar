@@ -1,7 +1,7 @@
 
 
 @extends('adminlte::page')
-@section('title', 'Realiza Rent a car | Cadastrar Pesquisa')
+@section('title', 'Realiza Rent a car | Responder Pesquisa')
 
 @section('content_header')
     <h1 class="text-center"> {{$search->title}}</h1>
@@ -13,12 +13,13 @@
 @include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
 <div class="box box-info">
-    <div class="box-header with-border">
-      <h3 class="box-title">Informe os dados da Pesquisa a ser cadastrado</h3>
-    </div>
     <!-- /.box-header -->
     <!-- form start -->
     <!-- PERGUNTAS-->
+    <div id="app">
+        <search></search>
+
+    </div>
     @forelse($search->questions as $question)
     <div class="panel panel-primary">
       <div class="panel-heading"><h2 class="text-center">{{$question->question}}</h2></div>
@@ -54,10 +55,9 @@
     @endforelse
     <div class="box-footer">
 
-        <button type="submit" class="btn btn-default">Cancelar</button>
-        <button type="submit"   class ="btn btn-info pull-right">Publicar Pesquisa</button>
+    <a href="{{url('user/searches')}}" type="submit" class="btn btn-default">Cancelar</a>
+        <button type="submit"   class ="btn btn-info pull-right">Enviar Respostas</button>
       </div>
-    <!--final de perguntas>
 
 
 <script src="{{asset('js/app.js')}}"></script>

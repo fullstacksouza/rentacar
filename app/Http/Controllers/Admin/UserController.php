@@ -16,15 +16,15 @@ class UserController extends Controller
 
         $roles = $role->all();
         $sectors = $sector->all();
-       
-       
+
+
         return view('dashboard/users/create',compact('roles','sectors'));
     }
 
     public function list(User $user)
     {
     $users = $user->all();
-   
+
        return view('dashboard/users/list',compact("users"));
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
     public function store(User $user,Role $role,UserRequest $request)
     {
 
-        //dd($request->all());        
+        //dd($request->all());
         $role               = $role->find($request->role);
         $sector             = Sector::find($request->sector);
 
@@ -44,7 +44,7 @@ class UserController extends Controller
         $user->dob          = $request->dob;
         //atribuindo o setor
         $user->sector()->associate($sector);
-            
+
         $user->save();
         //atribuindo o perfil
         $user->attachRole($role);
@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         $roles    = Role::all();
         $sectors  = Sector::all();
-        
+
         $userEdit = User::findOrFail($request->id);
         return view("dashboard/users/edit",compact('userEdit','roles','sectors'));
     }
@@ -66,7 +66,7 @@ class UserController extends Controller
         $editUser       = $user->findOrFail($request->id);
         $editUser->name = $request->name;
 
-        
+
         $currentRole    = $editUser->roles;
         $roles = $role->find($request->role);
         if($roles)
@@ -77,19 +77,19 @@ class UserController extends Controller
             $editUser->attachRole($roles);
         }
     }
-        
+
         $currentSector = $user->sector;
-       
+
         //verificando se houve alteração de setor no formulario
         if(!$currentSector === $sector->id || $currentSector === NULL)
         {
             //return "setor alterado";
             $editUser->sector()->associate($sector);
         }
-        
+
         $editUser->save();
 
-        
+
         return redirect()->back()->with('info','Usuario Atualizado com Sucesso');
 
     }
@@ -109,16 +109,7 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('info','Senha Alterada com Sucesso');
-        
+
     }
 
-    public function getSearches()
-    {
-
-        $user = \Auth::user();
-        $searches = $user->searches()->whereDate('date_start','=',date('y-m-d'))->get();
-       
-        return view("dashboard/users/searches",compact('searches'));
-       
-    }
 }

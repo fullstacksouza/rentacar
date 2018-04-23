@@ -21,4 +21,3 @@ mix.js('node_modules/bootstrap-select/dist/js/bootstrap-select.js','public/plugi
 mix.js('node_modules/jquery/dist/jquery.js','public/vendor/adminlte/vendor/jquery/dist');
 mix.js('node_modules/jquery-slimscroll/jquery.slimscroll.min.js','public/vendor/adminlte/vendor/jquery/dist');
 
-
