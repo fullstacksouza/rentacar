@@ -12,10 +12,12 @@
 
 @include('dashboard/alerts/alerts')
 <!-- Horizontal Form -->
+{{Form::open(array('route' => array('search.publish', $search->id),'id'=>'search_publish'))}}
+{{csrf_field()}}
+{{Form::close()}}
 <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Informe os dados da Pesquisa a ser cadastrado</h3>
-    </div>
     <!-- /.box-header -->
     <!-- form start -->
     <!-- PERGUNTAS-->
@@ -55,7 +57,7 @@
     <div class="box-footer">
 
         <button type="submit" class="btn btn-default">Cancelar</button>
-        <button type="submit"   class ="btn btn-info pull-right">Publicar Pesquisa</button>
+        <button type="submit"  id="publishSearch"  class ="btn btn-info pull-right">Publicar Pesquisa</button>
       </div>
     <!--final de perguntas>
 
@@ -68,7 +70,16 @@
 @stop
 
 @section('js')
+<script>
+    $(document).ready(function(){
 
+        $("#publishSearch").click(function(){
+
+
+            $("#search_publish").submit();
+        })
+    })
+</script>
 @stop
 
 

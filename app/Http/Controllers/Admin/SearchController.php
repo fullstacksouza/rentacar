@@ -137,4 +137,17 @@ class SearchController extends Controller
 
         return view('dashboard/searches/preview',compact('search'));
     }
+
+    public function publishSearch(Request $request)
+    {
+        $search = Search::findOrFail($request->id);
+
+        if($search)
+        {
+            $search->status = 1;
+            $search->save();
+            return redirect('/admin/searches/list');
+        }
+        return redirectr()->back()->with('error','Pesquisa não encontrada');
+    }
 }

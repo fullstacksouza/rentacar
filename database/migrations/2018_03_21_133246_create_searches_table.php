@@ -18,6 +18,7 @@ class CreateSearchesTable extends Migration
             $table->text('title');
             $table->date('date_start');
             $table->date('date_end');
+            $table->integer('status')->default("0");
             $table->timestamps();
         });
     }

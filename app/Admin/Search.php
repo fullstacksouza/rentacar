@@ -18,6 +18,13 @@ class Search extends Model
     {
         return $this->belongsToMany(Sector::class,'search_sectors','search_id','sector_id');
     }
-    
 
+    public function getStatus($status)
+    {
+        if($status == 0)
+        {
+            return "Não publicada";
+        }
+        return "Publicada";
+    }
 }

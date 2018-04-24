@@ -26,33 +26,36 @@
           <th>Titulo</th>
           <th>Data de Inicio</th>
           <th>Data de Expiração</th>
+          <th>Status</th>
           <th>Ações</th>
         </tr>
         </thead>
         <tbody>
          @forelse ($searches as $search)
         <tr>
-       
+
           <td>{{$search->title}}</td>
           <td>{{date('d/m/Y',strtotime($search->date_start))  }}</td>
           <td>{{date('d/m/y',strtotime($search->date_end))}}</td>
+          <td>{{$search->getStatus($search->status)}}</td>
           <td>
           <a class='btn btn-primary' href='{{url("admin/search/$search->id/preview")}}'>Vizualizar</a>
           <a class='btn btn-warning' href='{{url("admin/users/$search->id/edit")}}'>Editar</a>
           <a class='delete btn btn-danger' data-toggle="modal" data-id="{{ $search->id }}" data-token="{{ csrf_token() }}" data-target="#modal-default">Excluir</a>
-        
+
           </td>
         </tr>
         @empty
         Sem Registros
         @endforelse
-        
+
         </tbody>
         <tfoot>
         <tr>
           <th>Titulo</th>
           <th>Data de Inicio</th>
           <th>Data de Expiração</th>
+          <th>Status</th>
           <th>Ações</th>
         </tr>
         </tfoot>
@@ -138,7 +141,7 @@
             {
               alert("Problema ocorrido: " + status + "\nDescição: " + erro);
             //Abaixo está listando os header do conteudo que você requisitou, só para confirmar se você setou os header e dataType corretos
-                   
+
             }
 
 

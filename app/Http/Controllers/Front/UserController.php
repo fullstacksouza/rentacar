@@ -12,7 +12,7 @@ class UserController extends Controller
     {
 
         $user = \Auth::user();
-        $searches = $user->searches()->whereDate('date_start','=',date('y-m-d'))->get();
+        $searches = $user->searches()->where('status','=',1)->whereDate('date_start','=',date('y-m-d'))->get();
 
         return view("front/user/searches",compact('searches'));
 
@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function replySearch(Request $request)
     {
-        $search = Search::findOrFail(19);
+        $search = Search::findOrFail($request->id);
         if($search)
         {
             return view('front/user/search-reply',compact("search"));
@@ -42,7 +42,7 @@ class UserController extends Controller
                     $options[] = $asnw;
                 }
             }
-            return response()->json(['search'=>$search,'questions'=>$search->questions,'options'=>$options]);
+            return response()->json(['search'=>$search,'questions'=>$search->questions]);
         }
     }
 }

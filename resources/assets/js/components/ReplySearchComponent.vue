@@ -1,6 +1,27 @@
 <template>
   <div>
-    Vue ok
+
+    <div v-for="(question,index) in search.questions" class="panel panel-primary">
+      <div class="panel-heading"><h2 class="text-center">{{question.question}}</h2></div>
+      <div  class="panel-body">
+
+
+            <div class="form-group" v-for="answer in search.questions[index].answer_options" >
+                    <div class="radio">
+                            <label>
+                             <input v-if="answer.option != 'text'" type="radio" name="optionsRadios" id="optionsRadios1" :value="answer.id" checked>
+                                    {{answer.option}}
+                            </label>
+                    </div>
+
+
+             </div>
+
+
+
+
+          </div>
+    </div>
   </div>
 </template>
 
