@@ -5,6 +5,7 @@ use App\Role;
 use App\Permission;
 use App\User;
 use App\Admin\Question;
+use App\Admin\TypeQuestion;
 use App\Admin\Search;
 use App\Admin\Sector;
 use App\Admin\Answer;

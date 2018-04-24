@@ -69,6 +69,7 @@ Route::group(['namespace'=>"Front"],function(){
 
     $this->get("user/searches","UserController@getSearches");
     $this->get("user/searches/{id}/reply","UserController@replySearch")->name("search.reply");
+    $this->post("user/searches/{id}/reply","UserController@sendAnswers")->name("search.reply");
     $this->get("user/searches/{id}/get","UserController@searchJson");
 
 });

@@ -45,4 +45,19 @@ class UserController extends Controller
             return response()->json(['search'=>$search,'questions'=>$search->questions]);
         }
     }
+
+    public function sendAnswers(Request $request)
+    {
+        // criar migration user_text_answers contendo user_id,question_id,text answer
+        $answers = [];
+        foreach($request->answers as $answer)
+        {
+            //verificando se o usuario selecinou alguma resposta
+            if($answer['choice'] == null)
+            {
+                $answers[] = $answer['answer_text'];
+            }
+        }
+        return $answers;
+    }
 }
