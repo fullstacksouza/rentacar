@@ -17,10 +17,13 @@
     <!-- form start -->
     <!-- PERGUNTAS-->
     <div id="app">
-        <search></search>
+
+        <search>
+
+        </search>
 
     </div>
-    @forelse($search->questions as $question)
+    <!--@forelse($search->questions as $question)
     <div class="panel panel-primary">
       <div class="panel-heading"><h2 class="text-center">{{$question->question}}</h2></div>
 
@@ -39,12 +42,12 @@
 
              @else
              <div class="form-group">
-                            <label>                               <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked>
- Nenhuma das opçoes acima?</label>
-                                <textarea type="text" class="form-control" id="inputEmail3"  name="text_answer"></textarea>
-
-
-             </div>
+                <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked>
+                 Nenhuma das opçoes acima?
+                </label>
+                 <textarea type="text" class="form-control" id="inputEmail3"  name="text_answer"></textarea>
+            </div>
 
              @endif
         @endforeach
@@ -52,12 +55,8 @@
 
     @empty
 
-    @endforelse
-    <div class="box-footer">
+    @endforelse-->
 
-    <a href="{{url('user/searches')}}" type="submit" class="btn btn-default">Cancelar</a>
-        <button type="submit"   class ="btn btn-info pull-right">Enviar Respostas</button>
-      </div>
 
 
 <script src="{{asset('js/app.js')}}"></script>

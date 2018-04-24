@@ -21607,8 +21607,22 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vee_validate__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -21640,32 +21654,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            title: "TITULO",
-            search: [],
-            questions: [{
-                question: "",
-                answer: [{ "op": '' }],
-                text_answer: [{
-                    'text_answer': ''
-                }]
-            }]
-        };
+  data: function data() {
+    return {
+      title: "TITULO",
+      search: [],
+      answers: [],
+      textOptionSelect: true,
+      questions: [{
+        question: "",
+
+        answer: [{ op: "" }],
+        text_answer: [{
+          text_answer: ""
+        }]
+      }]
+    };
+  },
+
+  methods: {
+    textAsnwer: function textAsnwer() {
+      this.textOptionSelect = false;
     },
-    created: function created() {
-        var _this = this;
-
-        var uri = location.pathname.split("/");
-
-        var searchId = uri[3];
-        //this.questions.push({"search_id":searchId}),
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/user/searches/" + searchId + "/get").then(function (response) {
-            _this.search = response.data;
-        }).catch(function (error) {
-            console.log(error);
-        });
+    validate: function validate() {
+      this.$validator.validateAll().then(function (res) {
+        if (res) {
+          alert("nok");
+        } else {
+          alert("ok");
+        }
+      });
     }
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    var uri = location.pathname.split("/");
+
+    var searchId = uri[3];
+    //this.questions.push({"search_id":searchId}),
+    __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get("http://localhost:8000/user/searches/" + searchId + "/get").then(function (response) {
+      _this.search = response.data;
+      var i;
+      for (i = 0; i < _this.search.questions.length; i++) {
+        _this.answers.push({
+          'choice': '',
+          'question': _this.search.questions[i].id
+        });
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 });
 
 /***/ }),
@@ -21678,47 +21718,141 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.search.questions, function(question, index) {
-      return _c("div", { staticClass: "panel panel-primary" }, [
-        _c("div", { staticClass: "panel-heading" }, [
-          _c("h2", { staticClass: "text-center" }, [
-            _vm._v(_vm._s(question.question))
-          ])
+    [
+      _vm._l(_vm.search.questions, function(question, index) {
+        return _c("div", { staticClass: "panel panel-primary" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _c("h2", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(question.question))
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            _vm._l(_vm.search.questions[index].answer_options, function(
+              answer
+            ) {
+              return _c("div", { staticClass: "form-group" }, [
+                answer.option != "text"
+                  ? _c("div", { staticClass: "radio" }, [
+                      _c(
+                        "fieldset",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: { id: "group" + index }
+                        },
+                        [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.answers[index].choice,
+                                  expression: "answers[index].choice"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "group" + index,
+                                id: "optionsRadios1"
+                              },
+                              domProps: {
+                                value: answer.id,
+                                checked: _vm._q(
+                                  _vm.answers[index].choice,
+                                  answer.id
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(
+                                    _vm.answers[index],
+                                    "choice",
+                                    answer.id
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                  " +
+                                _vm._s(answer.option) +
+                                "\n                          "
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _c("div", { staticClass: "form-group" }, [
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "inputEmail3",
+                          name: "text_answer",
+                          disabled: _vm.textOptionSelect
+                        }
+                      })
+                    ])
+              ])
+            })
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer" }, [
+        _c("a", { staticClass: "btn btn-default", attrs: { type: "submit" } }, [
+          _vm._v("Cancelar")
         ]),
         _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "panel-body" },
-          _vm._l(_vm.search.questions[index].answer_options, function(answer) {
-            return _c("div", { staticClass: "form-group" }, [
-              _c("div", { staticClass: "radio" }, [
-                _c("label", [
-                  answer.option != "text"
-                    ? _c("input", {
-                        attrs: {
-                          type: "radio",
-                          name: "optionsRadios",
-                          id: "optionsRadios1",
-                          checked: ""
-                        },
-                        domProps: { value: answer.id }
-                      })
-                    : _vm._e(),
-                  _vm._v(
-                    "\n                                  " +
-                      _vm._s(answer.option) +
-                      "\n                          "
-                  )
-                ])
-              ])
-            ])
-          })
+          "button",
+          {
+            staticClass: "btn btn-info pull-right",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                _vm.validate()
+              }
+            }
+          },
+          [_vm._v("Enviar Respostas")]
         )
       ])
-    })
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("input", {
+        attrs: {
+          type: "radio",
+          name: "optionsRadios",
+          id: "optionsRadios1",
+          value: "textAnswer"
+        }
+      }),
+      _vm._v(
+        "\n                      Nenhuma das opçoes acima?\n                      "
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
