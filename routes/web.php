@@ -55,12 +55,13 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->get('searches/create','SearchController@create');
     $this->post('searches/create','SearchController@store');
 
-    $this->get('search/{id}/questions/create','QuestionController@create');
+    $this->get('search/{id}/questions/create','QuestionController@create')->middleware('create-questions');
     $this->get('searches/list','SearchController@list');
     $this->post('search/questions/create','SearchController@addQuestions');
 
     $this->get("search/{id}/preview",'SearchController@previewSearch');
     $this->post('search/{id}/publish','SearchController@publishSearch')->name('search.publish');
+    $this->get('search/{id}/details','SearchController@details')->name('search.details');
 
 
 });
@@ -68,7 +69,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
 Route::group(['namespace'=>"Front"],function(){
 
     $this->get("user/searches","UserController@getSearches");
-    $this->get("user/searches/{id}/reply","UserController@replySearch")->name("search.reply");
+    $this->get("user/searches/{id}/reply","UserController@replySearch")->name("search.reply")->middleware('search');
     $this->post("user/searches/{id}/reply","UserController@sendAnswers")->name("search.reply");
     $this->get("user/searches/{id}/get","UserController@searchJson");
 

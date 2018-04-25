@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Admin;
-
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Search extends Model
@@ -17,6 +17,11 @@ class Search extends Model
     public function sectors()
     {
         return $this->belongsToMany(Sector::class,'search_sectors','search_id','sector_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_searches');
     }
 
     public function getStatus($status)

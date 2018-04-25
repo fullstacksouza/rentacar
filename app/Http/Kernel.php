@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'permission' => \Laratrust\Middleware\LaratrustPermission::class,
         'ability' => \Laratrust\Middleware\LaratrustAbility::class,
         'search' => \App\Http\Middleware\SearchMiddleware::class,
+        'create-questions' => \App\Http\Middleware\CreateQuestionsMiddleware::class
     ];
 }

@@ -4,8 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Admin\Search;
-use App\User;
-class SearchMiddleware
+class CreateQuestionsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,15 +15,14 @@ class SearchMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = \Auth::user();
-
-           $search =  $user->searches()->where('search_id',$request->route('id'))
-           ->where('search_status',0)->get();
-
-        if(count($search) > 0 && ($search[0]['status'] == 1))
+        $search = Search::findOrFail($request->route('id'));
+        if($search)
         {
+            if($search->status == 0)
+            {
 
-            return $next($request);
+        return $next($request);
+            }
         }
 
         return redirect()->back();

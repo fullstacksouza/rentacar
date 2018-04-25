@@ -49,7 +49,7 @@
 
         </tr>
         @empty
-        Sem Registros
+
         @endforelse
 
         </tbody>

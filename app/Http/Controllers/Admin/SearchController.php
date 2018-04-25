@@ -9,6 +9,8 @@ use App\Admin\Search;
 use App\Admin\Sector;
 use App\Admin\Question;
 use App\Admin\AnswerOption;
+use App\User;
+use Charts;
 class SearchController extends Controller
 {
     public function create()
@@ -132,4 +134,71 @@ class SearchController extends Controller
         }
         return redirectr()->back()->with('error','Pesquisa não encontrada');
     }
+
+    public function details(Request $request)
+    {
+        $userDontReply = 0; //quantidade de usuarios que NÂO responderam a pesquisa
+        $userReply     = 0; // //quantidade de usuarios que responderam a pesquisa
+        $search        = Search::findOrFail($request->id);
+        foreach($search->users as $users)
+        {
+            $user           = User::find($users->id);
+            $searches       = $user->searches()->where('search_id',$request->id)
+            ->where('search_status',0)->count();
+            $userDontReply += $searches;
+
+            $userReply += $user->searches()->where('search_id',$request->id)
+            ->where('search_status',1)->count();
+
+        }
+
+        //gerando grafico fr usuarios que responderam
+
+/*        $chart = Charts::create('pie', 'highcharts')
+        ->title('Quantidade de usuarios que responderam')
+        ->labels(['Responderam', 'Não responderam'])
+        ->values([$userReply,$userDontReply])
+        ->dimensions(1000,500)
+        ->responsive(true);*/
+
+        $chart = Charts::multi()
+            // Setup the chart settings
+            ->title("My Cool Chart")
+            // A dimension of 0 means it will take 100% of the space
+            ->dimensions(0, 400) // Width x Height
+            // This defines a preset of colors already done:)
+            ->template("material")
+            // You could always set them manually
+            // ->colors(['#2196F3', '#F44336', '#FFC107'])
+            // Setup the diferent datasets (this is a multi chart)
+            ->dataset('Element 1', [5,20,100])
+            ->dataset('Element 2', [15,30,80])
+            ->dataset('Element 3', [25,10,40])
+            // Setup what the values mean
+            ->labels(['One', 'Two', 'Three']);
+
+        $questionsArray = [];
+        $answers   = [];
+        $count     = [];
+        //gerando graficos de respostas para cada pergunta
+        foreach($search->questions as $questions)
+        {
+            $questionsArray[] =$questions;
+            foreach($questions->answerOptions as $answerOptions)
+            {
+                if(strcmp($answerOptions->option,'text')!= 0)
+                {
+                    $ansOp = AnswerOption::find($answerOptions->id);
+                    $answers [] = $answerOptions->option;
+                    $count[]= $ansOp->users()->where('answer_id',$answerOptions->id)->count();
+                }
+            }
+        }
+
+        //return response()->json(['opçao'=>$answers,'quantidade'=>$count,$questionsArray]);
+         return view('dashboard/searches/details',compact('questionsArray','chart'));
+       // return $searchesOfU;
+
+    }
+
 }
