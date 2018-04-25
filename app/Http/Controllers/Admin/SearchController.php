@@ -22,24 +22,6 @@ class SearchController extends Controller
         $searches = $search->all();
         return view('dashboard/searches/list',compact('searches'));
     }
-    public function test()
-    {
-        $search = Search::find(43);
-
-        $sectors = $search->sectors;
-
-        foreach($sectors as $sec)
-        {
-            $sector = $sec->find($sec->id);
-            foreach($sector->user as $u)
-            {
-                $u->searches()->sync($current_search);
-            }
-
-            echo $sec->name."<br>";
-        }
-
-    }
     public function store(SearchRequest $request,Search $search)
     {
 

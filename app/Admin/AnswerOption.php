@@ -3,7 +3,7 @@
 namespace App\Admin;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
 class AnswerOption extends Model
 {
     //
@@ -12,5 +12,10 @@ class AnswerOption extends Model
     public function question()
     {
         return $this->belongsTo(Question::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_answers','answer_id');
     }
 }

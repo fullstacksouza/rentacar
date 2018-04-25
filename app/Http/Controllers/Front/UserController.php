@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Admin\Search;
+use App\Admin\Question;
+use App\Admin\UserTextAnswer;
+use App\Admin\AnswerOption;
 class UserController extends Controller
 {
 
@@ -43,11 +46,16 @@ class UserController extends Controller
                 }
             }
             return response()->json(['search'=>$search,'questions'=>$search->questions]);
+
         }
+
     }
 
-    public function sendAnswers(Request $request)
+    public function sendAnswers(Request $request,UserTextAnswer $userTextAnswer)
     {
+        $current_user = \Auth::user();
+        $texAnswer;
+
         // criar migration user_text_answers contendo user_id,question_id,text answer
         $answers = [];
         foreach($request->answers as $answer)
@@ -55,8 +63,20 @@ class UserController extends Controller
             //verificando se o usuario selecinou alguma resposta
             if($answer['choice'] == null)
             {
-                $answers[] = $answer['answer_text'];
+                $userTextAnswer = UserTextAnswer::create([
+                    'answer'=> $answer['answer_text'],
+                    'user_id'=>$current_user->id,
+                    'question_id'=>$answer['question']
+
+                ]);
+
             }
+            else
+            {
+            $answerChoosed = AnswerOption::find($answer['choice']);
+            $answerChoosed->users()->attach(1);
+            }
+
         }
         return $answers;
     }

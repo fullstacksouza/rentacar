@@ -17,7 +17,7 @@
 {{Form::close()}}
 <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Informe os dados da Pesquisa a ser cadastrado</h3>
+      <h3 class="box-title">Pré Vizualização da pesquisa</h3>
     <!-- /.box-header -->
     <!-- form start -->
     <!-- PERGUNTAS-->

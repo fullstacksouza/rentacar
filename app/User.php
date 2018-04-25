@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 use App\Admin\Sector;
 use App\Admin\Search;
+use App\Admin\UserTextAnswer;
+use App\Admin\AnswerOption;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
@@ -35,13 +37,14 @@ class User extends Authenticatable
         return $this->belongsTo(Sector::class);
     }
 
-    public function teste()
-    {
-        return $this->belongsTo(Sector::class);
-    }
 
     public function searches()
     {
         return $this->belongsToManY(Search::class,'user_searches');
+    }
+
+    public function answers()
+    {
+        return $this->belongsToMany(AnswerOption::class,'user_answers','user_id','id');
     }
 }
