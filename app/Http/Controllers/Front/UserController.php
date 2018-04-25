@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Admin\Search;
@@ -15,7 +15,13 @@ class UserController extends Controller
     {
 
         $user = \Auth::user();
-        $searches = $user->searches()->where('status','=',1)->whereDate('date_start','=',date('y-m-d'))->get();
+        $updateStatus = DB::table("user_searches")
+        ->where('user_id',\Auth::user()->id)
+        ->where('search_status',0)
+        ->get();
+        $searches = $user->searches()
+        ->where('search_status',0)
+        ->where('status','=',1)->whereDate('date_start','=',date('y-m-d'))->get();
 
         return view("front/user/searches",compact('searches'));
 
@@ -55,7 +61,13 @@ class UserController extends Controller
     {
         $current_user = \Auth::user();
         $texAnswer;
-
+        $data = [
+            'user_id'=>$current_user->id,
+            'search_id'=>$request->searchID,
+            'search_status'=> 1
+        ];
+        $current_user->searches()->updateExistingPivot(['search_id'=>$request->searchID],['search_status'=>1]);
+       //$current_user->searches()->attach(['search_id'=>$request->searchID,['search_status'=>1]]);
         // criar migration user_text_answers contendo user_id,question_id,text answer
         $answers = [];
         foreach($request->answers as $answer)
@@ -74,7 +86,8 @@ class UserController extends Controller
             else
             {
             $answerChoosed = AnswerOption::find($answer['choice']);
-            $answerChoosed->users()->attach(1);
+            $answerChoosed->users()->attach($current_user);
+
             }
 
         }

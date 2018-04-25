@@ -7,9 +7,9 @@
           <div class="form-group" v-for="answer in search.questions[index].answer_options" >
 
                     <div class="radio" v-if="answer.option !='text'">
-                             <fieldset :id="'group'+index" v-validate="'required'">
+                             <fieldset :id="'group'+index">
                             <label >
-                             <input v-model="answers[index].choice" type="radio" :name="'group'+index" id="optionsRadios1" :disabled="answers[index].answer_text!= ''" :value="answer.id">
+                             <input  v-validate="'required'" v-model="answers[index].choice" type="radio" :name="'group'+index" id="optionsRadios1" :disabled="answers[index].answer_text!= ''" :value="answer.id">
                                     {{answer.option}}
                             </label>
                               </fieldset>
@@ -18,7 +18,7 @@
 
 
                      <div class="form-group" v-else>
-                         <fieldset :id="'group'+index" v-validate="'required'">
+                         <fieldset :id="'group'+index">
                         <label>
                         Nenhuma das opçoes acima?
                         </label>
@@ -34,17 +34,40 @@
        <div class="box-footer">
 
     <a type="submit" class="btn btn-default">Cancelar</a>
-        <button type="submit" @click="sendAnswer()"   class ="btn btn-info pull-right">Enviar Respostas</button>
+        <button type="submit" :disabled="this.validate()"  data-toggle="modal" data-target="#exampleModal"   class ="btn btn-info pull-right">Enviar Respostas</button>
       </div>
+
+      <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmação de envio de respostas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja enviar as respostas para essa pesquisa?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" @click="sendAnswer()"  class="btn btn-primary">Enviar Respostas</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
 <script>
 import VeeValidate from "vee-validate";
+
 import axios from "axios";
 export default {
   data() {
     return {
+      form:true,
       text_answer:"",
       title: "TITULO",
       search: [],
@@ -68,26 +91,33 @@ export default {
     textAsnwer() {
       this.textOptionSelect = false;
     },
-    validate() {
-      this.$validator.validateAll().then(res => {
-        if (res) {
-            alert("nok")
-        } else {
-            alert("ok")
-        }
-      });
-    },
+    validate()
+            {
+              this.$validator.validateAll().then(res=>{
+                if(res) {
+                    this.form = false;
+
+                } else {
+                    this.form = true;
+                }
+            });
+            return this.form;
+            },
     sendAnswer()
     {
+      event.preventDefault();
+			event.target.disabled = true;
       let uri = location.pathname.split("/");
 
                 let searchId  =  uri[3];
                 //this.questions.push({"search_id":searchId}),
                 axios.post(`http://localhost:8000/user/searches/`+searchId+`/reply`,{
                     answers:this.answers,
+                    searchID: searchId
 
                  })
                 .then(response=>{
+                window.location = "http://localhost:8000/user/searches";
 
                     console.log(response);
 

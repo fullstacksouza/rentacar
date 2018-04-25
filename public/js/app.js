@@ -21651,12 +21651,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      form: true,
       text_answer: "",
       title: "TITULO",
       search: [],
@@ -21678,23 +21701,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.textOptionSelect = false;
     },
     validate: function validate() {
+      var _this = this;
+
       this.$validator.validateAll().then(function (res) {
         if (res) {
-          alert("nok");
+          _this.form = false;
         } else {
-          alert("ok");
+          _this.form = true;
         }
       });
+      return this.form;
     },
     sendAnswer: function sendAnswer() {
+      event.preventDefault();
+      event.target.disabled = true;
       var uri = location.pathname.split("/");
 
       var searchId = uri[3];
       //this.questions.push({"search_id":searchId}),
       __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post("http://localhost:8000/user/searches/" + searchId + "/reply", {
-        answers: this.answers
+        answers: this.answers,
+        searchID: searchId
 
       }).then(function (response) {
+        window.location = "http://localhost:8000/user/searches";
 
         console.log(response);
       }).catch(function (error) {
@@ -21707,20 +21737,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {},
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     var uri = location.pathname.split("/");
 
     var searchId = uri[3];
     //this.questions.push({"search_id":searchId}),
     __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get("http://localhost:8000/user/searches/" + searchId + "/get").then(function (response) {
-      _this.search = response.data;
+      _this2.search = response.data;
       var i;
-      for (i = 0; i < _this.search.questions.length; i++) {
-        _this.answers.push({
+      for (i = 0; i < _this2.search.questions.length; i++) {
+        _this2.answers.push({
           'choice': '',
           'answer_text': '',
-          'question': _this.search.questions[i].id
+          'question': _this2.search.questions[i].id
         });
       }
     }).catch(function (error) {
@@ -21757,84 +21787,62 @@ var render = function() {
               return _c("div", { staticClass: "form-group" }, [
                 answer.option != "text"
                   ? _c("div", { staticClass: "radio" }, [
-                      _c(
-                        "fieldset",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          attrs: { id: "group" + index }
-                        },
-                        [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.answers[index].choice,
-                                  expression: "answers[index].choice"
-                                }
-                              ],
-                              attrs: {
-                                type: "radio",
-                                name: "group" + index,
-                                id: "optionsRadios1",
-                                disabled: _vm.answers[index].answer_text != ""
+                      _c("fieldset", { attrs: { id: "group" + index } }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: "'required'"
                               },
-                              domProps: {
-                                value: answer.id,
-                                checked: _vm._q(
-                                  _vm.answers[index].choice,
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.answers[index].choice,
+                                expression: "answers[index].choice"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "group" + index,
+                              id: "optionsRadios1",
+                              disabled: _vm.answers[index].answer_text != ""
+                            },
+                            domProps: {
+                              value: answer.id,
+                              checked: _vm._q(
+                                _vm.answers[index].choice,
+                                answer.id
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(
+                                  _vm.answers[index],
+                                  "choice",
                                   answer.id
                                 )
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.$set(
-                                    _vm.answers[index],
-                                    "choice",
-                                    answer.id
-                                  )
-                                }
                               }
-                            }),
-                            _vm._v(
-                              "\n                                  " +
-                                _vm._s(answer.option) +
-                                "\n                          "
-                            )
-                          ])
-                        ]
-                      )
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(answer.option) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
                     ])
                   : _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "fieldset",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          attrs: { id: "group" + index }
-                        },
-                        [
-                          _c("label", [
-                            _vm._v(
-                              "\n                      Nenhuma das opçoes acima?\n                      "
-                            )
-                          ])
-                        ]
-                      ),
+                      _c("fieldset", { attrs: { id: "group" + index } }, [
+                        _c("label", [
+                          _vm._v(
+                            "\n                        Nenhuma das opçoes acima?\n                        "
+                          )
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("textarea", {
                         directives: [
@@ -21884,21 +21892,103 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-info pull-right",
-            attrs: { type: "submit" },
-            on: {
-              click: function($event) {
-                _vm.sendAnswer()
-              }
+            attrs: {
+              type: "submit",
+              disabled: this.validate(),
+              "data-toggle": "modal",
+              "data-target": "#exampleModal"
             }
           },
           [_vm._v("Enviar Respostas")]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "exampleModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _vm._v(
+                    "\n        Tem certeza que deseja enviar as respostas para essa pesquisa?\n      "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cancelar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.sendAnswer()
+                        }
+                      }
+                    },
+                    [_vm._v("Enviar Respostas")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Confirmação de envio de respostas")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

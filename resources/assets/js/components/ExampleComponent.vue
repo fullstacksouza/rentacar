@@ -177,7 +177,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
         data(){
 
         return {
-             index:0,
+            index:0,
             uri: location.pathname,
             params:"",
             searchId:"",
