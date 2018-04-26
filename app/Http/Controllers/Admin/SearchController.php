@@ -191,7 +191,7 @@ class SearchController extends Controller
 
             }
 
-        $questionChart= Charts::create('pie', 'highcharts')
+        $charts[]= Charts::create('pie', 'highcharts')
         ->title('Porcentagem de respostas')
         ->labels($answers)
         ->values($count)

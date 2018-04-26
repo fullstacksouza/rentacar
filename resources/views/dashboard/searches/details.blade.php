@@ -38,8 +38,11 @@
           </div>
         </div>
           <!-- /.box -->
-
+@php
+$i = 0
+@endphp
 @foreach($questionsArray as $questions)
+
           <div class="col-md-12">
           <!-- AREA CHART -->
           <div class="box box-primary">
@@ -55,17 +58,18 @@
             <div class="box-body text-center">
 
               <div class="chart text-center">
-                 Grafico da{{$questions->question}}
+                {!!$charts[$i]->html()!!}
               </div>
             </div>
             <!-- /.box-body -->
           </div>
         </div>
+        @php
+        $i++
+        @endphp
 @endforeach
 
-@foreach($charts as $ch)
-{!!$ch->html()!!}
-@endforeach
+
         <!-- /.col (RIGHT) -->
       </div>
       <!-- /.row -->
