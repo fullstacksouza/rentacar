@@ -137,6 +137,7 @@ class SearchController extends Controller
 
     public function details(Request $request)
     {
+        $charts = [];
         $userDontReply = 0; //quantidade de usuarios que NÂO responderam a pesquisa
         $userReply     = 0; // //quantidade de usuarios que responderam a pesquisa
         $search        = Search::findOrFail($request->id);
@@ -154,35 +155,29 @@ class SearchController extends Controller
 
         //gerando grafico fr usuarios que responderam
 
-/*        $chart = Charts::create('pie', 'highcharts')
+       $chart = Charts::create('pie', 'highcharts')
         ->title('Quantidade de usuarios que responderam')
         ->labels(['Responderam', 'Não responderam'])
         ->values([$userReply,$userDontReply])
         ->dimensions(1000,500)
-        ->responsive(true);*/
+        ->responsive(true);
 
-        $chart = Charts::multi()
-            // Setup the chart settings
-            ->title("My Cool Chart")
-            // A dimension of 0 means it will take 100% of the space
-            ->dimensions(0, 400) // Width x Height
-            // This defines a preset of colors already done:)
-            ->template("material")
-            // You could always set them manually
-            // ->colors(['#2196F3', '#F44336', '#FFC107'])
-            // Setup the diferent datasets (this is a multi chart)
-            ->dataset('Element 1', [5,20,100])
-            ->dataset('Element 2', [15,30,80])
-            ->dataset('Element 3', [25,10,40])
-            // Setup what the values mean
-            ->labels(['One', 'Two', 'Three']);
+        $chart1 = Charts::create('pie', 'highcharts')
+        ->title('Quantidade de usuarios que responderam 2')
+        ->labels(['Responderam', 'Não responderam'])
+        ->values([$userReply,$userDontReply])
+        ->dimensions(1000,500)
+        ->responsive(true);
 
         $questionsArray = [];
         $answers   = [];
         $count     = [];
+
+
         //gerando graficos de respostas para cada pergunta
         foreach($search->questions as $questions)
         {
+
             $questionsArray[] =$questions;
             foreach($questions->answerOptions as $answerOptions)
             {
@@ -192,11 +187,25 @@ class SearchController extends Controller
                     $answers [] = $answerOptions->option;
                     $count[]= $ansOp->users()->where('answer_id',$answerOptions->id)->count();
                 }
+
+
             }
+
+        $questionChart= Charts::create('pie', 'highcharts')
+        ->title('Porcentagem de respostas')
+        ->labels($answers)
+        ->values($count)
+        ->dimensions(1000,500)
+        ->responsive(true);
+        $answers = null;
+        $count = null;
+
         }
 
+
+
         //return response()->json(['opçao'=>$answers,'quantidade'=>$count,$questionsArray]);
-         return view('dashboard/searches/details',compact('questionsArray','chart'));
+         return view('dashboard/searches/details',compact('questionsArray','chart','charts','fullarray'));
        // return $searchesOfU;
 
     }

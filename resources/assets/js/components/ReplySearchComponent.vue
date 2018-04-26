@@ -105,8 +105,8 @@ export default {
             },
     sendAnswer()
     {
-      event.preventDefault();
-			event.target.disabled = true;
+     // event.preventDefault();
+		// /	event.target.disabled = true;
       let uri = location.pathname.split("/");
 
                 let searchId  =  uri[3];
