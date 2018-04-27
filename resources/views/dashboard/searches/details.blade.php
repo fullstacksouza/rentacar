@@ -17,7 +17,7 @@
 
 @section('content')
 <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-7">
           <!-- AREA CHART -->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -38,16 +38,18 @@
           </div>
         </div>
           <!-- /.box -->
+
 @php
 $i = 0
 @endphp
-@foreach($questionsArray as $questions)
 
-          <div class="col-md-12">
+<div class="row">
+  @foreach($questionsArray as $question)
+          <div class="col-md-5">
           <!-- AREA CHART -->
           <div class="box box-primary">
             <div class="box-header with-border">
-            <h3 class="text-center">{{$questions->question}}</h3>
+            <h3 class="text-center">Pergunta -</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -68,6 +70,12 @@ $i = 0
         $i++
         @endphp
 @endforeach
+</div>
+
+        @php
+        $i++
+        @endphp
+
 
 
         <!-- /.col (RIGHT) -->

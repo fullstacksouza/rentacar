@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Admin\Search;
 use App\Admin\Sector;
+use App\Admin\UserTextAnswer;
 use App\Admin\Question;
 use App\Admin\AnswerOption;
 use App\User;
@@ -186,7 +187,12 @@ class SearchController extends Controller
                     $ansOp = AnswerOption::find($answerOptions->id);
                     $answers [] = $answerOptions->option;
                     $count[]= $ansOp->users()->where('answer_id',$answerOptions->id)->count();
+                }else{
+                    //quantidade de usuarios que optaram por responder com texto
+                    $answers [] ="Campo de texto";
+                    $count[]=UserTextAnswer::where('question_id',$questions->id)->count();
                 }
+
 
 
             }
