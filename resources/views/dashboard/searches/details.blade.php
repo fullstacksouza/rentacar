@@ -10,7 +10,7 @@
 {{--alertas --}}
 @include('dashboard/alerts/alerts')
 
-    <h1>Dashboard</h1>
+<h1>Relatório da pesquisa: {{$search->title}}</h1>
 @stop
 
 
@@ -19,15 +19,10 @@
 <div class="row">
         <div class="col-md-7">
           <!-- AREA CHART -->
+
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Grafico 1</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+              <h3 class="box-title">Usuarios que responderam</h3>
             </div>
             <div class="box-body text-center">
               <div class="chart text-center">
@@ -36,52 +31,55 @@
             </div>
             <!-- /.box-body -->
           </div>
+
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Respostas campo aberto</h3>
+            </div>
+            <div class="box-body">
+                <h2 class="text-center">Pergunta</h2></h2>
+                    <h3 class="text-center">Resposta <small>- Usuario tal</small></h3>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+
         </div>
+
           <!-- /.box -->
 
 @php
 $i = 0
 @endphp
 
-<div class="row">
-  @foreach($questionsArray as $question)
-          <div class="col-md-5">
+<aside role="complementary" class="col-md-5">
+
           <!-- AREA CHART -->
+
+          @foreach($questionsArray as $question)
+
           <div class="box box-primary">
             <div class="box-header with-border">
-            <h3 class="text-center">Pergunta -</h3>
+            <h3 class="text-center">{{$question}}</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
             </div>
             <div class="box-body text-center">
 
               <div class="chart text-center">
                 {!!$charts[$i]->html()!!}
               </div>
+
+              @php
+              $i++
+              @endphp
+
             </div>
             <!-- /.box-body -->
           </div>
-        </div>
-        @php
-        $i++
-        @endphp
-@endforeach
+          @endforeach
+  </aside>
 </div>
-
-        @php
-        $i++
-        @endphp
-
-
-
-        <!-- /.col (RIGHT) -->
-      </div>
-      <!-- /.row -->
-
 @stop
 
 

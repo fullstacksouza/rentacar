@@ -6,7 +6,7 @@
 @section('content_header')
 {{--alertas --}}
 @include('dashboard/alerts/alerts')
-    <h1>Lista de usuários</h1>
+    <h1>Lista de Pesquisas</h1>
 @stop
 
 @section('css')
@@ -16,7 +16,7 @@
 
 <div class="box">
     <div class="box-header">
-      <h3 class="box-title">Tabela de  Usuários Cadastrados</h3>
+      <h3 class="box-title">Tabela de  Pesquisas Cadastradas</h3>
     </div>
 
     <div class="box-body">

@@ -13,4 +13,9 @@ class UserTextAnswer extends Model
     {
         return $this->belongsToMany(UserTextAnswer::class,'user_text_answers','user_id','id');
     }
+
+    public function question()
+    {
+        return $this->hasOne(Question::class,'id','question_id');
+    }
 }

@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(AnswerOption::class,'user_answers','user_id','id');
     }
+
+    public function textAnswers()
+    {
+        return $this->belongsToMany();
+    }
 }

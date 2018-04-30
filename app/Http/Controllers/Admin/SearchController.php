@@ -173,13 +173,15 @@ class SearchController extends Controller
         $questionsArray = [];
         $answers   = [];
         $count     = [];
-
+        $textAnswers =[];
+        $i = 0;
 
         //gerando graficos de respostas para cada pergunta
         foreach($search->questions as $questions)
         {
 
-            $questionsArray[] =$questions;
+            $questionsArray[] =$questions->question;
+
             foreach($questions->answerOptions as $answerOptions)
             {
                 if(strcmp($answerOptions->option,'text')!= 0)
@@ -191,6 +193,7 @@ class SearchController extends Controller
                     //quantidade de usuarios que optaram por responder com texto
                     $answers [] ="Campo de texto";
                     $count[]=UserTextAnswer::where('question_id',$questions->id)->count();
+                    $textAnswers[]=UserTextAnswer::where('question_id',$questions->id)->get();
                 }
 
 
@@ -198,20 +201,34 @@ class SearchController extends Controller
             }
 
         $charts[]= Charts::create('pie', 'highcharts')
-        ->title('Porcentagem de respostas')
+        ->title('Porcentagem de respostas para esta pergunta') //($questionsArray[$i]
         ->labels($answers)
         ->values($count)
         ->dimensions(1000,500)
         ->responsive(true);
         $answers = null;
         $count = null;
+            $i++;
+        }
 
+        $arrayText  = [];
+        foreach($textAnswers as $text)
+        {
+             if(count($text) == 1)
+            {
+                $arrayText[] = $text;
+            }
+            else{
+                foreach($text as $t)
+                {
+                    $arrayText[] = $t;
+                }
+            }
         }
 
 
-
         //return response()->json(['opçao'=>$answers,'quantidade'=>$count,$questionsArray]);
-         return view('dashboard/searches/details',compact('questionsArray','chart','charts','fullarray'));
+         return view('dashboard/searches/details',compact('questionsArray','chart','charts','fullarray','search','arrayText'));
        // return $searchesOfU;
 
     }
