@@ -12,6 +12,7 @@ use App\Admin\Question;
 use App\Admin\AnswerOption;
 use App\User;
 use Charts;
+use DB;
 class SearchController extends Controller
 {
     public function create()
@@ -138,28 +139,35 @@ class SearchController extends Controller
 
     public function details(Request $request)
     {
+        $searches;
+        $usersDont = []; //array
         $charts = [];
-        $userDontReply = 0; //quantidade de usuarios que NÂO responderam a pesquisa
+        $userDontReply = []; //lista  de usuarios que NÂO responderam a pesquisa
         $userReply     = 0; // //quantidade de usuarios que responderam a pesquisa
         $search        = Search::findOrFail($request->id);
         foreach($search->users as $users)
         {
             $user           = User::find($users->id);
             $searches       = $user->searches()->where('search_id',$request->id)
-            ->where('search_status',0)->count();
-            $userDontReply += $searches;
+            ->where('search_status',0)->get();
+            if($searches->count() > 0)
+            {
+
+                $userDontReply[] = $user;
+            }
 
             $userReply += $user->searches()->where('search_id',$request->id)
             ->where('search_status',1)->count();
 
         }
 
+
         //gerando grafico fr usuarios que responderam
 
        $chart = Charts::create('pie', 'highcharts')
         ->title('Quantidade de usuarios que responderam')
         ->labels(['Responderam', 'Não responderam'])
-        ->values([$userReply,$userDontReply])
+        ->values([$userReply,(count($userDontReply))])
         ->dimensions(1000,500)
         ->responsive(true);
 
@@ -193,7 +201,7 @@ class SearchController extends Controller
                     //quantidade de usuarios que optaram por responder com texto
                     $answers [] ="Campo de texto";
                     $count[]=UserTextAnswer::where('question_id',$questions->id)->count();
-                    $textAnswers[]=UserTextAnswer::where('question_id',$questions->id)->get();
+                    $textAnswers[]=DB::table('user_text_answers')->where('question_id',$questions->id)->get();
                 }
 
 
@@ -211,24 +219,8 @@ class SearchController extends Controller
             $i++;
         }
 
-        $arrayText  = [];
-        foreach($textAnswers as $text)
-        {
-             if(count($text) == 1)
-            {
-                $arrayText[] = $text;
-            }
-            else{
-                foreach($text as $t)
-                {
-                    $arrayText[] = $t;
-                }
-            }
-        }
-
-
         //return response()->json(['opçao'=>$answers,'quantidade'=>$count,$questionsArray]);
-         return view('dashboard/searches/details',compact('questionsArray','chart','charts','fullarray','search','arrayText'));
+         return view('dashboard/searches/details',compact('questionsArray','chart','charts','fullarray','search','textAnswers','userDontReply','question'));
        // return $searchesOfU;
 
     }

@@ -35,16 +35,81 @@
 
           <div class="box box-primary">
             <div class="box-header with-border">
+              <h3 class="box-title">Lista de Usuarios que ainda não responderam
+              </h3>
+              <a class='pull-right btn btn-primary' data-toggle="modal" data-id="1" data-token="{{ csrf_token() }}" data-target="#modal-default">Enviar notificação por email</a>
+
+            </div>
+
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Setor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      @forelse($userDontReply as $userDont)
+                    <tr>
+
+                      <td>{{$userDont->name}}</td>
+                      <td>{{$userDont->sector->name}}</td>
+                      <td>
+
+
+                      </td>
+                    </tr>
+                    @empty
+
+                    @endforelse
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Notificado</th>
+
+                    </tr>
+                    </tfoot>
+                  </table>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          @php
+            $i = 0;
+          @endphp
+          <div class="box box-primary">
+            <div class="box-header with-border">
               <h3 class="box-title">Respostas campo aberto</h3>
             </div>
             <div class="box-body">
-                <h2 class="text-center">Pergunta</h2></h2>
-                    <h3 class="text-center">Resposta <small>- Usuario tal</small></h3>
+              @foreach($textAnswers as $textAnswer)
+                    @foreach($textAnswer as $t)
+
+                      <h2 class="text-center">{{$questionsArray[0]}}</h2>
+            <p class="text-center">{{$t->answer}} - <small>Usuario</small></p>
+                    @endforeach
+
+
+
+
+                    @endforeach
 
             </div>
             <!-- /.box-body -->
           </div>
 
+          <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Ações tomadas após realização da pesquisa</h3>
+              </div>
+              <div class="box-body">
+                <p>Após analise da pesquisa, foi tomada a ação de ........</p>
+
+              </div>
+              <!-- /.box-body -->
+            </div>
         </div>
 
           <!-- /.box -->

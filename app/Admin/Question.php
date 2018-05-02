@@ -21,6 +21,6 @@ class Question extends Model
 
     public function textAnswer()
     {
-        return $this->belongsToMany(UserTextAnswer::class,'user_text_answers','question_id','id');
+        return $this->belongsTo(UserTextAnswer::class,'questions_id');
     }
 }
