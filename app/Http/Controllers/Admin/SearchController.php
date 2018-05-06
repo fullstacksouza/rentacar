@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
+use App\Http\Requests\ActionRegisterRequest;
+
 use App\Admin\Search;
 use App\Admin\Sector;
 use App\Admin\UserTextAnswer;
@@ -13,6 +15,7 @@ use App\Admin\AnswerOption;
 use App\User;
 use Charts;
 use DB;
+use App\Admin\RegisteredActions;
 class SearchController extends Controller
 {
     public function create()
@@ -225,4 +228,13 @@ class SearchController extends Controller
 
     }
 
+    public function actionRegister(ActionRegisterRequest $request)
+    {
+
+        $action = RegisteredActions::create([
+            'search_id'       => $request->id,
+            'action' => $request->action_register,
+            ]);
+        return redirect()->back()->with('info','Ação registrada com sucesso');
+    }
 }

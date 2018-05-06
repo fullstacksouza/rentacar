@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin','middleware'=>'auth'], fu
     $this->get("search/{id}/preview",'SearchController@previewSearch');
     $this->post('search/{id}/publish','SearchController@publishSearch')->name('search.publish');
     $this->get('search/{id}/details','SearchController@details')->name('search.details');
-
+    $this->post('search/{id}/action/register','SearchController@actionRegister')->name('action.register');
 
 });
 

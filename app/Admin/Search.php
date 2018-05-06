@@ -3,6 +3,7 @@
 namespace App\Admin;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Admin\RegisteredActions;
 
 class Search extends Model
 {
@@ -31,5 +32,9 @@ class Search extends Model
             return "Não publicada";
         }
         return "Publicada";
+    }
+    public function actions()
+    {
+        return $this->hasMany(RegisteredActions::class);
     }
 }
