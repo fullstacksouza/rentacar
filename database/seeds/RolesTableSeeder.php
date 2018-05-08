@@ -79,6 +79,10 @@ class RolesTableSeeder extends Seeder
         $user = User::find(1);
 
         $user->attachPermission($mangerPermission);
+        
+        $user = User::find(2);
+
+        $user->attachPermission($mangerPermission);
         $typeQuestion = TypeQuestion::create([
             'name'=> 'Multipla escolha'
         ]);

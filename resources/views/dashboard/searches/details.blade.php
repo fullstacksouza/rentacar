@@ -113,8 +113,12 @@
                 <h3 class="box-title">Ações tomadas após realização da pesquisa</h3>
               </div>
               <div class="box-body">
+
                 @forelse($search->actions as $action)
-              <p>{{$action->action}} - Data: {{date('d/m/y',strtotime($action->created_at))}}</p>
+                <div class="card bg-primary text-white">
+                  <div class="card-body">{{$action->action}} - Data: {{date('d/m/y',strtotime($action->created_at))}}</div>
+                </div>
+              <p></p>
                 @empty
 
                 @endforelse
