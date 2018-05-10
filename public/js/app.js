@@ -17781,8 +17781,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 search: this.questions,
                 search_id: searchId
             }).then(function (response) {
+                if (location.hostname == "localhost") {
+                    url = "http://localhost:8000/admin/search/" + searchId + "/preview";
+                } else {
+                    url = "rentacar.esy.es/admin/search" + searchId + "/preview";
+                }
 
-                window.location = url + searchId + "/preview";
+                window.location = url;
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);

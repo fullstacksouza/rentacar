@@ -266,7 +266,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
                 let uri = location.pathname.split("/");
 
                 let searchId  =  uri[3];
-               let  url ='' ;
+                let  url ='' ;
                 if(location.hostname == "localhost")
                 {
                     url = "http://localhost:8000/admin/search/questions/create";
@@ -280,8 +280,15 @@ import scroller from 'vue-scrollto/src/scrollTo';
                     search_id: searchId
                  })
                 .then(response=>{
+                    if(location.hostname == "localhost")
+                {
+                    url = "http://localhost:8000/admin/search/"+searchId+"/preview";
+                }
+                else{
+                    url  = "rentacar.esy.es/admin/search"+searchId+"/preview";
+                }
 
-                    window.location = url+searchId+"/preview";
+                    window.location = url;
                     console.log(response);
 
                 })
