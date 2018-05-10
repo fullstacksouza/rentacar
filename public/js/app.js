@@ -17784,6 +17784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (location.hostname == "localhost") {
                     url = "http://localhost:8000/admin/search/" + searchId + "/preview";
                 } else {
+                    alert(location.hostname);
                     url = "rentacar.esy.es/admin/search" + searchId + "/preview";
                 }
 

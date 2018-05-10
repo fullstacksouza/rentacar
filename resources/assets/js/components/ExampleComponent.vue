@@ -285,6 +285,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
                     url = "http://localhost:8000/admin/search/"+searchId+"/preview";
                 }
                 else{
+                    alert(location.hostname);
                     url  = "rentacar.esy.es/admin/search"+searchId+"/preview";
                 }
 
