@@ -17782,6 +17782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 search_id: searchId
             }).then(function (response) {
                 if (location.hostname == "localhost") {
+                    alert("localhost");
                     url = "http://localhost:8000/admin/search/" + searchId + "/preview";
                 } else {
                     alert(location.hostname);

@@ -282,6 +282,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
                 .then(response=>{
                     if(location.hostname == "localhost")
                 {
+                    alert("localhost")
                     url = "http://localhost:8000/admin/search/"+searchId+"/preview";
                 }
                 else{
