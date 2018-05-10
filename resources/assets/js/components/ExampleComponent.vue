@@ -280,6 +280,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
                     search_id: searchId
                  })
                 .then(response=>{
+                    alert(location.hostname);
                     if(location.hostname == "localhost")
                 {
                     alert("localhost")
@@ -334,7 +335,6 @@ import scroller from 'vue-scrollto/src/scrollTo';
             },
 
              mounted() {
-                 alert("mounted");
                  console.log(window.location);
                  let uri = location.pathname.split("/");
 

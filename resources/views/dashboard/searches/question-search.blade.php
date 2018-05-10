@@ -67,7 +67,6 @@
         let uri = location.pathname.split("/");
 
 
-        alert(window.location.hostname);
 
 
     });
