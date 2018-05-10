@@ -70,7 +70,7 @@ class RolesTableSeeder extends Seeder
             'password'     => bcrypt('rentacar'),
             'rg'           => 112233355,
             'registration' => 111224514,
-            'dob'          => '2018-03-28',
+            'dob'          => '2018-03-25',
 
 
 
@@ -79,7 +79,7 @@ class RolesTableSeeder extends Seeder
         $user = User::find(1);
 
         $user->attachPermission($mangerPermission);
-        
+
         $user = User::find(2);
 
         $user->attachPermission($mangerPermission);
