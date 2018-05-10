@@ -66,7 +66,7 @@
     $(function(){
        // var location = window.location.pathname;
         let uri = location.pathname.split("/");
-        alert(window.location.hostname);
+
     });
      $(function(){
 
