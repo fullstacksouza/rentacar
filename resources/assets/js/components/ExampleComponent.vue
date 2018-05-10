@@ -256,6 +256,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
             },
             addNewAnswerTextOption(index)
             {
+                console.log("log");
                  this.questions[index].text_answer.push({
                     text_answer:''
                 });
@@ -265,8 +266,16 @@ import scroller from 'vue-scrollto/src/scrollTo';
                 let uri = location.pathname.split("/");
 
                 let searchId  =  uri[3];
+               let  url ='' ;
+                if(location.hostname == "localhost")
+                {
+                    url = "http://localhost:8000/admin/search/questions/create";
+                }
+                else{
+                    url  = window.location.hostname+"/admin/search/questions/create";
+                }
                 //this.questions.push({"search_id":searchId}),
-                axios.post(`http://localhost:8000/admin/search/questions/create`,{
+                axios.post(url,{
                     search:this.questions,
                     search_id: searchId
                  })
@@ -316,6 +325,9 @@ import scroller from 'vue-scrollto/src/scrollTo';
             },
 
              mounted() {
+                 console.log(window.location);
+                 let uri = location.pathname.split("/");
+
                  this.questions.length;
         },
         }

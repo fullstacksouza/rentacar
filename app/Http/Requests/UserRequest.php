@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' =>'required|email|unique:users',
+            'email' =>'nullable|email|unique:users',
             'rg' => 'required|max:11',
             'registration'=>'required',
             'sector'=>'required',
@@ -39,7 +39,6 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => "O campo nome é obrigatório",
-            'email.required'=>"O campo email é obrigatório",
             'email.email'=>"Digite um email válido",
             'email.unique'=>"Este email já está sendo ultilizado",
             'rg.required'=>"O campo rg é obrigatório",

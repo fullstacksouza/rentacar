@@ -14,7 +14,7 @@
 $this->get('/','Auth\LoginController@showLoginForm')->name('login');
 $this->get('teste','HomeController@teste');
 
-$this->get('/home', 'HomeController@index')->name('home');
+$this->get('/home', 'HomeController@index')->name('home')->middleware("auth");
 
 $this->post('login','LoginController@auth');
 

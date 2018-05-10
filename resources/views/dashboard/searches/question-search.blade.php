@@ -62,7 +62,13 @@
 
 @section('js')
 
-    <script> $(function(){
+    <script>
+    $(function(){
+       // var location = window.location.pathname;
+        let uri = location.pathname.split("/");
+        alert(window.location.hostname);
+    });
+     $(function(){
 
       $('.clickable').on('click',function(){
           var effect = $(this).data('effect');
