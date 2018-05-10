@@ -17785,12 +17785,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (location.hostname == "localhost") {
                     alert("localhost");
                     url = "http://localhost:8000/admin/search/" + searchId + "/preview";
+
+                    window.location = url;
                 } else {
                     alert(location.hostname);
                     url = "rentacar.esy.es/admin/search" + searchId + "/preview";
+
+                    window.location = url;
                 }
 
-                window.location = url;
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);

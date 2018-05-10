@@ -285,13 +285,16 @@ import scroller from 'vue-scrollto/src/scrollTo';
                 {
                     alert("localhost")
                     url = "http://localhost:8000/admin/search/"+searchId+"/preview";
+
+                    window.location = url;
                 }
                 else{
                     alert(location.hostname);
                     url  = "rentacar.esy.es/admin/search"+searchId+"/preview";
-                }
 
                     window.location = url;
+                }
+
                     console.log(response);
 
                 })
