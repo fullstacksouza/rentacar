@@ -281,7 +281,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
                  })
                 .then(response=>{
 
-                    window.location = "http://localhost:8000/admin/search/"+searchId+"/preview";
+                    window.location = url+searchId+"/preview";
                     console.log(response);
 
                 })

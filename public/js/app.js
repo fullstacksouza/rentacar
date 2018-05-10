@@ -17774,7 +17774,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (location.hostname == "localhost") {
                 url = "http://localhost:8000/admin/search/questions/create";
             } else {
-                url = window.location.hostname;
+                url = window.location.hostname + "/admin/search/questions/create";
             }
             //this.questions.push({"search_id":searchId}),
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
@@ -17782,7 +17782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 search_id: searchId
             }).then(function (response) {
 
-                window.location = "http://localhost:8000/admin/search/" + searchId + "/preview";
+                window.location = url + searchId + "/preview";
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);

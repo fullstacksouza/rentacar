@@ -39,7 +39,9 @@
           <td>{{date('d/m/y',strtotime($search->date_end))}}</td>
           <td>{{$search->getStatus($search->status)}}</td>
           <td>
+              @if($search->status !== 0)
           <a class='btn btn-primary' href='{{url("admin/search/$search->id/details")}}'>Vizualizar Relatório</a>
+          @endif
           @if($search->status == 0)
           <a class='btn btn-warning' href='{{url("admin/users/$search->id/edit")}}'>Editar</a>
           @endif
