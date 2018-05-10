@@ -41,7 +41,10 @@
           <td>
               @if($search->status !== 0)
           <a class='btn btn-primary' href='{{url("admin/search/$search->id/details")}}'>Vizualizar Relatório</a>
+            @else
+            <a class='btn btn-primary' href='{{url("admin/search/$search->id/preview")}}'>Vizualizar Pesquisa</a>
           @endif
+
           @if($search->status == 0)
           <a class='btn btn-warning' href='{{url("admin/users/$search->id/edit")}}'>Editar</a>
           @endif
