@@ -17821,6 +17821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         mounted: function mounted() {
+            alert("mounted");
             console.log(window.location);
             var uri = location.pathname.split("/");
 

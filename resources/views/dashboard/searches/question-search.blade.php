@@ -52,7 +52,6 @@
   <!-- /.box -->
 
 
-
 <script src="{{asset('js/app.js')}}"></script>
 @stop
 
@@ -66,6 +65,10 @@
     $(function(){
        // var location = window.location.pathname;
         let uri = location.pathname.split("/");
+
+
+        alert(window.location.hostname);
+
 
     });
      $(function(){

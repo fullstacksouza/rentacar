@@ -334,6 +334,7 @@ import scroller from 'vue-scrollto/src/scrollTo';
             },
 
              mounted() {
+                 alert("mounted");
                  console.log(window.location);
                  let uri = location.pathname.split("/");
 
