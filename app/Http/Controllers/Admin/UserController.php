@@ -9,80 +9,79 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\Admin\Sector;
+
 class UserController extends Controller
 {
-    public function create(Role $role,Sector $sector,User $user)
+
+    public function create(Role $role, Sector $sector, User $user)
     {
 
         $roles = $role->all();
         $sectors = $sector->all();
 
 
-        return view('dashboard/users/create',compact('roles','sectors'));
+        return view('dashboard/users/create', compact('roles', 'sectors'));
     }
 
     public function list(User $user)
     {
-    $users = $user->all();
+        $users = $user->all();
 
-       return view('dashboard/users/list',compact("users"));
+        return view('dashboard/users/list', compact("users"));
     }
 
 
-    public function store(User $user,Role $role,UserRequest $request)
+    public function store(User $user, Role $role, UserRequest $request)
     {
 
         //dd($request->all());
-        $role               = $role->find($request->role);
-        $sector             = Sector::find($request->sector);
+        $role = $role->find($request->role);
+        $sector = Sector::find($request->sector);
 
-        $user->name         = $request->name;
-        $user->password     = bcrypt($request->password);
-        $user->email        = $request->email;
-        $user->rg           = $request->rg;
+        $user->name = $request->name;
+        $user->password = bcrypt($request->password);
+        $user->email = $request->email;
+        $user->rg = $request->rg;
         $user->registration = $request->registration;
-        $user->dob          = $request->dob;
+        $user->dob = $request->dob;
         //atribuindo o setor
         $user->sector()->associate($sector);
 
         $user->save();
         //atribuindo o perfil
         $user->attachRole($role);
-        return redirect()->back()->with('info','Usuario Cadastrado com Sucesso');
+        return redirect()->back()->with('info', 'Usuario Cadastrado com Sucesso');
     }
 
     public function edit(Request $request)
     {
-        $roles    = Role::all();
-        $sectors  = Sector::all();
+        $roles = Role::all();
+        $sectors = Sector::all();
 
         $userEdit = User::findOrFail($request->id);
-        return view("dashboard/users/edit",compact('userEdit','roles','sectors'));
+        return view("dashboard/users/edit", compact('userEdit', 'roles', 'sectors'));
     }
 
-    public function update(Request $request, User $user,Role $role)
+    public function update(Request $request, User $user, Role $role)
     {
-        $sector         = Sector::find($request->sector);
-        $editUser       = $user->findOrFail($request->id);
+        $sector = Sector::find($request->sector);
+        $editUser = $user->findOrFail($request->id);
         $editUser->name = $request->name;
 
 
-        $currentRole    = $editUser->roles;
+        $currentRole = $editUser->roles;
         $roles = $role->find($request->role);
-        if($roles)
-        {
+        if ($roles) {
         //verificando se houve alteração de perfil no formulario
-        if(!$currentRole = $roles->id)
-        {
-            $editUser->attachRole($roles);
+            if (!$currentRole = $roles->id) {
+                $editUser->attachRole($roles);
+            }
         }
-    }
 
         $currentSector = $user->sector;
 
         //verificando se houve alteração de setor no formulario
-        if(!$currentSector === $sector->id || $currentSector === NULL)
-        {
+        if (!$currentSector === $sector->id || $currentSector === null) {
             //return "setor alterado";
             $editUser->sector()->associate($sector);
         }
@@ -90,7 +89,7 @@ class UserController extends Controller
         $editUser->save();
 
 
-        return redirect()->back()->with('info','Usuario Atualizado com Sucesso');
+        return redirect()->back()->with('info', 'Usuario Atualizado com Sucesso');
 
     }
 
@@ -98,7 +97,7 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         $user->delete();
-        return response()->json(['success'=>'usuario apagado']);
+        return response()->json(['success' => 'usuario apagado']);
     }
 
     public function changePass(ChangePasswordRequest $request)
@@ -108,7 +107,7 @@ class UserController extends Controller
         $user->password = $request->new_pass;
         $user->save();
 
-        return redirect()->back()->with('info','Senha Alterada com Sucesso');
+        return redirect()->back()->with('info', 'Senha Alterada com Sucesso');
 
     }
 

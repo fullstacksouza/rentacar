@@ -167,179 +167,160 @@
 </template>
 
 <script>
+import axios from "axios";
 
+import VeeValidate from "vee-validate";
+import scroller from "vue-scrollto/src/scrollTo";
+export default {
+  data() {
+    return {
+      index: 0,
+      uri: location.pathname,
+      params: "",
+      searchId: "",
+      form: true,
+      token: "",
+      questions: [
+        {
+          question: "",
+          answer: [{ op: "" }],
+          text_answer: [
+            {
+              text_answer: ""
+            }
+          ]
+        }
+      ]
+    };
+  },
 
-import axios from 'axios';
-
-import VeeValidate from 'vee-validate';
-import scroller from 'vue-scrollto/src/scrollTo';
-    export default {
-        data(){
-
-        return {
-            index:0,
-            uri: location.pathname,
-            params:"",
-            searchId:"",
-            form: true,
-            token:"",
-            questions:[{
-               question:"",
-               answer:[{"op":''}],
-               text_answer:[{
-                   'text_answer':''
-               }]
-           }]
-
-
+  watch: {
+    questions: function(val) {
+      //metodo de scroller
+      this.scroll();
     }
+  },
+
+  methods: {
+    validate() {
+      this.$validator.validateAll().then(res => {
+        if (res) {
+          this.form = false;
+        } else {
+          this.form = true;
+        }
+      });
+      return this.form;
+    },
+    addNewQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [{ op: "Concordo" }, { op: "Discordo" }, { op: "Concordo" }],
+        text_answer: []
+      });
+
+      this.$on("teste", function(data) {
+        console.log(data);
+      });
+      //this.scroll();
+    },
+    //pergunta de multipla escolha
+    addMultipleChoiceQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [],
+        text_answer: []
+      });
+
+      this.$on("teste", function(data) {
+        console.log(data);
+      });
+      //this.scroll();
     },
 
-        watch:{
-            questions: function(val){
-                //metodo de scroller
-                  this.scroll();
-            }
-        },
+    addNewAnswerOption(index) {
+      this.questions[index].answer.push({
+        op: ""
+      });
+    },
+    addNewAnswerTextOption(index) {
+      console.log("log");
+      this.questions[index].text_answer.push({
+        text_answer: ""
+      });
+    },
+    sendQuestions() {
+      let uri = location.pathname.split("/");
 
-        methods:
-        {
-            validate()
-            {
-                  this.$validator.validateAll().then(res=>{
-                if(res) {
-                    this.form = false;
+      let searchId = uri[3];
+      let url = "";
+      if (location.hostname == "localhost") {
+        url =
+          "http://localhost:8000/admin/search/" +
+          searchId +
+          "/questions/create";
+      } else {
+        url =
+          window.location.hostname +
+          "/admin/search/" +
+          searchId +
+          "/questions/create";
+      }
+      //this.questions.push({"search_id":searchId}),
+      axios
+        .post(url, {
+          search: this.questions,
+          search_id: searchId
+        })
+        .then(response => {
+          if (location.hostname == "localhost") {
+            url = "http://localhost:8000/admin/search/" + searchId + "/preview";
 
-                } else {
-                    this.form = true;
-                }
-            });
-            return this.form;
-            },
-            addNewQuestion()
-            {
-                this.questions.push({
-                    'question':'',
-                    'answer': [
-                        {"op" : "Concordo"},
-                        {"op" : "Discordo"},
-                        {"op" : "Concordo"},
-                        ],
-                    'text_answer':[]
-                });
+            window.location = url;
+          } else {
+            url = "rentacar.esy.es/admin/search/" + searchId + "/preview";
 
-                  this.$on('teste',function(data){
-                       console.log(data);
-                   })
-                //this.scroll();
-            },
-            //pergunta de multipla escolha
-             addMultipleChoiceQuestion()
-            {
-                this.questions.push({
-                    'question':'',
-                    'answer': [],
-                    'text_answer':[]
-                });
+            window.location = url;
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
 
-                  this.$on('teste',function(data){
-                       console.log(data);
-                   })
-                //this.scroll();
-            },
+    answerLen(index) {
+      return this.questions[index].answer.length;
+    },
+    deleteQuestion(index) {
+      console.log("index da array " + index);
+      this.questions.splice(index, 1);
+      console.log(this.questions);
+    },
+    deleteAnswer(iq, index) {
+      this.questions[iq].answer.splice(index, 1);
+    },
+    deleteTextAnswer(iq, index) {
+      this.questions[iq].text_answer.splice(index, 1);
+    },
 
-            addNewAnswerOption(index)
-            {
-                this.questions[index].answer.push({
-                    op:''
-                });
-            },
-            addNewAnswerTextOption(index)
-            {
-                console.log("log");
-                 this.questions[index].text_answer.push({
-                    text_answer:''
-                });
-            },
-            sendQuestions()
-            {
-                let uri = location.pathname.split("/");
+    scroll() {
+      if (this.index == 0) {
+        this.index = 1;
+        var index = this.questions.length - 1;
+        scroller("#end");
+      } else {
+        var prevIndex = this.questions.length;
+        var lastAnswerIndex = prevIndex - 1;
+        scroller("#end");
+      }
+    },
 
-                let searchId  =  uri[3];
-                let  url ='' ;
-                if(location.hostname == "localhost")
-                {
-                    url = "http://localhost:8000/admin/search/questions/create";
-                }
-                else{
-                    url  = window.location.hostname+"/admin/search/questions/create";
-                }
-                //this.questions.push({"search_id":searchId}),
-                axios.post(url,{
-                    search:this.questions,
-                    search_id: searchId
-                 })
-                .then(response=>{
+    mounted() {
+      console.log(window.location);
+      let uri = location.pathname.split("/");
 
-                    if(location.hostname == "localhost")
-                {
-                    url = "http://localhost:8000/admin/search/"+searchId+"/preview";
-
-                    window.location = url;
-                }
-                else{
-                    url  = "rentacar.esy.es/admin/search/"+searchId+"/preview";
-
-                    window.location = url;
-                }
-
-
-                })
-                .catch(error =>{
-                    console.log(error)
-                })
-            },
-
-            answerLen(index)
-            {
-                return this.questions[index].answer.length;
-            },
-            deleteQuestion(index)
-            {
-                console.log("index da array "+index);
-                this.questions.splice(index,1);
-                console.log(this.questions);
-            },
-            deleteAnswer(iq,index)
-            {
-                this.questions[iq].answer.splice(index,1);
-            },
-            deleteTextAnswer(iq,index)
-            {
-                this.questions[iq].text_answer.splice(index,1);
-            },
-
-            scroll()
-            {
-                if(this.index == 0)
-                {
-                    this.index = 1
-                    var index  = ((this.questions.length)-1);
-                    scroller("#end");
-                }else{
-                    var prevIndex = this.questions.length;
-                    var lastAnswerIndex = (prevIndex-1);
-                    scroller("#end");
-                }
-
-            },
-
-             mounted() {
-                 console.log(window.location);
-                 let uri = location.pathname.split("/");
-
-                 this.questions.length;
-        },
-        }
+      this.questions.length;
     }
+  }
+};
 </script>
