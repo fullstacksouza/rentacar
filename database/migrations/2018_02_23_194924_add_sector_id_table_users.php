@@ -16,7 +16,7 @@ class AddSectorIdTableUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('sector_id')->unsigned()->nullable();
             $table->foreign('sector_id')->references('id')
-            ->on('sectors')->onDelete("cascade");
+                ->on('sectors')->onDelete("set null");
         });
     }
 

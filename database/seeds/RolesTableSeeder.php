@@ -21,23 +21,23 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
 
-        $adminRole               = new Role();
-        $adminRole->name         = "super-admin";
+        $adminRole = new Role();
+        $adminRole->name = "super-admin";
         $adminRole->display_name = "Administrador Total";
-        $adminRole->description  = "Administrador do Sistema com controle total dos dados";
+        $adminRole->description = "Administrador do Sistema com controle total dos dados";
         $adminRole->save();
 
         //permissão para criar pesquisa
-        $createSearch               = new Permission();
-        $createSearch->name         = "create-user";
+        $createSearch = new Permission();
+        $createSearch->name = "create-user";
         $createSearch->display_name = "Criar Usuários";
-        $createSearch->description  = "Permissão para criar Usuarios no sistema";
+        $createSearch->description = "Permissão para criar Usuarios no sistema";
         $createSearch->save();
         //permissao para gerenciamento
-        $manager               = new Permission();
-        $manager->name         = "manager";
+        $manager = new Permission();
+        $manager->name = "manager";
         $manager->display_name = "Gerenciar Conteúdo";
-        $manager->description  = "Permissão para gerenciar o sistema";
+        $manager->description = "Permissão para gerenciar o sistema";
         $manager->save();
 
 
@@ -52,12 +52,12 @@ class RolesTableSeeder extends Seeder
         //Atribuindo regras ao usuario
 
         $user = User::create([
-            'name'         => 'Matheus Souza',
-            'email'        => 'matheus.souzadv@gmail.com',
-            'password'     => bcrypt('05092013'),
-            'rg'           => 112233355,
+            'name' => 'Matheus Souza',
+            'email' => 'matheus.souzadv@gmail.com',
+            'password' => bcrypt('05092013'),
+            'rg' => 112233355,
             'registration' => 111224514,
-            'dob'          => '2018-03-28',
+            'dob' => '2018-03-28',
 
 
 
@@ -65,12 +65,12 @@ class RolesTableSeeder extends Seeder
         $user->attachRole($adminRole);
 
         $user = User::create([
-            'name'         => 'Administrador(a)',
-            'email'        => 'adm@rentacar.com',
-            'password'     => bcrypt('rentacar'),
-            'rg'           => 112233355,
+            'name' => 'Administrador(a)',
+            'email' => 'adm@rentacar.com',
+            'password' => bcrypt('rentacar'),
+            'rg' => 112233355,
             'registration' => 111224514,
-            'dob'          => '2018-03-25',
+            'dob' => '2018-03-25',
 
 
 
@@ -84,7 +84,12 @@ class RolesTableSeeder extends Seeder
 
         $user->attachPermission($mangerPermission);
         $typeQuestion = TypeQuestion::create([
-            'name'=> 'Multipla escolha'
+            'name' => 'Multipla escolha'
+        ]);
+
+        $sector = Sector::create([
+            'name' => 'Ti',
+            'responsible_email' => 'ti@gmail.com'
         ]);
 
     }

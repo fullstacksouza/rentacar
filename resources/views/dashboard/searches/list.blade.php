@@ -14,6 +14,8 @@
 @stop
 @section('content')
 
+{!! Form::open(['url'=>'#','id'=>'delete-form']) !!}
+{!! Form::close() !!}
 <div class="box">
     <div class="box-header">
       <h3 class="box-title">Tabela de  Pesquisas Cadastradas</h3>
@@ -48,7 +50,7 @@
           @if($search->status == 0)
           <a class='btn btn-warning' href='{{url("admin/users/$search->id/edit")}}'>Editar</a>
           @endif
-          <a class='delete btn btn-danger' data-toggle="modal" data-id="{{ $search->id }}" data-token="{{ csrf_token() }}" data-target="#modal-default">Excluir</a>
+          <a class='delete btn btn-danger'onclick="confirmDelete({{$search->id}})">Excluir</a>
 
           </td>
         </tr>
@@ -72,27 +74,22 @@
   </div>
   <!-- /.box -->
 
-  <div class="modal fade" id="modal-default">
+  <div class="modal" id="confirm">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Atenção!</h4>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirmação de exclusão</h4>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-primary" id="delete-btn">Confirmar</button>
+                <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Deseja realmente excluir o usuario selecionado?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-          <button  type="button" id='confirm-delete' class="btn btn-primary">Confirmar</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+</div>
 @stop
 
 @section('css')
@@ -131,29 +128,16 @@
         });
 
 
-          $("#confirm-delete").click(function(){
-            alert(id);
-            $.ajax({
-            url:"user/"+id+"/delete",
-            type:"PUT",
-            //dataType: "JSON",
-            data :{
-              "id":id,
-              "_token":token,
-            },
-            success: function(data){
-              console.log(data);
-            },
-            error: function(request, status, erro)
-            {
-              alert("Problema ocorrido: " + status + "\nDescição: " + erro);
-            //Abaixo está listando os header do conteudo que você requisitou, só para confirmar se você setou os header e dataType corretos
-
-            }
-
-
-          });
-          });
+   function confirmDelete(id)
+   {
+      var url = "{{url('')}}";
+        $("#delete-form").attr('action',url+'/admin/searches/'+id+'/delete');
+        var $form = $("#delete-form");
+        $('#confirm').modal({ backdrop: 'static', keyboard: false })
+        .on('click', '#delete-btn', function(){
+            $("#delete-form").submit()
+        });
+   }
       </script>
 
 @stop

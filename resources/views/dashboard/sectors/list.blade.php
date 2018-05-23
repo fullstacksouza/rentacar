@@ -14,6 +14,8 @@
 @stop
 @section('content')
 
+{!! Form::open(['url'=>'#','id'=>'delete-form']) !!}
+{!! Form::close() !!}
 <div class="box">
     <div class="box-header">
       <h3 class="box-title">Tabela de  Setores Cadastrados</h3>
@@ -31,19 +33,19 @@
         <tbody>
          @forelse ($sectors as $sector)
         <tr>
-       
+
           <td>{{$sector->name}}</td>
           <td>{{$sector->responsible_email or 'Não Cadastrado' }}</td>
           <td>
           <a   class='btn btn-primary'>Vizualizar</a>
           <a class='btn btn-warning' href='{{url("admin/sectors/$sector->id/edit")}}'>Editar</a>
-          <a class='btn btn-danger'>Excluir</a>
+          <a class='btn btn-danger' onclick="confirmDelete({{$sector->id}})">Excluir</a>
           </td>
         </tr>
         @empty
         Sem Registros
         @endforelse
-        
+
         </tbody>
         <tfoot>
         <tr>
@@ -57,6 +59,24 @@
     <!-- /.box-body -->
   </div>
   <!-- /.box -->
+
+
+  <div class="modal" id="confirm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirmação de exclusão</h4>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-primary" id="delete-btn">Confirmar</button>
+                <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @stop
 
 @section('css')
@@ -86,7 +106,19 @@
                     }
                 }
           })
-        })
+        });
+
+
+   function confirmDelete(id)
+   {
+      var url = "{{url('')}}";
+        $("#delete-form").attr('action',url+'/admin/sectors/'+id+'/delete');
+        var $form = $("#delete-form");
+        $('#confirm').modal({ backdrop: 'static', keyboard: false })
+        .on('click', '#delete-btn', function(){
+            $("#delete-form").submit()
+        });
+   }
       </script>
 
 @stop

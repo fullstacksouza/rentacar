@@ -97,7 +97,8 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         $user->delete();
-        return response()->json(['success' => 'usuario apagado']);
+
+        return redirect()->back()->with('info', 'Usuario Deletado com Sucesso');
     }
 
     public function changePass(ChangePasswordRequest $request)
