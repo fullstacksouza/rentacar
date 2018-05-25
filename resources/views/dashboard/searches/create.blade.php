@@ -47,7 +47,7 @@
           <label for="inputEmail3" class="col-sm-2 control-label">Data de inicio </label>
 
           <div class="col-sm-10">
-             {{ Form::date('date_start',null,['class'=>'form-control','placeholder'=>'Data de Nascimento'])}}
+             {{ Form::date('date_start',null,['class'=>'form-control','placeholder'=>'Data de Nascimento','id'=>'datetimepicker'])}}
 
           </div>
         </div>
@@ -102,8 +102,12 @@
 
 
 <script>
+  $('#datetimepicker').datetimepicker({
+    format: 'dd-mm-yyy'
+});
   $('.selectpicker').selectpicker({
     liveSearch:true,
+    nothingSelected: "Nada Selecionado",
     selectAllText:"Selecionar todos",
     deselectAllText:"Desmarcar todos"
   })

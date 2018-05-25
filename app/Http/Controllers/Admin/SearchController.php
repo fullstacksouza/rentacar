@@ -16,6 +16,7 @@ use App\User;
 use Charts;
 use DB;
 use App\Admin\RegisteredActions;
+use App\Jobs\SendMailJob;
 
 class SearchController extends Controller
 {
@@ -235,6 +236,23 @@ class SearchController extends Controller
 
     public function sendNotification(Request $request)
     {
+        $search = Search::findOrFail($request->id);
+        foreach ($search->users as $users) {
+            $user = User::find($users->id);
 
+            $searches = $user->searches()->where('search_id', $request->id)
+                ->where('search_status', 0)->get();
+            if ($searches->count() > 0) {
+                if ($user->email != null) {
+
+                    $this->dispatch(new SendMailJob('dashboard/email/remember-reply-search', $user, $search));
+                }
+
+            }
+
+        }
+
+        return "job disparado";
     }
+
 }
