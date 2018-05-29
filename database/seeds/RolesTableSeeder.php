@@ -66,7 +66,7 @@ class RolesTableSeeder extends Seeder
 
         $user = User::create([
             'name' => 'Administrador(a)',
-            'email' => 'adm@rentacar.com',
+            'email' => 'matheus.kruzsouza@gmail.com',
             'password' => bcrypt('rentacar'),
             'rg' => 112233355,
             'registration' => 111224514,

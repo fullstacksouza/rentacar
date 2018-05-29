@@ -7,7 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Admin\Search;
 use App\Admin\User;
 use App\Admin\Sector;
-
+use App\Jobs\SendMailJob;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -29,17 +29,25 @@ class Kernel extends ConsoleKernel
     {
 
         $schedule->call(function () {
-            $searches = Search::all();
-            foreach ($searches as $search) {
-                if (\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_end)) == 0) {
+          $searches = Search::all();
 
-                }
+          foreach ($searches as $search) {
+            if(  @if(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_start)) == 0))
+            {
+              $sectors = $search->sectors;
+         //direcionar a pesquisa para as pessoas dos setores
+              foreach ($sectors as $sec) {
+              $sector = $sec->find($sec->id);
+              foreach ($sector->user as $user) {
+                  $this->dispatch(new SendMailJob('dashboard/email/new-search', $user, $search));
+              }
             }
-        })->everyMinute();
+          }
+    })->everyMinute();
 
-        // $schedule->command('inspire')
-        //          ->hourly();
-    }
+  }
+
+}
 
     /**
      * Register the commands for the application.

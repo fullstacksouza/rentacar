@@ -136,7 +136,7 @@ class SearchController extends Controller
         if ($search) {
             $search->status = 1;
             $search->save();
-            return redirect('/admin/searches/list');
+            return redirect('/admin/searches/list')->with('info','A pesquisa foi publicada com sucesso,os usuarios irão recebe um email na data de inicio da pesquisa');
         }
         return redirectr()->back()->with('error', 'Pesquisa não encontrada');
     }
@@ -252,7 +252,7 @@ class SearchController extends Controller
 
         }
 
-        return "job disparado";
+        return redirect()->back()->with('info', 'Notificação enviada com sucesso');
     }
 
 }
