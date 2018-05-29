@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
           $searches = Search::all();
 
           foreach ($searches as $search) {
-            if(  @if(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_start)) == 0))
+            if((\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_start)) == 0))
             {
               $sectors = $search->sectors;
          //direcionar a pesquisa para as pessoas dos setores
