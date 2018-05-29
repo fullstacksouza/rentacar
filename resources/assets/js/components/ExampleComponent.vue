@@ -260,7 +260,7 @@ export default {
           searchId +
           "/questions/create";
       } else {
-        url =
+        url ="http://"+
           window.location.hostname +
           "/admin/search/" +
           searchId +

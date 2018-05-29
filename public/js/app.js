@@ -19691,7 +19691,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (location.hostname == "localhost") {
         url = "http://localhost:8000/admin/search/" + searchId + "/questions/create";
       } else {
-        url = window.location.hostname + "/admin/search/" + searchId + "/questions/create";
+        url = "http://" + window.location.hostname + "/admin/search/" + searchId + "/questions/create";
       }
       //this.questions.push({"search_id":searchId}),
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
