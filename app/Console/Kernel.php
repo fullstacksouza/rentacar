@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Admin\Search;
 use App\Admin\User;
 use App\Admin\Sector;
+use App\Jobs\SendMailJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -32,7 +33,9 @@ class Kernel extends ConsoleKernel
             $searches = Search::all();
             foreach ($searches as $search) {
                 if (\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_end)) == 0) {
-
+                    foreach ($search->users as $user) {
+                        $this->dispatch(new SendMailJob('dashboard/email/new-search', $user, $search));
+                    }
                 }
             }
         })->everyMinute();
