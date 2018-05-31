@@ -58,7 +58,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     $this->get('search/{id}/questions/create', 'QuestionController@create')->middleware('create-questions');
     $this->get('searches/list', 'SearchController@list');
-    $this->post('search/questions/create', 'SearchController@addQuestions');
+    $this->post('search/{id}/questions/create', 'SearchController@addQuestions');
 
     $this->get("search/{id}/preview", 'SearchController@previewSearch');
     $this->post('search/{id}/publish', 'SearchController@publishSearch')->name('search.publish');

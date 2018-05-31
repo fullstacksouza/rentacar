@@ -260,7 +260,8 @@ export default {
           searchId +
           "/questions/create";
       } else {
-        url = "http://"+
+        url =
+          "http://" +
           window.location.hostname +
           "/admin/search/" +
           searchId +
@@ -278,7 +279,8 @@ export default {
 
             window.location = url;
           } else {
-            url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+            url =
+              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
 
             window.location = url;
           }
