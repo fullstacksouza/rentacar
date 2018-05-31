@@ -19,6 +19,7 @@ class NotificationSearch extends Mailable
     public $view;
     public $user;
     public $search;
+    protected $subject = "Notificação de Pesquisa";
     public function __construct($view, $user, $search)
     {
         $this->view = $view;

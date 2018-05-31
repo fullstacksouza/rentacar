@@ -29,19 +29,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        $schedule->call(function () {
-            $searches = Search::all();
-            foreach ($searches as $search) {
-                if (\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_end)) == 0) {
-                    foreach ($search->users as $user) {
-                        $this->dispatch(new SendMailJob('dashboard/email/new-search', $user, $search));
-                    }
+        $searches = Search::all();
+        foreach ($searches as $search) {
+            if (\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_start)) == 0) {
+                foreach ($search->users as $user) {
+
+                    $schedule->job(new SendMailJob("dashboard/email/new-search", $user, $search))->dailyAt('08:00');
                 }
             }
-        })->everyMinute();
-
-        // $schedule->command('inspire')
-        //          ->hourly();
+        }
     }
 
     /**

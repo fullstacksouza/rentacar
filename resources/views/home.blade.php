@@ -9,7 +9,7 @@
 @section('content_header')
 {{--alertas --}}
 @include('dashboard/alerts/alerts')
-    
+
     <h1>Dashboard</h1>
 @stop
 
@@ -23,11 +23,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">Grafico 1</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+
             </div>
             <div class="box-body">
               <div class="chart">
@@ -72,7 +68,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                
+
               </div>
             </div>
             <!-- /.box-body -->
@@ -92,7 +88,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                
+
                     {!!$chart->html()!!}
               </div>
             </div>
