@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Charts;
 use App\Admin\TypeQuestion;
+use DB;
+use App\User;
+use App\Admin\Search;
+
 class HomeController extends Controller
 {
     /**
@@ -24,21 +28,42 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $chart = Charts::create('pie', 'highcharts')
-        ->title('Indice de Satisfação')
-        ->labels(['Satisfeito', 'Insatisfeito', 'Pouco Satisfeito','Muito Satisfeito'])
-        ->values([5,10,20,10])
-        ->dimensions(1000,500)
-        ->responsive(true);
+        $searches;
+        $usersDont = []; //array
+        $charts = [];
+        $userDontReply = []; //lista  de usuarios que NÂO responderam a pesquisa
+        $userReply = 0; // //quantidade de usuarios que responderam a pesquisa
+        $lastSearchId = DB::table("searches")->orderBy("id", 'desc')->first();
+        $search = Search::find($lastSearchId->id);
+        foreach ($search->users as $users) {
+            $user = User::find($users->id);
+            $searches = $user->searches()->where('search_id', $search->id)
+                ->where('search_status', 0)->get();
+            if ($searches->count() > 0) {
 
-         return view('home',compact('chart'));
+                $userDontReply[] = $user;
+            }
+
+
+            $userReply += $user->searches()->where('search_id', $search->id)
+                ->where('search_status', 1)->count();
+        }
+
+
+        $chart = Charts::create('pie', 'highcharts')
+            ->title('Quantidade de usuarios que responderam')
+            ->labels(['Responderam', 'Não responderam'])
+            ->values([$userReply, (count($userDontReply))])
+            ->dimensions(1000, 500)
+            ->responsive(true);
+
+        return view('home', compact('chart'));
     }
 
     public function teste(TypeQuestion $tipo)
     {
         $t = $tipo->find(2);
-        foreach($t->answers as $ans)
-        {
+        foreach ($t->answers as $ans) {
             echo "$ans->answer <br>";
         }
     }
