@@ -98,7 +98,9 @@
             </div>
             <div class="box-body">
               <div class="chart">
+                @isset($chart)
                   {!!$chart->html()!!}
+                @endisset
               </div>
             </div>
             <!-- /.box-body -->
@@ -159,8 +161,9 @@
             </div>
             <div class="box-body">
               <div class="chart">
-
-                    {!!$chart->html()!!}
+                 @isset($chart)
+                  {!!$chart->html()!!}
+                @endisset
               </div>
             </div>
             <!-- /.box-body -->
@@ -177,7 +180,9 @@
 
 @section('js')
 {!! Charts::scripts() !!}
-        {!! $chart->script() !!}
+@isset($chart)
+{!!$chart->script()!!}
+@endisset
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::render() !!}
 @stop

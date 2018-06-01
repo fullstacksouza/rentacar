@@ -27,6 +27,12 @@ class RolesTableSeeder extends Seeder
         $adminRole->description = "Administrador do Sistema com controle total dos dados";
         $adminRole->save();
 
+
+        $commonRole = new Role();
+        $commonRole->name = "common-user";
+        $commonRole->display_name = "Usuario Comum";
+        $commonRole->description = "Usuarios do sistema que somente reponde as pesquisas";
+        $commonRole->save();
         //permissão para criar pesquisa
         $createSearch = new Permission();
         $createSearch->name = "create-user";
