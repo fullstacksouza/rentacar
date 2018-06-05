@@ -64,20 +64,24 @@
             {{ Form::label('perfil', 'Perfil',['class'=>"col-sm-2 control-label"]) }}
             <div class="col-sm-10">
 
-            <select  class="form-control" name="role">
+                <select  class="form-control" name="role">
 
-              @forelse($roles as $role)
+                    @forelse($roles as $role)
 
-                @if($role->id == $userEdit->role)
-            <option value="{{$role->id}}" selected>{{$role->display_name}}</option>
-                @else
-                    <option value="{{$role->id}}">{{$role->display_name}}</option>
-                @endif
-            @empty
-              <option value="0"></option>
-              @endforelse
+                     @if(isset($userEdit->roles[0]))
+                      @if($role->id == $userEdit->roles[0]->id)
+                  <option value="{{$role->id}}" selected>{{$role->display_name}}</option>
+                      @else
 
-            </select>
+                      <option value="{{$role->id}}">{{$role->display_name}}</option>
+                      @endif
+                      @endif
+
+                  @empty
+                    <option value="0"></option>
+                    @endforelse
+
+                  </select>
             </div>
         </div>
 

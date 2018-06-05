@@ -123,7 +123,7 @@ return [
         'GERENCIAMENTO',
 
         [
-            'can' => 'manager',
+            'can' => 'super-admin',
             'text' => 'Pesquisas',
             'icon' => 'users',
             'submenu' => [
@@ -143,7 +143,7 @@ return [
             ],
         ],
         [
-            'can' => 'manager',
+            'can' => 'super-admin',
             'text' => 'Usuários',
             'icon' => 'users',
             'submenu' => [
@@ -160,7 +160,7 @@ return [
             ],
         ],
         [
-            'can' => 'manager',
+            'can' => 'super-admin',
             'text' => 'Controle de Acesso',
             'icon' => 'lock',
             'submenu' => [
@@ -177,7 +177,7 @@ return [
             ],
         ],
         [
-            'can' => 'manager',
+            'can' => 'super-admin',
             'text' => 'Setores',
             'icon' => 'users',
             'submenu' => [

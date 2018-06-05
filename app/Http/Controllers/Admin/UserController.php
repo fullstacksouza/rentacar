@@ -73,10 +73,16 @@ class UserController extends Controller
         $roles = $role->find($request->role);
         if ($roles) {
         //verificando se houve alteração de perfil no formulario
-            if (!$currentRole = $roles->id) {
+            if (count($currentRole) > 0) {
+                if (!$editUser->hasRole($roles->name)) {
+                    $editUser->roles()->sync($roles);
+
+                }
+            } else {
                 $editUser->attachRole($roles);
             }
         }
+
 
         $currentSector = $user->sector;
 
@@ -87,8 +93,6 @@ class UserController extends Controller
         }
 
         $editUser->save();
-
-
         return redirect()->back()->with('info', 'Usuario Atualizado com Sucesso');
 
     }

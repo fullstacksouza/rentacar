@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         //redirecionando usuario para a pagina de  lista de pesquisa caso o mesmo nao possua privilegio de adm
         if (!\Auth::user()->hasRole('super-admin')) {
-            return redirect('users/searches');
+            return redirect('user/searches');
         }
         $searches;
         $totalUsers = User::all()->count();

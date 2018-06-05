@@ -11,7 +11,7 @@ class MenuFilter implements FilterInterface
 {
     public function transform($item, Builder $builder)
     {
-        if (isset($item['can']) && ! Laratrust::can($item['can'])) {
+        if (isset($item['can']) && (!\Auth::user()->hasRole($item['can']))) {
             return false;
         }
 
