@@ -9,9 +9,11 @@ use App\Admin\Sector;
 use App\Admin\Search;
 use App\Admin\UserTextAnswer;
 use App\Admin\AnswerOption;
+
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
+
     use Notifiable;
 
     /**
@@ -20,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','sector_id','dob','rg','registration'
+        'name', 'email', 'password', 'sector_id', 'dob', 'rg', 'registration'
     ];
 
     /**
@@ -40,12 +42,12 @@ class User extends Authenticatable
 
     public function searches()
     {
-        return $this->belongsToManY(Search::class,'user_searches');
+        return $this->belongsToManY(Search::class, 'user_searches');
     }
 
     public function answers()
     {
-        return $this->belongsToMany(AnswerOption::class,'user_answers','user_id','id');
+        return $this->belongsToMany(AnswerOption::class, 'user_answers', 'user_id', 'id');
     }
 
     public function textAnswers()

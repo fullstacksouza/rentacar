@@ -16,7 +16,15 @@
     <!-- /.box-header -->
     <!-- form start -->
 
-   
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <form class="form-horizontal" action="{{url('admin/sectors/create')}}" method="post">
 
     {{csrf_field()}}
@@ -38,7 +46,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancelar</button>
+          <a href="{{URL::previous()}}" class="btn btn-default">Cancelar</a>
         <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
       </div>
       <!-- /.box-footer -->
@@ -55,5 +63,4 @@
     <script> console.log('Hi!'); </script>
 @stop
 
- 
- 
+

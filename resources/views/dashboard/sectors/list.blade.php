@@ -37,8 +37,7 @@
           <td>{{$sector->name}}</td>
           <td>{{$sector->responsible_email or 'Não Cadastrado' }}</td>
           <td>
-          <a   class='btn btn-primary'>Vizualizar</a>
-          <a class='btn btn-warning' href='{{url("admin/sectors/$sector->id/edit")}}'>Editar</a>
+                <a class='btn btn-warning' href='{{url("admin/sectors/$sector->id/edit")}}'>Vizualizar/Editar</a>
           <a class='btn btn-danger' onclick="confirmDelete({{$sector->id}})">Excluir</a>
           </td>
         </tr>

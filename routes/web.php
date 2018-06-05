@@ -14,7 +14,7 @@
 $this->get('/', 'Auth\LoginController@showLoginForm')->name('login');
 $this->get('teste', 'HomeController@teste');
 
-$this->get("testnot/{id}", "Admin\SearchController@sendNotification");
+
 $this->get('/home', 'HomeController@index')->name('home')->middleware("auth");
 
 $this->post('login', 'LoginController@auth');
@@ -64,7 +64,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     $this->post('search/{id}/publish', 'SearchController@publishSearch')->name('search.publish');
     $this->get('search/{id}/details', 'SearchController@details')->name('search.details');
     $this->post('search/{id}/action/register', 'SearchController@actionRegister')->name('action.register');
-
+    $this->get("search/{id}/send-notification", "Admin\SearchController@sendNotification");
     $this->post('searches/{id}/delete', 'SearchController@delete');
 
 });

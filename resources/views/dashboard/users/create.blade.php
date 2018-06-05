@@ -69,20 +69,20 @@
             <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
           </div>
         </div>
-    
+
         <div class="form-group">
           <label for="inputPassword3" class="col-sm-2 control-label">Perfil</label>
 
           <div class="col-sm-10">
 
             <select  class="form-control" name="role">
-             
+
               @forelse($roles as $role)
             <option value="{{$role->id}}" selected>{{$role->display_name}}</option>
             @empty
               <option value="0"></option>
               @endforelse
-              
+
             </select>
           </div>
         </div>
@@ -111,7 +111,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancelar</button>
+      <a href="{{URL::previous()}}" class="btn btn-default">Cancelar</a>
         <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
       </div>
       <!-- /.box-footer -->
@@ -128,5 +128,4 @@
     <script> console.log('Hi!'); </script>
 @stop
 
- 
- 
+

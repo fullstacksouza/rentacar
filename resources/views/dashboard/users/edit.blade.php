@@ -31,6 +31,29 @@
 
 
         <div class="form-group">
+                {{ Form::label('dob', 'Data de Nascimento',['class'=>"col-sm-2 control-label"]) }}
+
+                <div class="col-sm-10">
+                   {{ Form::date('dob',null,['class'=>'form-control','placeholder'=>'Data de Nascimento'])}}
+                </div>
+         </div>
+
+        <div class="form-group">
+                {{ Form::label('rg', 'RG',['class'=>"col-sm-2 control-label"]) }}
+
+                <div class="col-sm-10">
+                        {{ Form::text('rg',null,['class'=>'form-control','placeholder'=>'Numero do RG'])}}
+                </div>
+         </div>
+
+         <div class="form-group">
+                {{ Form::label('registration', 'Matrícula',['class'=>"col-sm-2 control-label"]) }}
+
+                <div class="col-sm-10">
+                        {{ Form::text('registration',null,['class'=>'form-control','placeholder'=>'Matrícula'])}}
+                </div>
+         </div>
+        <div class="form-group">
             {{ Form::label('email', 'Email',['class'=>"col-sm-2 control-label"]) }}
             <div class="col-sm-10">
             {{ Form::text('email',null,['class'=>'form-control','readonly'])}}
@@ -95,7 +118,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancelar</button>
+      <a href="{{URL::previous()}}" class="btn btn-default">Cancelar</a>
         <button type="submit" class="btn btn-info pull-right">Atualizar</button>
       </div>
       <!-- /.box-footer -->

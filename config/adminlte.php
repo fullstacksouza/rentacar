@@ -11,7 +11,7 @@ return [
     | of your page. You can override it per page with the title section.
     | You can optionally also specify a title prefix and/or postfix.
     |
-    */
+ */
 
     'title' => 'Realiza Rent a Car',
 
@@ -28,9 +28,9 @@ return [
     | You can use basic HTML here if you want. The logo has also a mini
     | variant, used for the mini side bar. Make it 3 letters or so
     |
-    */
+     */
 
-    'logo' => '<b>Realiza</b>Rent a Car',
+    'logo' => 'img/logo-realiza.png',
 
     'logo_mini' => '<b>R</b>RC',
 
@@ -43,9 +43,9 @@ return [
     | blue, black, purple, yellow, red, and green. Each skin also has a
     | ligth variant: blue-light, purple-light, purple-light, etc.
     |
-    */
+     */
 
-    'skin' => 'purple',
+    'skin' => 'green',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     | null, 'boxed', 'fixed', 'top-nav'. null is the default, top-nav
     | removes the sidebar and places your menu in the top navbar
     |
-    */
+     */
 
     'layout' => null,
 
@@ -69,7 +69,7 @@ return [
     | bar. To adjust your sidebar layout simply set this  either true
     | this is compatible with layouts except top-nav layout option
     |
-    */
+     */
 
     'collapse_sidebar' => false,
 
@@ -83,7 +83,7 @@ return [
     | You can set the request to a GET or POST with logout_method.
     | Set register_url to null if you don't want a register link.
     |
-    */
+     */
 
     'dashboard_url' => 'home',
 
@@ -105,114 +105,93 @@ return [
     | Font Awesome. A string instead of an array represents a header in sidebar
     | layout. The 'can' is a filter on Laravel's built in Gate functionality.
     |
-    */
+     */
 
     'menu' => [
         'CONFIGURAÇOES DA CONTA',
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'url' => 'admin/settings',
             'icon' => 'user',
         ],
         [
             'text' => 'Mudar senha',
-            'url'  => 'user/change-pass',
+            'url' => 'user/change-pass',
             'icon' => 'lock',
         ],
 
         'GERENCIAMENTO',
 
-        [   'can'=>'manager',
-            'text'    => 'Pesquisas',
-            'icon'    => 'users',
-            'submenu' => [
-                [
-                    'text' => 'Listar',
-                    'icon' => 'list-ul',
-                    'url'  => 'admin/searches/list',
-
-
-                ],
-                [
-                    'text'    => 'Cadastrar',
-                    'icon'    => 'user-plus',
-                    'url'     => 'admin/searches/create'
-                ],
-                [
-                    'text'    => 'Modelos de Perguntas',
-                    'icon'    => 'question',
-                    'url'     => 'admin/users/create',
-                    'submenu' => [
-                        [
-                            'text' => 'Listar',
-                            'icon' => 'list-ul',
-                            'url'  => 'admin/users/list',
-                        ],
-                        [
-                            'text'    => 'Cadastrar',
-                            'icon'    => 'user-plus',
-                            'url'     => 'admin/users/create'
-                        ],
-                    ],
-                ],
-            ],
-        ],
-        [   'can'=>'manager',
-            'text'    => 'Usuários',
-            'icon'    => 'users',
-            'submenu' => [
-                [
-                    'text' => 'Listar',
-                    'icon' => 'list-ul',
-                    'url'  => 'admin/users/list',
-                ],
-                [
-                    'text'    => 'Cadastrar',
-                    'icon'    => 'user-plus',
-                    'url'     => 'admin/users/create'
-                ],
-            ],
-        ],
-        [   'can'=>'manager',
-            'text'    => 'Controle de Acesso',
-            'icon'    => 'lock',
-            'submenu' => [
-                [
-                    'text' => 'Listar',
-                    'icon' => 'list-ul',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Cadastrar',
-                    'icon'    => 'user-plus',
-                    'url'     => 'admin/roles/create'
-                ],
-            ],
-        ],
-        [   'can'=>'manager',
-            'text'    => 'Setores',
-            'icon'    => 'users',
-            'submenu' => [
-                [
-                    'text' => 'Listar',
-                    'icon' => 'list-ul',
-                    'url'  => 'admin/sectors/list',
-                ],
-                [
-                    'text'    => 'Cadastrar',
-                    'icon'    => 'user-plus',
-                    'url'     => 'admin/sectors/create'
-                ],
-            ],
-        ],
-        'MINHAS PESQUISAS',
-
         [
-            'text'        => 'Responder',
-            'url'         => 'user/searches',
-            'icon'        => 'comments',
-            'label'       => 4,
-            'label_color' => 'success',
+            'can' => 'manager',
+            'text' => 'Pesquisas',
+            'icon' => 'users',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url' => 'admin/searches/list',
+
+
+                ],
+                [
+                    'text' => 'Cadastrar',
+                    'icon' => 'user-plus',
+                    'url' => 'admin/searches/create'
+                ],
+
+            ],
+        ],
+        [
+            'can' => 'manager',
+            'text' => 'Usuários',
+            'icon' => 'users',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url' => 'admin/users/list',
+                ],
+                [
+                    'text' => 'Cadastrar',
+                    'icon' => 'user-plus',
+                    'url' => 'admin/users/create'
+                ],
+            ],
+        ],
+        [
+            'can' => 'manager',
+            'text' => 'Controle de Acesso',
+            'icon' => 'lock',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'Cadastrar',
+                    'icon' => 'user-plus',
+                    'url' => 'admin/roles/create'
+                ],
+            ],
+        ],
+        [
+            'can' => 'manager',
+            'text' => 'Setores',
+            'icon' => 'users',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'icon' => 'list-ul',
+                    'url' => 'admin/sectors/list',
+                ],
+                [
+                    'text' => 'Cadastrar',
+                    'icon' => 'user-plus',
+                    'url' => 'admin/sectors/create'
+                ],
+            ],
         ],
 
 
@@ -229,7 +208,7 @@ return [
     | You can comment out the GateFilter if you don't want to use Laravel's
     | built in Gate functionality
     |
-    */
+     */
 
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
@@ -249,11 +228,11 @@ return [
     | only DataTables is supported as a plugin. Set the value to true
     | to include the JavaScript file from a CDN via a script tag.
     |
-    */
+     */
 
     'plugins' => [
         'datatables' => true,
-        'select2'    => false,
-        'chartjs'    => true,
+        'select2' => false,
+        'chartjs' => true,
     ],
 ];

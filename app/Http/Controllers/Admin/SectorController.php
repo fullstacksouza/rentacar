@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Admin\Sector;
+use App\Http\Requests\SectorRequest;
 
 class SectorController extends Controller
 {
@@ -23,7 +24,7 @@ class SectorController extends Controller
     }
 
     //metodo para salvar
-    public function store(Request $request, Sector $sector)
+    public function store(SectorRequest $request, Sector $sector)
     {
         $sector->name = $request->name;
         $sector->responsible_email = $request->responsible_email;

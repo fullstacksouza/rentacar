@@ -16,8 +16,8 @@
     <!-- /.box-header -->
     <!-- form start -->
 
-   
-    {{ Form::model($sectorEdit,['url'=>"admin/sectors/$sectorEdit->id/edit",'class'=>'form-horizontal']) }}  
+
+    {{ Form::model($sectorEdit,['url'=>"admin/sectors/$sectorEdit->id/edit",'class'=>'form-horizontal']) }}
 
     {{csrf_field()}}
       <div class="box-body">
@@ -36,12 +36,12 @@
             {{ Form::text('responsible_email',null,['class'=>'form-control'])}}
             </div>
         </div>
-        
-        
+
+
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancelar</button>
+            <a href="{{URL::previous()}}" class="btn btn-default">Cancelar</a>
         <button type="submit" class="btn btn-info pull-right">Atualizar</button>
       </div>
       <!-- /.box-footer -->
@@ -58,5 +58,4 @@
     <script> console.log('Hi!'); </script>
 @stop
 
- 
-    
+

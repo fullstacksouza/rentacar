@@ -28,7 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //redirecionando usuario para a pagina de  lista de pesquisa caso o mesmo nao possua privilegio de adm
+        if (!\Auth::user()->hasRole('super-admin')) {
+            return redirect('users/searches');
+        }
         $searches;
+        $totalUsers = User::all()->count();
+        $totalSearches = Search::all()->count();
         $usersDont = []; //array
         $charts = [];
         $userDontReply = []; //lista  de usuarios que NÂO responderam a pesquisa
@@ -59,10 +65,10 @@ class HomeController extends Controller
                 ->dimensions(1000, 500)
                 ->responsive(true);
 
-            return view('home', compact('chart'));
+            return view('home', compact('chart', 'totalUsers', 'totalSearches'));
         }
 
-        return view('home');
+        return view('home', compact('totalUsers', 'totalSearches'));
     }
 
     public function teste(TypeQuestion $tipo)

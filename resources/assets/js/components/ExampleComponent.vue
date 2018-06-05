@@ -133,7 +133,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="card">
-                        <a href="#"><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img  @click="addSatisfyQuestion"  class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Satisfatória</h4>
 
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="card">
-                        <a href="#"><img class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addTextQuestion" class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Campo de texto</h4>
 
@@ -215,14 +215,37 @@ export default {
     addNewQuestion() {
       this.questions.push({
         question: "",
-        answer: [{ op: "Concordo" }, { op: "Discordo" }, { op: "Concordo" }],
+        answer: [
+          { op: "Discordo Plenamente" },
+          { op: "Discordo Discordo Parcialmente" },
+          { op: "Nem Concordo,Nem Discordo" },
+          { op: "Concordo Parcialmente" },
+          { op: "Concordo Plenamente" }
+        ],
         text_answer: []
       });
 
-      this.$on("teste", function(data) {
-        console.log(data);
-      });
       //this.scroll();
+    },
+    addSatisfyQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [
+          { op: "Muito insatisfeito" },
+          { op: "Insatisfeito" },
+          { op: "Indiferente" },
+          { op: "Satisfeito" },
+          { op: "Muito satisfeito" }
+        ],
+        text_answer: []
+      });
+    },
+    addTextQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [],
+        text_answer: [{ text_answer: "" }]
+      });
     },
     //pergunta de multipla escolha
     addMultipleChoiceQuestion() {

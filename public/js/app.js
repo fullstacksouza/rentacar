@@ -19649,14 +19649,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addNewQuestion: function addNewQuestion() {
       this.questions.push({
         question: "",
-        answer: [{ op: "Concordo" }, { op: "Discordo" }, { op: "Concordo" }],
+        answer: [{ op: "Discordo Plenamente" }, { op: "Discordo Discordo Parcialmente" }, { op: "Nem Concordo,Nem Discordo" }, { op: "Concordo Parcialmente" }, { op: "Concordo Plenamente" }],
         text_answer: []
       });
 
-      this.$on("teste", function (data) {
-        console.log(data);
-      });
       //this.scroll();
+    },
+    addSatisfyQuestion: function addSatisfyQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [{ op: "Muito insatisfeito" }, { op: "Insatisfeito" }, { op: "Indiferente" }, { op: "Satisfeito" }, { op: "Muito satisfeito" }],
+        text_answer: []
+      });
+    },
+    addTextQuestion: function addTextQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [],
+        text_answer: [{ text_answer: "" }]
+      });
     },
 
     //pergunta de multipla escolha
@@ -21471,9 +21482,39 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: { click: _vm.addSatisfyQuestion }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(2),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: { click: _vm.addTextQuestion }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-2" }, [
               _c("div", { staticClass: "card" }, [
@@ -21515,38 +21556,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-2" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", {
-            staticClass: "card-img-top img-fluid",
-            attrs: { src: "//placehold.it/100x100", alt: "Card image cap" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-block" }, [
-          _c("h4", { staticClass: "card-title" }, [_vm._v("Satisfatória")])
-        ])
-      ])
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Satisfatória")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-2" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", {
-            staticClass: "card-img-top img-fluid",
-            attrs: { src: "//placehold.it/100x100", alt: "Card image cap" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-block" }, [
-          _c("h4", { staticClass: "card-title" }, [_vm._v("Campo de texto")])
-        ])
-      ])
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Campo de texto")])
     ])
   },
   function() {

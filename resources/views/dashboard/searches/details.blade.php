@@ -41,12 +41,13 @@
             <!-- /.box-body -->
           </div>
 
-
+          @if(count($userDontReply) > 0)
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Lista de Usuarios que ainda não responderam
               </h3>
-            <a href='{{url("testnot/$search->id")}}'' class='pull-right btn btn-primary' data-toggle="modal" data-id="1" data-token="{{ csrf_token() }}" data-target="#modal-default">Enviar notificação por email</a>
+
+            <a href='{{url("admin/search/$search->id/send-notification")}}' class='pull-right btn btn-primary'>Enviar notificação por email</a>
 
             </div>
 
@@ -84,6 +85,8 @@
             </div>
             <!-- /.box-body -->
           </div>
+
+          @endif
           @php
             $i = 0;
           @endphp
