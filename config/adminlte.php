@@ -159,7 +159,7 @@ return [
                 ],
             ],
         ],
-        [
+        /* [
             'can' => 'super-admin',
             'text' => 'Controle de Acesso',
             'icon' => 'lock',
@@ -175,7 +175,7 @@ return [
                     'url' => 'admin/roles/create'
                 ],
             ],
-        ],
+        ], */
         [
             'can' => 'super-admin',
             'text' => 'Setores',
