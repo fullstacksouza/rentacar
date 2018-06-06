@@ -15,7 +15,15 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
 
     {{ Form::model($sectorEdit,['url'=>"admin/sectors/$sectorEdit->id/edit",'class'=>'form-horizontal']) }}
 
@@ -57,5 +65,3 @@
 @section('js')
     <script> console.log('Hi!'); </script>
 @stop
-
-
