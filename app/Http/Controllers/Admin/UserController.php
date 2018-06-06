@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -62,11 +63,15 @@ class UserController extends Controller
         return view("dashboard/users/edit", compact('userEdit', 'roles', 'sectors'));
     }
 
-    public function update(Request $request, User $user, Role $role)
+    public function update(UpdateUserRequest $request, User $user, Role $role)
     {
         $sector = Sector::find($request->sector);
         $editUser = $user->findOrFail($request->id);
         $editUser->name = $request->name;
+        $editUser->dob = $request->dob;
+        $editUser->rg = $request->rg;
+        $editUser->registration = $request->registration;
+        $editUser->email = $request->email;
 
 
         $currentRole = $editUser->roles;
@@ -91,6 +96,7 @@ class UserController extends Controller
             //return "setor alterado";
             $editUser->sector()->associate($sector);
         }
+
 
         $editUser->save();
         return redirect()->back()->with('info', 'Usuario Atualizado com Sucesso');

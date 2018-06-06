@@ -15,7 +15,15 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
 
     {{ Form::model($userEdit,['url'=>"admin/users/$userEdit->id/edit",'class'=>'form-horizontal']) }}
 
@@ -142,5 +150,3 @@
 
 </script>
 @stop
-
-

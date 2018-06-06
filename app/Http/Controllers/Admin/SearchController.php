@@ -252,7 +252,7 @@ class SearchController extends Controller
 
         }
 
-        return "job disparado";
+        return redirect()->back()->with('info','A notificação esta sendo enviada para os usuarios');
     }
 
 }

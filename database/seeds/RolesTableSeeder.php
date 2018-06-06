@@ -82,9 +82,9 @@ class RolesTableSeeder extends Seeder
 
         ]);
 
-        $user = User::find(1);
 
-        $user->attachPermission($mangerPermission);
+        $user->attachRole($adminRole);
+
 
         $user = User::find(2);
 
