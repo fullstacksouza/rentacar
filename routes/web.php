@@ -66,7 +66,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     $this->post('search/{id}/action/register', 'SearchController@actionRegister')->name('action.register');
     $this->get("search/{id}/send-notification", "SearchController@sendNotification");
     $this->post('searches/{id}/delete', 'SearchController@delete');
-
+    $this->get('searches/{id}/get', 'SearchController@getSearch');
+    $this->get('searches/{id}/edit', 'SearchController@edit');
+    $this->post('search/{id}/update', 'SearchController@update');
 });
 
 Route::group(['namespace' => "Front"], function () {

@@ -55,8 +55,8 @@
 
     @endforelse
     <div class="box-footer">
+      <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Cancelar</a>
 
-        <button type="submit" class="btn btn-default">Cancelar</button>
         <button type="submit"  id="publishSearch"  class ="btn btn-info pull-right">Publicar Pesquisa</button>
       </div>
     <!--final de perguntas>
@@ -81,5 +81,3 @@
     })
 </script>
 @stop
-
-

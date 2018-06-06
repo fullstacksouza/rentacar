@@ -26,6 +26,28 @@ class SearchController extends Controller
         return view('dashboard/searches/create', compact('sectors'));
     }
 
+
+    public function getSearch(Request $request)
+    {
+      $search = Search::findOrFail($request->id);
+      $options = [];
+      if($search)
+      {
+          foreach($search->questions as $question)
+          {
+              foreach($question->answerOptions as $asnw)
+              {
+                  $options[] = $asnw;
+              }
+          }
+          return response()->json(['search'=>$search,'questions'=>$search->questions]);
+
+      }
+    }
+    public function edit(Request $request)
+    {
+      return view('dashboard/searches/edit');
+    }
     public function list(Search $search)
     {
         $searches = $search->all();
@@ -119,6 +141,79 @@ class SearchController extends Controller
         }
 
         return response(['status' => 'success']);
+    }
+
+    public function update(Request $request, Question $quest, AnswerOption $answOp)
+    {
+      $questions = $request->all();
+      $perguntas = [];
+
+     // return $questions['search'];
+      if (is_array($questions)) {
+          $i = 0;
+          //pecorrendo array dos dados enviados pelo vueJs
+          foreach ($questions['search'] as $p) {
+              //salvando pergunta
+              $question = $quest->find($p['id']);
+              if($question)
+              {
+              $question->question = $p['question'];
+              $question->type = 1;
+              $question->save();
+              $current_search = Search::find($request->search_id);
+              $current_search->questions()->save($question);
+            }else {
+              $question = $quest->create([
+                  'search_id' => $request->search_id,
+                  'question' => $p['question'],
+                  'type' => 1
+              ]);
+              $question->search()->associate($request->search_id)->save();
+
+            }
+              //criando relacionamento da pergunta com a pesquisa
+              //$question->search()->associate($request->search_id)->save();
+
+
+              if (is_array($p['answer'])) {
+                  foreach ($p['answer'] as $answ) {
+                    if(isset())
+                      $answer = $answOp->find($answ['id']);
+                      if($answer)
+                      {
+                      $answer->option = $answ['op'];
+                      $answer->save();
+                      $question->answerOptions()->save($answer);
+                    }else {
+                      $answer = $answOp->create([
+                          'question_id' => $question->id,
+                          'option' => $answ['op']
+                      ]);
+                      $answer->question()->associate($question->id)->save();
+
+                    }
+                    //  $answer->question()->associate($question->id)->save();
+                  }
+              }
+                  ///verificando se existe opçao de resposta como campo de texto
+              if (isset($p['text_answer'])) {
+                  foreach ($p['text_answer'] as $text) {
+                    $answer = $answOp->find($answ['id']);
+                    $answer->option = "text";
+                    $answer->save();
+                      // $answer = $answOp->create([
+                      //     'question_id' => $question->id,
+                      //     'option' => 'text'
+                      // ]);
+                      $question->answerOptions()->save($answer);
+                      //$answer->question()->associate($question->id)->save();
+
+                  }
+              }
+             // print_r($p['question']);
+             return "ok";
+          }
+      }
     }
 
     public function previewSearch(Request $request)

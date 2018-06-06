@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(8);
-var isBuffer = __webpack_require__(21);
+var isBuffer = __webpack_require__(22);
 
 /*global toString:true*/
 
@@ -7405,33 +7405,6 @@ var index_esm = {
 /* 2 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -7538,14 +7511,47 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(21);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(23);
+var normalizeHeaderName = __webpack_require__(24);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -7635,11 +7641,11 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 5 */,
-/* 6 */
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -7829,12 +7835,6 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(20);
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7860,12 +7860,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(24);
-var buildURL = __webpack_require__(26);
-var parseHeaders = __webpack_require__(27);
-var isURLSameOrigin = __webpack_require__(28);
+var settle = __webpack_require__(25);
+var buildURL = __webpack_require__(27);
+var parseHeaders = __webpack_require__(28);
+var isURLSameOrigin = __webpack_require__(29);
 var createError = __webpack_require__(10);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(29);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -7962,7 +7962,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(30);
+      var cookies = __webpack_require__(31);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -8046,7 +8046,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(25);
+var enhanceError = __webpack_require__(26);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -8104,26 +8104,247 @@ module.exports = Cancel;
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__(14);
+"use strict";
+/* unused harmony export setDefaults */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bezier_easing__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bezier_easing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_bezier_easing__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__easings__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(41);
+
+
+
+
+const abortEvents = [
+    "mousedown",
+    "wheel",
+    "DOMMouseScroll",
+    "mousewheel",
+    "keyup",
+    "touchmove"
+];
+
+let defaults = {
+    container: "body",
+    duration: 500,
+    easing: "ease",
+    offset: 0,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+};
+
+function setDefaults(options) {
+    defaults = Object.assign({}, defaults, options);
+}
+
+const scroller = () => {
+    let element; // element to scroll to
+    let container; // container to scroll
+    let duration; // duration of the scrolling
+    let easing; // easing to be used when scrolling
+    let offset; // offset to be added (subtracted)
+    let cancelable; // indicates if user can cancel the scroll or not.
+    let onStart; // callback when scrolling is started
+    let onDone; // callback when scrolling is done
+    let onCancel; // callback when scrolling is canceled / aborted
+    let x; // scroll on x axis
+    let y; // scroll on y axis
+
+    let initialX; // initial X of container
+    let targetX; // target X of container
+    let initialY; // initial Y of container
+    let targetY; // target Y of container
+    let diffX; // difference
+    let diffY; // difference
+
+    let abort; // is scrolling aborted
+
+    let abortEv; // event that aborted scrolling
+    let abortFn = e => {
+        if (!cancelable) return;
+        abortEv = e;
+        abort = true;
+    };
+    let easingFn;
+
+    let timeStart; // time when scrolling started
+    let timeElapsed; // time elapsed since scrolling started
+
+    let progress; // progress
+
+    function scrollTop(container) {
+        let scrollTop = container.scrollTop;
+
+        if (container.tagName.toLowerCase() === "body") {
+            // in firefox body.scrollTop always returns 0
+            // thus if we are trying to get scrollTop on a body tag
+            // we need to get it from the documentElement
+            scrollTop = scrollTop || document.documentElement.scrollTop;
+        }
+
+        return scrollTop;
+    }
+
+    function scrollLeft(container) {
+        let scrollLeft = container.scrollLeft;
+
+        if (container.tagName.toLowerCase() === "body") {
+            // in firefox body.scrollLeft always returns 0
+            // thus if we are trying to get scrollLeft on a body tag
+            // we need to get it from the documentElement
+            scrollLeft = scrollLeft || document.documentElement.scrollLeft;
+        }
+
+        return scrollLeft;
+    }
+
+    function step(timestamp) {
+        if (abort) return done();
+        if (!timeStart) timeStart = timestamp;
+
+        timeElapsed = timestamp - timeStart;
+
+        progress = Math.min(timeElapsed / duration, 1);
+        progress = easingFn(progress);
+
+        topLeft(
+            container,
+            initialY + diffY * progress,
+            initialX + diffX * progress
+        );
+
+        timeElapsed < duration ? window.requestAnimationFrame(step) : done();
+    }
+
+    function done() {
+        if (!abort) topLeft(container, targetY, targetX);
+        timeStart = false;
+
+        __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].off(container, abortEvents, abortFn);
+        if (abort && onCancel) onCancel(abortEv, element);
+        if (!abort && onDone) onDone(element);
+    }
+
+    function topLeft(element, top, left) {
+        if (y) element.scrollTop = top;
+        if (x) element.scrollLeft = left;
+        if (element.tagName.toLowerCase() === "body") {
+            // in firefox body.scrollTop doesn't scroll the page
+            // thus if we are trying to scrollTop on a body tag
+            // we need to scroll on the documentElement
+            if (y) document.documentElement.scrollTop = top;
+            if (x) document.documentElement.scrollLeft = left;
+        }
+    }
+
+    function scrollTo(target, _duration, options = {}) {
+        if (typeof _duration === "object") {
+            options = _duration;
+        } else if (typeof _duration === "number") {
+            options.duration = _duration;
+        }
+
+        element = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].$(target);
+
+        if (!element) {
+            return console.warn(
+                "[vue-scrollto warn]: Trying to scroll to an element that is not on the page: " +
+                    target
+            );
+        }
+
+        container = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].$(options.container || defaults.container);
+        duration = options.duration || defaults.duration;
+        easing = options.easing || defaults.easing;
+        offset = options.offset || defaults.offset;
+        cancelable = options.hasOwnProperty("cancelable")
+            ? options.cancelable !== false
+            : defaults.cancelable;
+        onStart = options.onStart || defaults.onStart;
+        onDone = options.onDone || defaults.onDone;
+        onCancel = options.onCancel || defaults.onCancel;
+        x = options.x === undefined ? defaults.x : options.x;
+        y = options.y === undefined ? defaults.y : options.y;
+
+        var cumulativeOffsetContainer = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].cumulativeOffset(container);
+        var cumulativeOffsetElement = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].cumulativeOffset(element);
+
+        if (typeof offset === "function") {
+            offset = offset();
+        }
+
+        initialY = scrollTop(container);
+        targetY = cumulativeOffsetElement.top -
+            cumulativeOffsetContainer.top +
+            offset;
+
+        initialX = scrollLeft(container);
+        targetX = cumulativeOffsetElement.left -
+            cumulativeOffsetContainer.left +
+            offset;
+
+        abort = false;
+
+        diffY = targetY - initialY;
+        diffX = targetX - initialX;
+
+        if (typeof easing === "string") {
+            easing = __WEBPACK_IMPORTED_MODULE_1__easings__["a" /* default */][easing] || __WEBPACK_IMPORTED_MODULE_1__easings__["a" /* default */]["ease"];
+        }
+
+        easingFn = __WEBPACK_IMPORTED_MODULE_0_bezier_easing___default.a.apply(__WEBPACK_IMPORTED_MODULE_0_bezier_easing___default.a, easing);
+
+        if (!diffY && !diffX) return;
+        if (onStart) onStart(element);
+
+        __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].on(container, abortEvents, abortFn, { passive: true });
+
+        window.requestAnimationFrame(step);
+
+        return () => {
+            abortEv = null;
+            abort = true;
+        };
+    }
+
+    return scrollTo;
+};
+/* unused harmony export scroller */
+
+
+const _scroller = scroller();
+/* harmony default export */ __webpack_exports__["a"] = (_scroller);
 
 
 /***/ }),
 /* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(15);
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ExampleComponent_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ExampleComponent_vue__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ExampleComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ExampleComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ReplySearchComponent_vue__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ReplySearchComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ReplySearchComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TypeOfQuestionsComponent_vue__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TypeOfQuestionsComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_TypeOfQuestionsComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_EditSearchComponent_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_EditSearchComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_EditSearchComponent_vue__);
 
 
 
@@ -8134,7 +8355,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(window.VeeValidate);
 
 
 
-var VueScrollTo = __webpack_require__(49);
+
+var VueScrollTo = __webpack_require__(52);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(VueScrollTo);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('type-question', __WEBPACK_IMPORTED_MODULE_4__components_TypeOfQuestionsComponent_vue___default.a);
@@ -8145,13 +8367,14 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     components: {
         'example': __WEBPACK_IMPORTED_MODULE_2__components_ExampleComponent_vue___default.a,
         'type-question': __WEBPACK_IMPORTED_MODULE_4__components_TypeOfQuestionsComponent_vue___default.a,
-        'search': __WEBPACK_IMPORTED_MODULE_3__components_ReplySearchComponent_vue___default.a
+        'search': __WEBPACK_IMPORTED_MODULE_3__components_ReplySearchComponent_vue___default.a,
+        'edit-search': __WEBPACK_IMPORTED_MODULE_5__components_EditSearchComponent_vue___default.a
     }
 
 });
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19114,10 +19337,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(16).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(17).setImmediate))
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
@@ -19170,7 +19393,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(17);
+__webpack_require__(18);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -19181,10 +19404,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -19374,16 +19597,16 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(7)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(19)
+var __vue_script__ = __webpack_require__(20)
 /* template */
 var __vue_template__ = __webpack_require__(42)
 /* template functional */
@@ -19424,15 +19647,15 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_scrollto_src_scrollTo__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_scrollto_src_scrollTo__ = __webpack_require__(13);
 //
 //
 //
@@ -19757,7 +19980,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19765,8 +19988,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(8);
-var Axios = __webpack_require__(22);
-var defaults = __webpack_require__(4);
+var Axios = __webpack_require__(23);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -19800,14 +20023,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(12);
-axios.CancelToken = __webpack_require__(36);
+axios.CancelToken = __webpack_require__(37);
 axios.isCancel = __webpack_require__(11);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(37);
+axios.spread = __webpack_require__(38);
 
 module.exports = axios;
 
@@ -19816,7 +20039,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /*!
@@ -19843,16 +20066,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(31);
-var dispatchRequest = __webpack_require__(32);
+var InterceptorManager = __webpack_require__(32);
+var dispatchRequest = __webpack_require__(33);
 
 /**
  * Create a new instance of Axios
@@ -19929,7 +20152,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19948,7 +20171,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19981,7 +20204,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20009,7 +20232,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20084,7 +20307,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20144,7 +20367,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20219,7 +20442,7 @@ module.exports = (
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20262,7 +20485,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20322,7 +20545,7 @@ module.exports = (
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20381,18 +20604,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(33);
+var transformData = __webpack_require__(34);
 var isCancel = __webpack_require__(11);
-var defaults = __webpack_require__(4);
-var isAbsoluteURL = __webpack_require__(34);
-var combineURLs = __webpack_require__(35);
+var defaults = __webpack_require__(5);
+var isAbsoluteURL = __webpack_require__(35);
+var combineURLs = __webpack_require__(36);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -20474,7 +20697,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20501,7 +20724,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20522,7 +20745,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20543,7 +20766,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20607,7 +20830,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20638,225 +20861,6 @@ module.exports = function spread(callback) {
     return callback.apply(null, arr);
   };
 };
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export setDefaults */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bezier_easing__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bezier_easing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_bezier_easing__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__easings__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(41);
-
-
-
-
-const abortEvents = [
-    "mousedown",
-    "wheel",
-    "DOMMouseScroll",
-    "mousewheel",
-    "keyup",
-    "touchmove"
-];
-
-let defaults = {
-    container: "body",
-    duration: 500,
-    easing: "ease",
-    offset: 0,
-    cancelable: true,
-    onStart: false,
-    onDone: false,
-    onCancel: false,
-    x: false,
-    y: true
-};
-
-function setDefaults(options) {
-    defaults = Object.assign({}, defaults, options);
-}
-
-const scroller = () => {
-    let element; // element to scroll to
-    let container; // container to scroll
-    let duration; // duration of the scrolling
-    let easing; // easing to be used when scrolling
-    let offset; // offset to be added (subtracted)
-    let cancelable; // indicates if user can cancel the scroll or not.
-    let onStart; // callback when scrolling is started
-    let onDone; // callback when scrolling is done
-    let onCancel; // callback when scrolling is canceled / aborted
-    let x; // scroll on x axis
-    let y; // scroll on y axis
-
-    let initialX; // initial X of container
-    let targetX; // target X of container
-    let initialY; // initial Y of container
-    let targetY; // target Y of container
-    let diffX; // difference
-    let diffY; // difference
-
-    let abort; // is scrolling aborted
-
-    let abortEv; // event that aborted scrolling
-    let abortFn = e => {
-        if (!cancelable) return;
-        abortEv = e;
-        abort = true;
-    };
-    let easingFn;
-
-    let timeStart; // time when scrolling started
-    let timeElapsed; // time elapsed since scrolling started
-
-    let progress; // progress
-
-    function scrollTop(container) {
-        let scrollTop = container.scrollTop;
-
-        if (container.tagName.toLowerCase() === "body") {
-            // in firefox body.scrollTop always returns 0
-            // thus if we are trying to get scrollTop on a body tag
-            // we need to get it from the documentElement
-            scrollTop = scrollTop || document.documentElement.scrollTop;
-        }
-
-        return scrollTop;
-    }
-
-    function scrollLeft(container) {
-        let scrollLeft = container.scrollLeft;
-
-        if (container.tagName.toLowerCase() === "body") {
-            // in firefox body.scrollLeft always returns 0
-            // thus if we are trying to get scrollLeft on a body tag
-            // we need to get it from the documentElement
-            scrollLeft = scrollLeft || document.documentElement.scrollLeft;
-        }
-
-        return scrollLeft;
-    }
-
-    function step(timestamp) {
-        if (abort) return done();
-        if (!timeStart) timeStart = timestamp;
-
-        timeElapsed = timestamp - timeStart;
-
-        progress = Math.min(timeElapsed / duration, 1);
-        progress = easingFn(progress);
-
-        topLeft(
-            container,
-            initialY + diffY * progress,
-            initialX + diffX * progress
-        );
-
-        timeElapsed < duration ? window.requestAnimationFrame(step) : done();
-    }
-
-    function done() {
-        if (!abort) topLeft(container, targetY, targetX);
-        timeStart = false;
-
-        __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].off(container, abortEvents, abortFn);
-        if (abort && onCancel) onCancel(abortEv, element);
-        if (!abort && onDone) onDone(element);
-    }
-
-    function topLeft(element, top, left) {
-        if (y) element.scrollTop = top;
-        if (x) element.scrollLeft = left;
-        if (element.tagName.toLowerCase() === "body") {
-            // in firefox body.scrollTop doesn't scroll the page
-            // thus if we are trying to scrollTop on a body tag
-            // we need to scroll on the documentElement
-            if (y) document.documentElement.scrollTop = top;
-            if (x) document.documentElement.scrollLeft = left;
-        }
-    }
-
-    function scrollTo(target, _duration, options = {}) {
-        if (typeof _duration === "object") {
-            options = _duration;
-        } else if (typeof _duration === "number") {
-            options.duration = _duration;
-        }
-
-        element = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].$(target);
-
-        if (!element) {
-            return console.warn(
-                "[vue-scrollto warn]: Trying to scroll to an element that is not on the page: " +
-                    target
-            );
-        }
-
-        container = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].$(options.container || defaults.container);
-        duration = options.duration || defaults.duration;
-        easing = options.easing || defaults.easing;
-        offset = options.offset || defaults.offset;
-        cancelable = options.hasOwnProperty("cancelable")
-            ? options.cancelable !== false
-            : defaults.cancelable;
-        onStart = options.onStart || defaults.onStart;
-        onDone = options.onDone || defaults.onDone;
-        onCancel = options.onCancel || defaults.onCancel;
-        x = options.x === undefined ? defaults.x : options.x;
-        y = options.y === undefined ? defaults.y : options.y;
-
-        var cumulativeOffsetContainer = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].cumulativeOffset(container);
-        var cumulativeOffsetElement = __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].cumulativeOffset(element);
-
-        if (typeof offset === "function") {
-            offset = offset();
-        }
-
-        initialY = scrollTop(container);
-        targetY = cumulativeOffsetElement.top -
-            cumulativeOffsetContainer.top +
-            offset;
-
-        initialX = scrollLeft(container);
-        targetX = cumulativeOffsetElement.left -
-            cumulativeOffsetContainer.left +
-            offset;
-
-        abort = false;
-
-        diffY = targetY - initialY;
-        diffX = targetX - initialX;
-
-        if (typeof easing === "string") {
-            easing = __WEBPACK_IMPORTED_MODULE_1__easings__["a" /* default */][easing] || __WEBPACK_IMPORTED_MODULE_1__easings__["a" /* default */]["ease"];
-        }
-
-        easingFn = __WEBPACK_IMPORTED_MODULE_0_bezier_easing___default.a.apply(__WEBPACK_IMPORTED_MODULE_0_bezier_easing___default.a, easing);
-
-        if (!diffY && !diffX) return;
-        if (onStart) onStart(element);
-
-        __WEBPACK_IMPORTED_MODULE_2__utils__["a" /* default */].on(container, abortEvents, abortFn, { passive: true });
-
-        window.requestAnimationFrame(step);
-
-        return () => {
-            abortEv = null;
-            abort = true;
-        };
-    }
-
-    return scrollTo;
-};
-/* unused harmony export scroller */
-
-
-const _scroller = scroller();
-/* harmony default export */ __webpack_exports__["a"] = (_scroller);
 
 
 /***/ }),
@@ -21591,7 +21595,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(44)
 /* template */
@@ -21640,7 +21644,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vee_validate__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 //
 //
@@ -22035,7 +22039,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(47)
 /* template */
@@ -22207,6 +22211,979 @@ if (false) {
 
 /***/ }),
 /* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(50)
+/* template */
+var __vue_template__ = __webpack_require__(51)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/EditSearchComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2cbe6de4", Component.options)
+  } else {
+    hotAPI.reload("data-v-2cbe6de4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_scrollto_src_scrollTo__ = __webpack_require__(13);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      index: 0,
+      uri: location.pathname,
+      params: "",
+      searchId: "",
+      form: true,
+      token: "",
+      questions: [{
+        question: "",
+        answer: [{ op: "" }],
+        text_answer: [{
+          text_answer: ""
+        }]
+      }]
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.questions.splice(0, 1);
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/admin/searches/" + location.pathname.split("/")[3] + "/get").then(function (response) {
+      var i;
+      var j;
+      var k;
+      console.log(response.data.questions[0]);
+      console.log("size " + response.data.questions.length);
+      for (i = 0; i < response.data.questions.length; i++) {
+
+        _this.questions.push({
+          question: response.data.questions[i].question,
+          id: response.data.questions[i].id,
+          answer: [],
+          text_answer: []
+        });
+        for (j = 0; j < response.data.questions[i].answer_options.length; j++) {
+          if (response.data.questions[i].answer_options[j].option.localeCompare("text")) {
+            _this.questions[i].answer.push({
+              id: response.data.questions[i].answer_options[j].id,
+              op: response.data.questions[i].answer_options[j].option
+
+            });
+          } else {
+            _this.questions[i].text_answer.push({
+              text_answer: ""
+            });
+          }
+        }
+        // alert(response.data.questions[i].answer_options[0].option)
+        // this.questions.push({
+        //   question: "",
+        // });
+        // for(j=0;j<response.data.questions[i].answer_options.length;j++)
+        // {
+        //   this.quesions[i].answer.push({
+        //       op:"ll"
+        //   });
+        // }
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+    var uri = location.pathname.split("/");
+    console.log(this.questions);
+    this.questions.length;
+  },
+
+  watch: {
+    questions: function questions(val) {
+      //metodo de scroller
+      this.scroll();
+    }
+  },
+
+  methods: {
+    validate: function validate() {
+      var _this2 = this;
+
+      this.$validator.validateAll().then(function (res) {
+        if (res) {
+          _this2.form = false;
+        } else {
+          _this2.form = true;
+        }
+      });
+      return this.form;
+    },
+    addNewQuestion: function addNewQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [{ op: "Discordo Plenamente" }, { op: "Discordo Discordo Parcialmente" }, { op: "Nem Concordo,Nem Discordo" }, { op: "Concordo Parcialmente" }, { op: "Concordo Plenamente" }],
+        text_answer: []
+      });
+
+      //this.scroll();
+    },
+    addSatisfyQuestion: function addSatisfyQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [{ op: "Muito insatisfeito" }, { op: "Insatisfeito" }, { op: "Indiferente" }, { op: "Satisfeito" }, { op: "Muito satisfeito" }],
+        text_answer: []
+      });
+    },
+    addTextQuestion: function addTextQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [],
+        text_answer: [{ text_answer: "" }]
+      });
+    },
+
+    //pergunta de multipla escolha
+    addMultipleChoiceQuestion: function addMultipleChoiceQuestion() {
+      this.questions.push({
+        question: "",
+        answer: [],
+        text_answer: []
+      });
+
+      this.$on("teste", function (data) {
+        console.log(data);
+      });
+      //this.scroll();
+    },
+    addNewAnswerOption: function addNewAnswerOption(index) {
+      this.questions[index].answer.push({
+        op: ""
+      });
+    },
+    addNewAnswerTextOption: function addNewAnswerTextOption(index) {
+      console.log("log");
+      this.questions[index].text_answer.push({
+        text_answer: ""
+      });
+    },
+    sendQuestions: function sendQuestions() {
+      var uri = location.pathname.split("/");
+
+      var searchId = uri[3];
+      var url = "";
+      if (location.hostname == "localhost") {
+        url = "http://localhost:8000/admin/search/" + searchId + "/update";
+      } else {
+        url = "http://" + window.location.hostname + "/admin/search/" + searchId + "/questions/create";
+      }
+      //this.questions.push({"search_id":searchId}),
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
+        search: this.questions,
+        search_id: searchId
+      }).then(function (response) {
+        if (location.hostname == "localhost") {
+          url = "http://localhost:8000/admin/search/" + searchId + "/preview";
+
+          window.location = url;
+        } else {
+          url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+
+          window.location = url;
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    answerLen: function answerLen(index) {
+      return this.questions[index].answer.length;
+    },
+    getQuestions: function getQuestions() {
+      alert("OOOOOK");
+    },
+    deleteQuestion: function deleteQuestion(index) {
+      console.log("index da array " + index);
+      this.questions.splice(index, 1);
+      console.log(this.questions);
+    },
+    deleteAnswer: function deleteAnswer(iq, index) {
+      this.questions[iq].answer.splice(index, 1);
+    },
+    deleteTextAnswer: function deleteTextAnswer(iq, index) {
+      this.questions[iq].text_answer.splice(index, 1);
+    },
+    scroll: function scroll() {
+      if (this.index == 0) {
+        this.index = 1;
+        var index = this.questions.length - 1;
+        Object(__WEBPACK_IMPORTED_MODULE_2_vue_scrollto_src_scrollTo__["a" /* default */])("#end");
+      } else {
+        var prevIndex = this.questions.length;
+        var lastAnswerIndex = prevIndex - 1;
+        Object(__WEBPACK_IMPORTED_MODULE_2_vue_scrollto_src_scrollTo__["a" /* default */])("#end");
+      }
+    },
+
+
+    created: function created() {
+      // `this` aponta para a instância
+      console.log("a ");
+    }
+  }
+});
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "col-md-12" },
+    [
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.questions, function(question, index) {
+        return _c(
+          "div",
+          {
+            staticClass: "panel panel-primary copyright-wrap",
+            attrs: { id: "copyright-wrap-" + index }
+          },
+          [
+            _c("div", { staticClass: "panel-heading" }, [
+              _vm._v(
+                "Pergunta " + _vm._s(index + 1) + "\n                        "
+              ),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-target": "#copyright-wrap-[index]",
+                    "data-dismiss": "alert"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteQuestion(index)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ]),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Close")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "panel-body" },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 control-label",
+                      attrs: { for: "inputEmail3" }
+                    },
+                    [_vm._v("Pergunta")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required",
+                          expression: "'required'"
+                        },
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: question.question,
+                          expression: "question.question"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "inputEmail3",
+                        placeholder: "Digite aqui a pergunta"
+                      },
+                      domProps: { value: question.question },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(question, "question", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm._l(_vm.questions[index].answer, function(ans, i) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "panel panel-info copyright-wrap",
+                      attrs: { id: "copyright-wrap-ans-" + index + "-" + i }
+                    },
+                    [
+                      _c("div", { staticClass: "panel-heading" }, [
+                        _vm._v(
+                          "Resposta " +
+                            _vm._s(i + 1) +
+                            " - Selecionavel\n                        "
+                        ),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close",
+                            attrs: {
+                              type: "button",
+                              "data-target": "#copyright-wrap-[i]",
+                              "data-dismiss": "alert"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.deleteAnswer(index, i)
+                              }
+                            }
+                          },
+                          [
+                            _c("span", { attrs: { "aria-hidden": "true" } }, [
+                              _vm._v("×")
+                            ]),
+                            _c("span", { staticClass: "sr-only" }, [
+                              _vm._v("Close")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "panel-body" }, [
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 control-label",
+                              attrs: {
+                                for: "inputEmail3",
+                                "white-space:": "",
+                                nowrap: ""
+                              }
+                            },
+                            [_vm._v("Opçao de resposta selecionavel")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-10" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                },
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: ans.op,
+                                  expression: "ans.op"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "inputEmail3",
+                                placeholder:
+                                  "Digite a " + (i + 1) + "ª opção de resposta"
+                              },
+                              domProps: { value: ans.op },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(ans, "op", $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("br")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {
+                        attrs: { id: "endanswer" + index + "-" + i }
+                      })
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.questions[index].text_answer, function(ans, i) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "panel panel-warning copyright-wrap",
+                      attrs: { id: "copyright-wrap-ans-" + index + "-" + i }
+                    },
+                    [
+                      _c("div", { staticClass: "panel-heading" }, [
+                        _vm._v(
+                          "Resposta do tipo  Campo de Texto\n                        "
+                        ),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close",
+                            attrs: {
+                              type: "button",
+                              "data-target": "#copyright-wrap-[i]",
+                              "data-dismiss": "alert"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.deleteTextAnswer(index, i)
+                              }
+                            }
+                          },
+                          [
+                            _c("span", { attrs: { "aria-hidden": "true" } }, [
+                              _vm._v("×")
+                            ]),
+                            _c("span", { staticClass: "sr-only" }, [
+                              _vm._v("Close")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "panel-body" }, [
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 control-label",
+                              attrs: {
+                                for: "inputEmail3",
+                                "white-space:": "",
+                                nowrap: ""
+                              }
+                            },
+                            [_vm._v("Opçao de resposta aberta")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-10" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: ans.text_answer,
+                                  expression: "ans.text_answer"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                readonly: "",
+                                type: "text",
+                                id: "inputEmail3",
+                                placeholder: "Campo de texto aberto"
+                              },
+                              domProps: { value: ans.text_answer },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    ans,
+                                    "text_answer",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("br")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {
+                        attrs: { id: "endanswer" + index + "-" + i }
+                      })
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c("center", [
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "scroll-to",
+                          rawName: "v-scroll-to",
+                          value:
+                            "#endanswer" +
+                            index +
+                            "-" +
+                            (_vm.answerLen(index) - 1),
+                          expression:
+                            "'#endanswer'+index+'-'+(answerLen(index)-1)"
+                        }
+                      ],
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          _vm.addNewAnswerOption(index)
+                        }
+                      }
+                    },
+                    [_vm._v("Adicionar Opçao de resposta")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("center", [
+                  _vm.questions[index].text_answer.length < 1
+                    ? _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "scroll-to",
+                              rawName: "v-scroll-to",
+                              value:
+                                "#endanswer" +
+                                index +
+                                "-" +
+                                (_vm.answerLen(index) - 1),
+                              expression:
+                                "'#endanswer'+index+'-'+(answerLen(index)-1)"
+                            }
+                          ],
+                          staticClass: "btn btn-warning",
+                          on: {
+                            click: function($event) {
+                              _vm.addNewAnswerTextOption(index)
+                            }
+                          }
+                        },
+                        [_vm._v("Adicionar Campo de Texto")]
+                      )
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-default", attrs: { type: "submit" } },
+          [_vm._v("Cancelar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-info pull-right",
+            attrs: { type: "submit", disabled: this.validate() },
+            on: { click: _vm.sendQuestions }
+          },
+          [_vm._v("Prosseguir")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("center", [
+        _c(
+          "button",
+          {
+            staticClass: "btn-lg btn-success",
+            attrs: {
+              "data-toggle": "collapse",
+              "data-target": "#collapseExample",
+              "aria-expanded": "false",
+              "aria-controls": "collapseExample",
+              href: "#"
+            }
+          },
+          [_vm._v("Adicionar Pergunta")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "end" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
+        _c("div", { staticClass: "well" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: { click: _vm.addNewQuestion }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: { click: _vm.addSatisfyQuestion }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: { click: _vm.addTextQuestion }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", {
+                    staticClass: "card-img-top img-fluid",
+                    attrs: {
+                      src: "//placehold.it/100x100",
+                      alt: "Card image cap"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.addMultipleChoiceQuestion()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Concordância")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Satisfatória")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Campo de texto")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-block" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Multipla Escolha")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2cbe6de4", module.exports)
+  }
+}
+
+/***/ }),
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
