@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Admin\Sector;
 use App\Http\Requests\SectorRequest;
-
+use App\Http\Requests\UpdateSectorRequest;
 class SectorController extends Controller
 {
     //
@@ -41,7 +41,7 @@ class SectorController extends Controller
         return view('dashboard/sectors/edit', compact('sectorEdit'));
     }
 
-    public function update(Request $request, Sector $sector)
+    public function update(UpdateSectorRequest $request, Sector $sector)
     {
         $sectorEdit = $sector->findOrFail($request->id);
         $sectorEdit->name = $request->name;
