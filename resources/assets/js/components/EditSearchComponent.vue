@@ -220,16 +220,16 @@ export default {
             j < response.data.questions[i].answer_options.length;
             j++
           ) {
-            if (
-              response.data.questions[i].answer_options[j].option.localeCompare(
-                "text"
-              )
-            ) {
+            if (response.data.questions[i].answer_options[j].option.localeCompare("text"))
+            {
+              this.questions[i].text_answer.splice(0, 1);
               this.questions[i].answer.push({
                 id: response.data.questions[i].answer_options[j].id,
                 op: response.data.questions[i].answer_options[j].option
               });
             } else {
+              this.questions[i].text_answer.splice(0, 1);
+              console.log("POSSUI TEXTO");
               this.questions[i].text_answer.push({
                 id: response.data.questions[i].answer_options[j].id,
                 text_answer: ""
@@ -278,7 +278,7 @@ export default {
         question: "",
         answer: [
           { op: "Discordo Plenamente" },
-          { op: "Discordo Discordo Parcialmente" },
+          { op: "Discordo  Parcialmente" },
           { op: "Nem Concordo,Nem Discordo" },
           { op: "Concordo Parcialmente" },
           { op: "Concordo Plenamente" }
@@ -357,13 +357,13 @@ export default {
         .then(response => {
           if (location.hostname == "localhost") {
             url = "http://localhost:8000/admin/search/" + searchId + "/preview";
-
-            window.location = url;
+            console.log(response);
+            //window.location = url;
           } else {
             url =
               "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-
-            window.location = url;
+console.log(response);
+            //window.location = url;
           }
         })
         .catch(error => {
@@ -378,14 +378,70 @@ export default {
       alert("OOOOOK");
     },
     deleteQuestion(index) {
+      if(this.questions[index].id)
+      {
+      let url = "";
+       let searchId = location.pathname.split("/")[3];
+       let questionId = this.questions[index].id;
+        if (location.hostname == "localhost") {
+          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/delete`;
+
+        } else {
+          url =
+            "http://"+window.location.hostname+`/admin/search/${searchId}/question/${questionId}`;
+        }
+
+        axios.post(url)
+        .then((response)=>{
+          console.log(response);
+        })
+      }
       console.log("index da array " + index);
       this.questions.splice(index, 1);
-      console.log(this.questions);
+
     },
     deleteAnswer(iq, index) {
+      if(this.questions[iq].answer[index].id)
+      {
+        let url = "";
+       let searchId = location.pathname.split("/")[3];
+       let questionId = this.questions[iq].id;
+       let answerId = this.questions[iq].answer[index].id;
+        if (location.hostname == "localhost") {
+          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
+
+        } else {
+          url =
+            "http://"+window.location.hostname+`/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
+        }
+
+        axios.post(url)
+        .then((response)=>{
+          console.log(response);
+        })
+      }
       this.questions[iq].answer.splice(index, 1);
     },
     deleteTextAnswer(iq, index) {
+      if(this.questions[iq].text_answer[index].id)
+      {
+        let url = "";
+       let searchId = location.pathname.split("/")[3];
+       let questionId = this.questions[iq].id;
+       let text_answerId = this.questions[iq].answer[index].id;
+        if (location.hostname == "localhost") {
+          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/text-answer/${answerId}/delete`;
+
+        } else {
+          url =
+            "http://"+window.location.hostname+`/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
+        }
+
+        axios.post(url)
+        .then((response)=>{
+          console.log(response);
+        })
+      }
       this.questions[iq].text_answer.splice(index, 1);
     },
 

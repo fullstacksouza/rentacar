@@ -26,7 +26,18 @@ class SearchController extends Controller
         return view('dashboard/searches/create', compact('sectors'));
     }
 
-
+    public function deleteAnswer(Request $request)
+    {
+       $answer = AnswerOption::find($request->answerId);
+       $answer->delete();
+       return "ok";
+    }
+    public function deleteQuestion(Request $request)
+    {
+       $question = Question::find($request->questionId);
+       $question->delete();
+       return "ok";
+    }
     public function getSearch(Request $request)
     {
         $search = Search::findOrFail($request->id);
@@ -142,6 +153,7 @@ class SearchController extends Controller
 
     public function update(Request $request, Question $quest, AnswerOption $answOp)
     {
+
         $questions = $request->all();
         $perguntas = [];
         $questiondIds = [];
@@ -152,6 +164,7 @@ class SearchController extends Controller
             foreach ($questions['search'] as $p) {
               //salvando pergunta
                 if (isset($p['id'])) {
+                    echo "Pergunta vai ser atualizada";
                     $questionsId[] = $p['id'];
                     $question = $quest->find($p['id']);
                     if ($question) {
@@ -160,15 +173,15 @@ class SearchController extends Controller
                         $question->save();
                         $current_search = Search::find($request->search_id);
                         $current_search->questions()->save($question);
-                    } else {
-                        $question = $quest->create([
-                            'search_id' => $request->search_id,
-                            'question' => $p['question'],
-                            'type' => 1
-                        ]);
-                        $question->search()->associate($request->search_id)->save();
-
                     }
+                }else {
+                  $question = $quest->create([
+                        'search_id' => $request->search_id,
+                        'question' => $p['question'],
+                        'type' => 1
+                    ]);
+                    $question->search()->associate($request->search_id)->save();
+
                 }
               //criando relacionamento da pergunta com a pesquisa
               //$question->search()->associate($request->search_id)->save();
@@ -182,14 +195,15 @@ class SearchController extends Controller
                                 $answer->option = $answ['op'];
                                 $answer->save();
                                 $question->answerOptions()->save($answer);
-                            } else {
-                                $answer = $answOp->create([
-                                    'question_id' => $question->id,
-                                    'option' => $answ['op']
-                                ]);
-                                $answer->question()->associate($question->id)->save();
-
                             }
+                        }
+                        else {
+                            $answer = $answOp->create([
+                                'question_id' => $question->id,
+                                'option' => $answ['op']
+                            ]);
+                            $answer->question()->associate($question->id)->save();
+
                         }
                     //  $answer->question()->associate($question->id)->save();
                     }
@@ -197,22 +211,28 @@ class SearchController extends Controller
                   ///verificando se existe opçao de resposta como campo de texto
                 if (isset($p['text_answer'])) {
                     foreach ($p['text_answer'] as $text) {
-                        $answer = $answOp->find($text['id']);
-                        $answer->option = "text";
-                        $answer->save();
-                      // $answer = $answOp->create([
-                      //     'question_id' => $question->id,
-                      //     'option' => 'text'
-                      // ]);
-                        $question->answerOptions()->save($answer);
-                      //$answer->question()->associate($question->id)->save();
+                        if(!isset($text['id'])){
 
+                        $answer = $answOp->create([
+                            'question_id' => $question->id,
+                            'option' => 'text'
+                        ]);
+
+                      $answer->question()->associate($question->id)->save();
+                    }
+                    else{
+                      $answer = $answOp->find($text['id']);
+                      $answer->option = "text";
+                      $answer->save();
+                      $question->answerOptions()->save($answer);
+                    }
                     }
                 }
              // print_r($p['question']);
-                return "ok";
+
             }
         }
+        return "ok";
     }
 
     public function previewSearch(Request $request)

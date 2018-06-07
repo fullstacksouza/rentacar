@@ -1,7 +1,9 @@
 import Vue from 'vue';
 
 import VeeValidate from 'vee-validate';
+import VueRouter from 'vue-router'
 
+Vue.use(VueRouter)
 window.VeeValidate = require('vee-validate');
 
 Vue.use(window.VeeValidate);
@@ -14,7 +16,7 @@ Vue.use(VueScrollTo);
 
 Vue.component('type-question',TypeQuestions);
 Vue.component('search',ReplySearchComponent);
-var eventBus = new Vue();
+
 const app = new Vue({
     el: '#app',
     components:{
@@ -22,7 +24,8 @@ const app = new Vue({
         'type-question':TypeQuestions,
         'search':ReplySearchComponent,
         'edit-search':EditSearchComponent
-    }
+    },
+    
 
 
 });

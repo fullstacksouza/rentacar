@@ -251,7 +251,7 @@ export default {
     addMultipleChoiceQuestion() {
       this.questions.push({
         question: "",
-        answer: [],
+        answer: [{op:""}],
         text_answer: []
       });
 
@@ -367,6 +367,7 @@ export default {
     },
 
     mounted() {
+      localStorage.set('search','pesquisaa');
       console.log(window.location);
       let uri = location.pathname.split("/");
 

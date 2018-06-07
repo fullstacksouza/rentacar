@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     $this->get('searches/{id}/get', 'SearchController@getSearch');
     $this->get('searches/{id}/edit', 'SearchController@edit');
     $this->post('search/{id}/update', 'SearchController@update');
+    $this->post('search/{id}/question/{questionId}/answer/{answerId}/delete','SearchController@deleteAnswer');
+
+    $this->post('search/{id}/question/{questionId}/delete','SearchController@deleteQuestion');
 });
 
 Route::group(['namespace' => "Front"], function () {
