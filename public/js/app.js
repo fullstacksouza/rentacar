@@ -22465,6 +22465,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      host: "localhost:8000/",
       index: 0,
       uri: location.pathname,
       params: "",
@@ -24087,9 +24088,14 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "box-footer" }, [
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _vm._v("Criar Perguntas depois")
-        ]),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-default",
+            attrs: { href: "http://" + _vm.host + "admin/searches/list" }
+          },
+          [_vm._v("Criar Perguntas depois")]
+        ),
         _vm._v(" "),
         _c(
           "button",

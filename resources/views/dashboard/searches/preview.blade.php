@@ -55,8 +55,12 @@
 
     @endforelse
     <div class="box-footer">
-     <!-- <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Cancelar</a> -->
+      @if(strpos(URL::previous(),'edit'))
+      <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Editar</a> 
+      
+      @else
      <a href='{{URL::previous()}}' class="btn btn-default">Cancelar</a>
+     @endif
           @if($search->questions()->count() < 1)
         <a href='{{url("admin/search/$search->id/questions/create")}}'  id="publishSearch"  class ="btn btn-info pull-right">Cadastrar Perguntas</a>
         @else

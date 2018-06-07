@@ -109,7 +109,7 @@
                <!-- /.box-body -->
       <div class="box-footer">
 
-        <a href="" class="btn btn-default">Criar Perguntas depois</a>
+        <a :href="'http://'+host+'admin/searches/list'" class="btn btn-default">Criar Perguntas depois</a>
         <button type="submit" @click="sendQuestions" :disabled="this.validate()"  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
@@ -174,6 +174,7 @@ import scroller from "vue-scrollto/src/scrollTo";
 export default {
   data() {
     return {
+      host: "localhost:8000/",
       index: 0,
       uri: location.pathname,
       params: "",
