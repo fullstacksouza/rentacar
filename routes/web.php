@@ -81,5 +81,7 @@ Route::group(['namespace' => "Front"], function () {
     $this->get("user/searches/{id}/reply", "UserController@replySearch")->name("search.reply")->middleware('search');
     $this->post("user/searches/{id}/reply", "UserController@sendAnswers")->name("search.reply");
     $this->get("user/searches/{id}/get", "UserController@searchJson");
+    $this->get('user/edit','UserController@edit');
+    $this->post('user/{id}/edit','UserController@update');
 
 });

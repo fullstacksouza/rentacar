@@ -8,8 +8,30 @@ use App\Admin\Search;
 use App\Admin\Question;
 use App\Admin\UserTextAnswer;
 use App\Admin\AnswerOption;
+use App\User;
 class UserController extends Controller
 {
+
+    public function edit(Request $request)
+    {
+        $userEdit = \Auth::user();
+        if($userEdit)
+        {
+            return view('front/user/profile-edit',compact('userEdit'));
+        }
+    }
+    public function update(Request $request)
+    {
+        $user = User::find($request->id);
+        if($request->email)
+        {
+            $user->email = $request->email;
+        }
+
+        $user->name = $request->name;
+        $user->save();
+        return redirect()->back()->with('info', 'Perfil Atualizado com Sucesso');
+    }
 
     public function getSearches()
     {

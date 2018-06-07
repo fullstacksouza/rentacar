@@ -111,7 +111,7 @@ return [
         'CONFIGURAÇOES DA CONTA',
         [
             'text' => 'Perfil',
-            'url' => 'admin/settings',
+            'url' => 'user/edit',
             'icon' => 'user',
         ],
         [
