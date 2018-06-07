@@ -19872,7 +19872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addNewQuestion: function addNewQuestion() {
       this.questions.push({
         question: "",
-        answer: [{ op: "Discordo Plenamente" }, { op: "Discordo Discordo Parcialmente" }, { op: "Nem Concordo,Nem Discordo" }, { op: "Concordo Parcialmente" }, { op: "Concordo Plenamente" }],
+        answer: [{ op: "Discordo Plenamente" }, { op: "Discordo  Parcialmente" }, { op: "Nem Concordo,Nem Discordo" }, { op: "Concordo Parcialmente" }, { op: "Concordo Plenamente" }],
         text_answer: []
       });
 
@@ -19940,6 +19940,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
 
           window.location = url;
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    cancelCreatedQuesions: function cancelCreatedQuesions() {
+      if (location.hostname == "localhost") {
+        url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
+      } else {
+        url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
+      }
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
+        search: this.questions,
+        search_id: searchId
+      }).then(function (response) {
+        if (location.hostname == "localhost") {
+          url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
+
+          // window.location = url;
+        } else {
+          url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+
+          // window.location = url;
         }
       }).catch(function (error) {
         console.log(error);
@@ -22468,22 +22491,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log(response.data.questions[0]);
       console.log("size " + response.data.questions.length);
       for (i = 0; i < response.data.questions.length; i++) {
-
         _this.questions.push({
           question: response.data.questions[i].question,
           id: response.data.questions[i].id,
           answer: [],
-          text_answer: []
+          text_answer: [{}]
         });
         for (j = 0; j < response.data.questions[i].answer_options.length; j++) {
           if (response.data.questions[i].answer_options[j].option.localeCompare("text")) {
             _this.questions[i].answer.push({
               id: response.data.questions[i].answer_options[j].id,
               op: response.data.questions[i].answer_options[j].option
-
             });
           } else {
             _this.questions[i].text_answer.push({
+              id: response.data.questions[i].answer_options[j].id,
               text_answer: ""
             });
           }

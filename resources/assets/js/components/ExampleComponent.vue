@@ -217,7 +217,7 @@ export default {
         question: "",
         answer: [
           { op: "Discordo Plenamente" },
-          { op: "Discordo Discordo Parcialmente" },
+          { op: "Discordo  Parcialmente" },
           { op: "Nem Concordo,Nem Discordo" },
           { op: "Concordo Parcialmente" },
           { op: "Concordo Plenamente" }
@@ -312,7 +312,33 @@ export default {
           console.log(error);
         });
     },
+    cancelCreatedQuesions() {
+      if (location.hostname == "localhost") {
+        url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
+      } else {
+        url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
+      }
+      axios
+        .post(url, {
+          search: this.questions,
+          search_id: searchId
+        })
+        .then(response => {
+          if (location.hostname == "localhost") {
+            url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
 
+            // window.location = url;
+          } else {
+            url =
+              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+
+            // window.location = url;
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     answerLen(index) {
       return this.questions[index].answer.length;
     },

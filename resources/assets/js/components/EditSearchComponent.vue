@@ -195,38 +195,44 @@ export default {
   },
 
   mounted() {
-      this.questions.splice(0,1);
-      axios.get("http://localhost:8000/admin/searches/"+location.pathname.split("/")[3]+"/get")
+    this.questions.splice(0, 1);
+    axios
+      .get(
+        "http://localhost:8000/admin/searches/" +
+          location.pathname.split("/")[3] +
+          "/get"
+      )
       .then(response => {
         var i;
         var j;
         var k;
         console.log(response.data.questions[0]);
-  console.log("size "+ response.data.questions.length);
-        for(i=0;i<response.data.questions.length;i++)
-        {
-
-            this.questions.push({
+        console.log("size " + response.data.questions.length);
+        for (i = 0; i < response.data.questions.length; i++) {
+          this.questions.push({
             question: response.data.questions[i].question,
-            id:response.data.questions[i].id,
-            answer: [
-
-              ],
-            text_answer: []
-            });
-          for(j=0;j<response.data.questions[i].answer_options.length;j++)
-          {
-              if(response.data.questions[i].answer_options[j].option.localeCompare("text"))
-              {
+            id: response.data.questions[i].id,
+            answer: [],
+            text_answer: [{}]
+          });
+          for (
+            j = 0;
+            j < response.data.questions[i].answer_options.length;
+            j++
+          ) {
+            if (
+              response.data.questions[i].answer_options[j].option.localeCompare(
+                "text"
+              )
+            ) {
               this.questions[i].answer.push({
-                  id:response.data.questions[i].answer_options[j].id,
-                  op: response.data.questions[i].answer_options[j].option,
-
+                id: response.data.questions[i].answer_options[j].id,
+                op: response.data.questions[i].answer_options[j].option
               });
-
-            }else{
+            } else {
               this.questions[i].text_answer.push({
-                 text_answer: ""
+                id: response.data.questions[i].answer_options[j].id,
+                text_answer: ""
               });
             }
           }
@@ -245,8 +251,8 @@ export default {
       .catch(error => {
         console.log(error);
       });
-      let uri = location.pathname.split("/");
-      console.log(this.questions);
+    let uri = location.pathname.split("/");
+    console.log(this.questions);
     this.questions.length;
   },
   watch: {
@@ -333,10 +339,7 @@ export default {
       let searchId = uri[3];
       let url = "";
       if (location.hostname == "localhost") {
-        url =
-          "http://localhost:8000/admin/search/" +
-          searchId +
-          "/update";
+        url = "http://localhost:8000/admin/search/" + searchId + "/update";
       } else {
         url =
           "http://" +
@@ -353,11 +356,11 @@ export default {
         })
         .then(response => {
           if (location.hostname == "localhost") {
-           url = "http://localhost:8000/admin/search/" + searchId + "/preview";
+            url = "http://localhost:8000/admin/search/" + searchId + "/preview";
 
             window.location = url;
           } else {
-             url =
+            url =
               "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
 
             window.location = url;
@@ -371,8 +374,7 @@ export default {
     answerLen(index) {
       return this.questions[index].answer.length;
     },
-    getQuestions()
-    {
+    getQuestions() {
       alert("OOOOOK");
     },
     deleteQuestion(index) {
@@ -399,11 +401,10 @@ export default {
       }
     },
 
-
-    created: function () {
-   // `this` aponta para a instância
-   console.log("a ")
- }
+    created: function() {
+      // `this` aponta para a instância
+      console.log("a ");
+    }
   }
 };
 </script>

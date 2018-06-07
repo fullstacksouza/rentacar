@@ -107,7 +107,6 @@
         <!-- /.col (RIGHT) -->
         @endrole
 
-        <h1 class="h1"> Olá {{\Auth::user()->name}}  Verifique se você tem novas pesquisas clicando no menu a esquerda </h1>
       </div>
       <!-- /.row -->
 
