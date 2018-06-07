@@ -7,7 +7,7 @@
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group. Now create something great!lo
 |
  */
 
@@ -19,8 +19,8 @@ $this->get('/home', 'HomeController@index')->name('home')->middleware("auth");
 
 $this->post('login', 'LoginController@auth');
 
-$this->post('/logout', 'Auth\LoginController@logout');
-Auth::routes();
+$this->post('/logout', 'Auth\LoginController@logout')->name('logout');
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 $this->get('user/change-pass', function () {
@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     $this->get('searches/{id}/edit', 'SearchController@edit');
     $this->post('search/{id}/update', 'SearchController@update');
     $this->post('search/{id}/question/{questionId}/answer/{answerId}/delete','SearchController@deleteAnswer');
+    $this->post('search/{id}/question/{questionId}/text-answer/{answerId}/delete','SearchController@deleteTextAnswer');
 
     $this->post('search/{id}/question/{questionId}/delete','SearchController@deleteQuestion');
 });

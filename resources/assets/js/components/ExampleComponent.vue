@@ -109,7 +109,7 @@
                <!-- /.box-body -->
       <div class="box-footer">
 
-        <button type="submit" class="btn btn-default">Cancelar</button>
+        <a href="" class="btn btn-default">Criar Perguntas depois</a>
         <button type="submit" @click="sendQuestions" :disabled="this.validate()"  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->

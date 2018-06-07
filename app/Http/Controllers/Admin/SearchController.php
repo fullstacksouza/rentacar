@@ -25,7 +25,6 @@ class SearchController extends Controller
         $sectors = Sector::all();
         return view('dashboard/searches/create', compact('sectors'));
     }
-
     public function deleteAnswer(Request $request)
     {
        $answer = AnswerOption::find($request->answerId);
@@ -164,7 +163,6 @@ class SearchController extends Controller
             foreach ($questions['search'] as $p) {
               //salvando pergunta
                 if (isset($p['id'])) {
-                    echo "Pergunta vai ser atualizada";
                     $questionsId[] = $p['id'];
                     $question = $quest->find($p['id']);
                     if ($question) {

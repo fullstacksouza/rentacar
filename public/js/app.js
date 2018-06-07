@@ -24087,11 +24087,9 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "box-footer" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-default", attrs: { type: "submit" } },
-          [_vm._v("Cancelar")]
-        ),
+        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+          _vm._v("Criar Perguntas depois")
+        ]),
         _vm._v(" "),
         _c(
           "button",
@@ -25100,6 +25098,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       index: 0,
+      host: "localhost:8000/",
       uri: location.pathname,
       params: "",
       searchId: "",
@@ -25134,12 +25133,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         for (j = 0; j < response.data.questions[i].answer_options.length; j++) {
           if (response.data.questions[i].answer_options[j].option.localeCompare("text")) {
             _this.questions[i].text_answer.splice(0, 1);
+
             _this.questions[i].answer.push({
               id: response.data.questions[i].answer_options[j].id,
               op: response.data.questions[i].answer_options[j].option
             });
           } else {
             _this.questions[i].text_answer.splice(0, 1);
+
             console.log("POSSUI TEXTO");
             _this.questions[i].text_answer.push({
               id: response.data.questions[i].answer_options[j].id,
@@ -25214,7 +25215,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addMultipleChoiceQuestion: function addMultipleChoiceQuestion() {
       this.questions.push({
         question: "",
-        answer: [],
+        answer: [{ op: "" }],
         text_answer: []
       });
 
@@ -25252,11 +25253,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (location.hostname == "localhost") {
           url = "http://localhost:8000/admin/search/" + searchId + "/preview";
           console.log(response);
-          //window.location = url;
+          window.location = url;
         } else {
           url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
           console.log(response);
-          //window.location = url;
+          window.location = url;
         }
       }).catch(function (error) {
         console.log(error);
@@ -25291,11 +25292,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var url = "";
         var searchId = location.pathname.split("/")[3];
         var questionId = this.questions[iq].id;
-        var _answerId = this.questions[iq].answer[index].id;
+        var answerId = this.questions[iq].answer[index].id;
         if (location.hostname == "localhost") {
-          url = "http://localhost:8000/admin/search/" + searchId + "/question/" + questionId + "/answer/" + _answerId + "/delete";
+          url = "http://localhost:8000/admin/search/" + searchId + "/question/" + questionId + "/answer/" + answerId + "/delete";
         } else {
-          url = "http://" + window.location.hostname + ("/admin/search/" + searchId + "/question/" + questionId + "/answer/" + _answerId + "/delete");
+          url = "http://" + window.location.hostname + ("/admin/search/" + searchId + "/question/" + questionId + "/answer/" + answerId + "/delete");
         }
 
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url).then(function (response) {
@@ -25309,9 +25310,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var url = "";
         var searchId = location.pathname.split("/")[3];
         var questionId = this.questions[iq].id;
-        var text_answerId = this.questions[iq].answer[index].id;
+        var answerId = this.questions[iq].text_answer[index].id;
         if (location.hostname == "localhost") {
-          url = "http://localhost:8000/admin/search/" + searchId + "/question/" + questionId + "/text-answer/" + answerId + "/delete";
+          url = "http://localhost:8000/admin/search/" + searchId + "/question/" + questionId + "/answer/" + answerId + "/delete";
         } else {
           url = "http://" + window.location.hostname + ("/admin/search/" + searchId + "/question/" + questionId + "/answer/" + answerId + "/delete");
         }
@@ -25725,8 +25726,11 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "box-footer" }, [
         _c(
-          "button",
-          { staticClass: "btn btn-default", attrs: { type: "submit" } },
+          "a",
+          {
+            staticClass: "btn btn-default",
+            attrs: { href: "http://" + _vm.host + "admin/searches/list" }
+          },
           [_vm._v("Cancelar")]
         ),
         _vm._v(" "),
@@ -25763,13 +25767,14 @@ var render = function() {
       _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
         _c("div", { staticClass: "well" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src:
+                        "http://" + _vm.host + "img/search/concordancia.jpeg",
                       alt: "Card image cap"
                     },
                     on: { click: _vm.addNewQuestion }
@@ -25780,13 +25785,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src: "http://" + _vm.host + "img/search/satisfy.jpeg",
                       alt: "Card image cap"
                     },
                     on: { click: _vm.addSatisfyQuestion }
@@ -25797,13 +25802,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src: "http://" + _vm.host + "img/search/text.jpeg",
                       alt: "Card image cap"
                     },
                     on: { click: _vm.addTextQuestion }
@@ -25814,13 +25819,16 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src:
+                        "http://" +
+                        _vm.host +
+                        "img/search/multiple-choose.jpeg",
                       alt: "Card image cap"
                     },
                     on: {

@@ -109,7 +109,7 @@
                <!-- /.box-body -->
       <div class="box-footer">
 
-        <button type="submit" class="btn btn-default">Cancelar</button>
+        <a :href="'http://'+host+'admin/searches/list'" class="btn btn-default">Cancelar</a>
         <button type="submit" @click="sendQuestions" :disabled="this.validate()"  class ="btn btn-info pull-right">Prosseguir</button>
       </div>
       <!-- /.box-footer -->
@@ -122,36 +122,36 @@
 <div class="collapse" id="collapseExample">
   <div class="well">
      <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img @click="addNewQuestion"   class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addNewQuestion"   class="card-img-top img-fluid" :src="'http://'+host+'img/search/concordancia.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Concordância</h4>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img  @click="addSatisfyQuestion"  class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img  @click="addSatisfyQuestion"  class="card-img-top img-fluid" :src="'http://'+host+'img/search/satisfy.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Satisfatória</h4>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img @click="addTextQuestion" class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addTextQuestion" class="card-img-top img-fluid" :src="'http://'+host+'img/search/text.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Campo de texto</h4>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img @click="addMultipleChoiceQuestion()" class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addMultipleChoiceQuestion()" class="card-img-top img-fluid" :src="'http://'+host+'img/search/multiple-choose.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Multipla Escolha</h4>
 
@@ -175,6 +175,7 @@ export default {
   data() {
     return {
       index: 0,
+      host: "localhost:8000/",
       uri: location.pathname,
       params: "",
       searchId: "",
@@ -223,12 +224,15 @@ export default {
             if (response.data.questions[i].answer_options[j].option.localeCompare("text"))
             {
               this.questions[i].text_answer.splice(0, 1);
+
               this.questions[i].answer.push({
                 id: response.data.questions[i].answer_options[j].id,
                 op: response.data.questions[i].answer_options[j].option
               });
+
             } else {
               this.questions[i].text_answer.splice(0, 1);
+
               console.log("POSSUI TEXTO");
               this.questions[i].text_answer.push({
                 id: response.data.questions[i].answer_options[j].id,
@@ -312,7 +316,7 @@ export default {
     addMultipleChoiceQuestion() {
       this.questions.push({
         question: "",
-        answer: [],
+        answer: [{op:""}],
         text_answer: []
       });
 
@@ -358,12 +362,12 @@ export default {
           if (location.hostname == "localhost") {
             url = "http://localhost:8000/admin/search/" + searchId + "/preview";
             console.log(response);
-            //window.location = url;
+            window.location = url;
           } else {
             url =
               "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
 console.log(response);
-            //window.location = url;
+            window.location = url;
           }
         })
         .catch(error => {
@@ -428,9 +432,9 @@ console.log(response);
         let url = "";
        let searchId = location.pathname.split("/")[3];
        let questionId = this.questions[iq].id;
-       let text_answerId = this.questions[iq].answer[index].id;
+       let answerId = this.questions[iq].text_answer[index].id;
         if (location.hostname == "localhost") {
-          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/text-answer/${answerId}/delete`;
+          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
 
         } else {
           url =

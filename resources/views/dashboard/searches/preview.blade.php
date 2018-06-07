@@ -55,9 +55,14 @@
 
     @endforelse
     <div class="box-footer">
-      <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Cancelar</a>
-
-        <button type="submit"  id="publishSearch"  class ="btn btn-info pull-right">Publicar Pesquisa</button>
+     <!-- <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Cancelar</a> -->
+     <a href='{{URL::previous()}}' class="btn btn-default">Cancelar</a>
+          @if($search->questions()->count() < 1)
+        <a href='{{url("admin/search/$search->id/questions/create")}}'  id="publishSearch"  class ="btn btn-info pull-right">Cadastrar Perguntas</a>
+        @else
+          <button type="submit"  id="publishSearch"  class ="btn btn-info pull-right">
+            Publicar Pesquisa</button>
+                @endif
       </div>
     <!--final de perguntas>
 
