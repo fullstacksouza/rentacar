@@ -55,9 +55,9 @@
 
     @endforelse
     <div class="box-footer">
-      @if(strpos(URL::previous(),'edit'))
-      <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Editar</a> 
-      
+      @if(strpos(URL::previous(),'create'))
+      <a href='{{url("admin/searches/$search->id/edit")}}' class="btn btn-default">Editar</a>
+
       @else
      <a href='{{URL::previous()}}' class="btn btn-default">Cancelar</a>
      @endif
