@@ -33,7 +33,7 @@
 
        <div class="box-footer">
 
-    <a type="submit" class="btn btn-default">Cancelar</a>
+    <a :href="'http://'+host+'user/searches'" class="btn btn-default">Cancelar</a>
         <button type="submit" :disabled="this.validate()"  data-toggle="modal" data-target="#exampleModal"   class ="btn btn-info pull-right">Enviar Respostas</button>
       </div>
 
@@ -67,11 +67,12 @@ import axios from "axios";
 export default {
   data() {
     return {
-      form:true,
-      text_answer:"",
+      host: "localhost:8000/",
+      form: true,
+      text_answer: "",
       title: "TITULO",
       search: [],
-      answers:[],
+      answers: [],
       textOptionSelect: false,
       questions: [
         {
@@ -91,53 +92,44 @@ export default {
     textAsnwer() {
       this.textOptionSelect = false;
     },
-    validate()
-            {
-              this.$validator.validateAll().then(res=>{
-                if(res) {
-                    this.form = false;
-
-                } else {
-                    this.form = true;
-                }
-            });
-            return this.form;
-            },
-    sendAnswer()
-    {
+    validate() {
+      this.$validator.validateAll().then(res => {
+        if (res) {
+          this.form = false;
+        } else {
+          this.form = true;
+        }
+      });
+      return this.form;
+    },
+    sendAnswer() {
       event.preventDefault();
-		  event.target.disabled = true;
+      event.target.disabled = true;
       let uri = location.pathname.split("/");
 
-                let searchId  =  uri[3];
-                //this.questions.push({"search_id":searchId}),
-                axios.post(`http://localhost:8000/user/searches/`+searchId+`/reply`,{
-                    answers:this.answers,
-                    searchID: searchId
+      let searchId = uri[3];
+      //this.questions.push({"search_id":searchId}),
+      axios
+        .post(`http://localhost:8000/user/searches/` + searchId + `/reply`, {
+          answers: this.answers,
+          searchID: searchId
+        })
+        .then(response => {
+          window.location = "http://localhost:8000/user/searches";
 
-                 })
-                .then(response=>{
-                window.location = "http://localhost:8000/user/searches";
-
-                    console.log(response);
-
-                })
-                .catch(error =>{
-                    console.log(error)
-                })
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
-    unselectRadio(index)
-    {
+    unselectRadio(index) {
       this.answers[index].choice = "";
     }
   },
-  created() {
-
-
-
-  },
-  mounted(){
-      let uri = location.pathname.split("/");
+  created() {},
+  mounted() {
+    let uri = location.pathname.split("/");
 
     let searchId = uri[3];
     //this.questions.push({"search_id":searchId}),
@@ -146,13 +138,12 @@ export default {
       .then(response => {
         this.search = response.data;
         var i;
-        for(i=0;i<this.search.questions.length;i++)
-        {
-            this.answers.push({
-                'choice':'',
-                'answer_text':'',
-                'question':this.search.questions[i].id,
-            })
+        for (i = 0; i < this.search.questions.length; i++) {
+          this.answers.push({
+            choice: "",
+            answer_text: "",
+            question: this.search.questions[i].id
+          });
         }
       })
       .catch(error => {
