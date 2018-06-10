@@ -55,55 +55,179 @@
 
 
         </div>
-        <div class="col-md-6">
-          <!-- AREA CHART -->
-          <div class="box box-primary">
+        <h3 class="box-title text-center">RELATORIO DA ULTIMA PESQUISA REALIZADA</h3>
+        <hr>
+
+        <div class="col-md-7">
+        <!-- AREA CHART -->
+
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Usuarios que responderam</h3>
+          </div>
+          <div class="box-body text-center">
+            <div class="chart text-center">
+                {!!$chart->html()!!}
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+        @if(count($userDontReply) > 0)
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Lista de Usuarios que ainda não responderam
+            </h3>
+
+          <a href='{{url("admin/search/$search->id/send-notification")}}' class='pull-right btn btn-primary'>Enviar notificação por email</a>
+
+          </div>
+
+          <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Setor</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    @forelse($userDontReply as $userDont)
+                  <tr>
+
+                    <td>{{$userDont->name}}</td>
+                    <td>{{$userDont->sector->name}}</td>
+
+                  </tr>
+
+                  @empty
+
+                  @endforelse
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                      <th>Nome</th>
+                      <th>Setor</th>
+
+
+                  </tr>
+                  </tfoot>
+                </table>
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+        @endif
+        @php
+          $i = 0;
+        @endphp
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Respostas campo aberto</h3>
+          </div>
+          <div class="box-body">
+            @foreach($textAnswers as $textAnswer)
+            <h2 class="text-center">{{$questionsArray[$i]}}</h2>
+                  @foreach($textAnswer as $t)
+
+
+                    <p class="text-center">{{$t->answer}} - <small>{{$userObj->find($t->user_id)->name}}</small></p>
+                  @endforeach
+
+
+
+              @php
+              $i++;
+              @endphp
+              @endforeach
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+        <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Ultima Pesquisa Realizada</h3>
-
-
+              <h3 class="box-title">Ações tomadas após realização da pesquisa</h3>
             </div>
             <div class="box-body">
-              <div class="chart">
-                @isset($chart)
-                  {!!$chart->html()!!}
-                @endisset
+
+              @forelse($search->actions as $action)
+              <div class="card bg-primary text-white">
+                <div class="card-body">{{$action->action}} - Data: {{date('d/m/y',strtotime($action->created_at))}}</div>
               </div>
+            <p></p>
+              @empty
+
+              @endforelse
+
+              <button class="btn btn-primary pull-right"  data-toggle="modal" data-target="#myModal">Adicionar Açao</button>
+
             </div>
             <!-- /.box-body -->
+
           </div>
-          <!-- /.box -->
+      </div>
 
-          <!-- DONUT CHART -->
+        <!-- /.box -->
 
-          <!-- /.box -->
+@php
+$i = 0
+@endphp
 
+<aside role="complementary" class="col-md-5">
+
+        <!-- AREA CHART -->
+        @foreach($questionsArray as $question)
+
+        <div class="box box-primary">
+          <div class="box-header with-border">
+          <h3 class="text-center">{{$question}}</h3>
+
+          </div>
+          <div class="box-body text-center">
+
+            <div class="chart text-center">
+              {!!$charts[$i]->html()!!}
+            </div>
+
+            @php
+            $i++
+            @endphp
+
+          </div>
+          <!-- /.box-body -->
         </div>
+        @endforeach
+</aside>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Registrar ação tomada após analise da pesquisa</h4>
+      </div>
+      <div class="modal-body">
+        {{Form::open(['url'=>"admin/search/$search->id/action/register",'id'=>'action_register'])}}
+
+          <textarea class="form-control" name="action_register" required></textarea>
+        {{Form::close()}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary  pull-right" id="action_register_button">Registrar Ação</button>
+
+      </div>
+    </div>
+
+  </div>
         <!-- /.col (LEFT) -->
-        <div class="col-md-6">
-          <!-- LINE CHART -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Total de Pesquisas Realizadas</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-
-
-        </div>
         <!-- /.col (RIGHT) -->
         @endrole
 

@@ -329,7 +329,7 @@ class SearchController extends Controller
         }
         $userObj = new User();
         //return response()->json(['opçao'=>$answers,'quantidade'=>$count,$questionsArray]);
-        return view('dashboard/searches/details', compact('questionsArray', 'chart', 'charts', 'fullarray', 'search', 'textAnswers', 'userDontReply', 'question', 'userObj'));
+        return view('dashboard/searches/details', compact('questionsArray', 'chart', 'charts', 'search', 'textAnswers', 'userDontReply', 'question', 'userObj'));
        // return $searchesOfU;
 
     }
