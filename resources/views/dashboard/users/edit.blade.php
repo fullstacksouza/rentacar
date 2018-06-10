@@ -130,7 +130,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-      <a href="{{URL::previous()}}" class="btn btn-default">Cancelar</a>
+      <a href="{{url('/admin/users/list')}}" class="btn btn-default">Cancelar</a>
         <button type="submit" class="btn btn-info pull-right">Atualizar</button>
       </div>
       <!-- /.box-footer -->

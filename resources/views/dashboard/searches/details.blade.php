@@ -96,16 +96,17 @@
             </div>
             <div class="box-body">
               @foreach($textAnswers as $textAnswer)
+              <h2 class="text-center">{{$questionsArray[0]}}</h2>
                     @foreach($textAnswer as $t)
 
-                      <h2 class="text-center">{{$questionsArray[0]}}</h2>
-            <p class="text-center">{{$t->answer}} - <small>Usuario</small></p>
+
+                      <p class="text-center">{{$t->answer}} - <small>{{$userObj->find($t->user_id)->name}}</small></p>
                     @endforeach
 
 
 
 
-                    @endforeach
+                @endforeach
 
             </div>
             <!-- /.box-body -->

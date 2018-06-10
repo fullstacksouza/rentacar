@@ -26,7 +26,7 @@
           <th>Titulo</th>
           <th>Data de Inicio</th>
           <th>Prazo</th>
-          <th>Acções</th>
+          <th>Ações</th>
         </tr>
         </thead>
         <tbody>

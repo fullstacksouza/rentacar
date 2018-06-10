@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
                 'text' => 'Responder',
                 'url' => 'user/searches',
                 'icon' => 'comments',
-                'label' => \Auth::user()->searches()->where('status', 0)->whereDate('date_start',date('y-m-d'))->count(),
+                'label' => \Auth::user()->searches()->where('search_status', 0)->where('status', 1)->whereDate('date_start', date('y-m-d'))->count(),
                 'label_color' => 'success',
             ]);
         });

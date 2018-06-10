@@ -12,9 +12,9 @@ use App\Admin\Sector;
 use App\Admin\UserTextAnswer;
 use App\Admin\Question;
 use App\Admin\AnswerOption;
-use App\User;
 use Charts;
 use DB;
+use App\User;
 use App\Admin\RegisteredActions;
 use App\Jobs\SendMailJob;
 
@@ -27,15 +27,15 @@ class SearchController extends Controller
     }
     public function deleteAnswer(Request $request)
     {
-       $answer = AnswerOption::find($request->answerId);
-       $answer->delete();
-       return "ok";
+        $answer = AnswerOption::find($request->answerId);
+        $answer->delete();
+        return "ok";
     }
     public function deleteQuestion(Request $request)
     {
-       $question = Question::find($request->questionId);
-       $question->delete();
-       return "ok";
+        $question = Question::find($request->questionId);
+        $question->delete();
+        return "ok";
     }
     public function getSearch(Request $request)
     {
@@ -172,8 +172,8 @@ class SearchController extends Controller
                         $current_search = Search::find($request->search_id);
                         $current_search->questions()->save($question);
                     }
-                }else {
-                  $question = $quest->create([
+                } else {
+                    $question = $quest->create([
                         'search_id' => $request->search_id,
                         'question' => $p['question'],
                         'type' => 1
@@ -194,8 +194,7 @@ class SearchController extends Controller
                                 $answer->save();
                                 $question->answerOptions()->save($answer);
                             }
-                        }
-                        else {
+                        } else {
                             $answer = $answOp->create([
                                 'question_id' => $question->id,
                                 'option' => $answ['op']
@@ -209,21 +208,20 @@ class SearchController extends Controller
                   ///verificando se existe opçao de resposta como campo de texto
                 if (isset($p['text_answer'])) {
                     foreach ($p['text_answer'] as $text) {
-                        if(!isset($text['id'])){
+                        if (!isset($text['id'])) {
 
-                        $answer = $answOp->create([
-                            'question_id' => $question->id,
-                            'option' => 'text'
-                        ]);
+                            $answer = $answOp->create([
+                                'question_id' => $question->id,
+                                'option' => 'text'
+                            ]);
 
-                      $answer->question()->associate($question->id)->save();
-                    }
-                    else{
-                      $answer = $answOp->find($text['id']);
-                      $answer->option = "text";
-                      $answer->save();
-                      $question->answerOptions()->save($answer);
-                    }
+                            $answer->question()->associate($question->id)->save();
+                        } else {
+                            $answer = $answOp->find($text['id']);
+                            $answer->option = "text";
+                            $answer->save();
+                            $question->answerOptions()->save($answer);
+                        }
                     }
                 }
              // print_r($p['question']);
@@ -329,9 +327,9 @@ class SearchController extends Controller
             $count = null;
             $i++;
         }
-
+        $userObj = new User();
         //return response()->json(['opçao'=>$answers,'quantidade'=>$count,$questionsArray]);
-        return view('dashboard/searches/details', compact('questionsArray', 'chart', 'charts', 'fullarray', 'search', 'textAnswers', 'userDontReply', 'question'));
+        return view('dashboard/searches/details', compact('questionsArray', 'chart', 'charts', 'fullarray', 'search', 'textAnswers', 'userDontReply', 'question', 'userObj'));
        // return $searchesOfU;
 
     }
