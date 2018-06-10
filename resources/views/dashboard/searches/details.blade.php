@@ -96,7 +96,7 @@
             </div>
             <div class="box-body">
               @foreach($textAnswers as $textAnswer)
-              <h2 class="text-center">{{$questionsArray[0]}}</h2>
+              <h2 class="text-center">{{$questionsArray[$i]}}</h2>
                     @foreach($textAnswer as $t)
 
 
@@ -105,7 +105,9 @@
 
 
 
-
+                @php
+                $i++;
+                @endphp
                 @endforeach
 
             </div>
