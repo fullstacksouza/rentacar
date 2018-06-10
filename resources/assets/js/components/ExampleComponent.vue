@@ -120,38 +120,38 @@
 
 
 <div class="collapse" id="collapseExample">
-  <div class="well">
+ <div class="well">
      <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img @click="addNewQuestion"   class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addNewQuestion"   class="card-img-top img-fluid" :src="'http://'+host+'img/search/concordancia.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Concordância</h4>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img  @click="addSatisfyQuestion"  class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img  @click="addSatisfyQuestion"  class="card-img-top img-fluid" :src="'http://'+host+'img/search/satisfy.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Satisfatória</h4>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img @click="addTextQuestion" class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addTextQuestion" class="card-img-top img-fluid" :src="'http://'+host+'img/search/text.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Campo de texto</h4>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="card">
-                        <a href="#"><img @click="addMultipleChoiceQuestion()" class="card-img-top img-fluid" src="//placehold.it/100x100" alt="Card image cap"></a>
+                        <a href="#"><img @click="addMultipleChoiceQuestion()" class="card-img-top img-fluid" :src="'http://'+host+'img/search/multiple-choose.jpeg'" alt="Card image cap"></a>
                         <div class="card-block">
                             <h4 class="card-title">Multipla Escolha</h4>
 
@@ -252,7 +252,7 @@ export default {
     addMultipleChoiceQuestion() {
       this.questions.push({
         question: "",
-        answer: [{op:""}],
+        answer: [{ op: "" }],
         text_answer: []
       });
 
@@ -368,7 +368,7 @@ export default {
     },
 
     mounted() {
-      localStorage.set('search','pesquisaa');
+      localStorage.set("search", "pesquisaa");
       console.log(window.location);
       let uri = location.pathname.split("/");
 

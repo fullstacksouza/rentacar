@@ -19997,7 +19997,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     mounted: function mounted() {
-      localStorage.set('search', 'pesquisaa');
+      localStorage.set("search", "pesquisaa");
       console.log(window.location);
       var uri = location.pathname.split("/");
 
@@ -21499,13 +21499,14 @@ var render = function() {
       _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
         _c("div", { staticClass: "well" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src:
+                        "http://" + _vm.host + "img/search/concordancia.jpeg",
                       alt: "Card image cap"
                     },
                     on: { click: _vm.addNewQuestion }
@@ -21516,13 +21517,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src: "http://" + _vm.host + "img/search/satisfy.jpeg",
                       alt: "Card image cap"
                     },
                     on: { click: _vm.addSatisfyQuestion }
@@ -21533,13 +21534,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src: "http://" + _vm.host + "img/search/text.jpeg",
                       alt: "Card image cap"
                     },
                     on: { click: _vm.addTextQuestion }
@@ -21550,13 +21551,16 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("img", {
                     staticClass: "card-img-top img-fluid",
                     attrs: {
-                      src: "//placehold.it/100x100",
+                      src:
+                        "http://" +
+                        _vm.host +
+                        "img/search/multiple-choose.jpeg",
                       alt: "Card image cap"
                     },
                     on: {
