@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Charts;
 use App\Admin\TypeQuestion;
 use DB;
+use App\Admin\AnswerOption;
+use App\Admin\UserTextAnswer;
 use App\User;
 use App\Admin\Search;
 
@@ -40,6 +42,8 @@ class HomeController extends Controller
         $userDontReply = []; //lista  de usuarios que NÂO responderam a pesquisa
         $userReply = 0; // //quantidade de usuarios que responderam a pesquisa
         $lastSearch = DB::table('searches')->orderBy('created_at', 'desc')->first();
+        if($lastSearch)
+        {
         $search = Search::findOrFail($lastSearch->id);
         foreach ($search->users as $users) {
             $user = User::find($users->id);
@@ -123,6 +127,8 @@ class HomeController extends Controller
             'totalUsers',
             'totalSearches'
         ));
+    }
+    return view('home',compact('totalSearches','totalUsers'));
        // return $searchesOfU;
 
     }

@@ -60,7 +60,7 @@
 
         <div class="col-md-7">
         <!-- AREA CHART -->
-
+      @if(isset($search))
         <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">Usuarios que responderam</h3>
@@ -230,7 +230,7 @@ $i = 0
 
         <!-- /.col (RIGHT) -->
         @endrole
-
+@endif
       </div>
       <!-- /.row -->
 
@@ -238,7 +238,20 @@ $i = 0
 
 
 @section('js')
+<script>
+   $(function(){
+      $("#action_register_button").click(function(){
+       $("#action_register").submit();
+      })
+    })
+</script>
 {!! Charts::scripts() !!}
+@if(isset($charts))
+@foreach($charts as $ch)
+{!! $ch->script() !!}
+@endforeach
+@endif
+
 @isset($chart)
 {!!$chart->script()!!}
 @endisset
