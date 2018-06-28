@@ -317,7 +317,8 @@ export default {
       if (location.hostname == "localhost") {
         url = "http://localhost/admin/search/" + searchId + "/cancel";
       } else {
-        url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
+       // url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
+       url = location.host+"/admin/search/" + searchId + "/cancel";
       }
       axios
         .post(url, {
@@ -331,8 +332,8 @@ export default {
             // window.location = url;
           } else {
             url =
-              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-
+              //"http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+            url = location.host+"/admin/search/" + searchId + "/cancel";
             // window.location = url;
           }
         })
