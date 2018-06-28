@@ -67,7 +67,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      host: "localhost/",
+      host: location.host+"/",
       form: true,
       text_answer: "",
       title: "TITULO",
@@ -110,12 +110,12 @@ export default {
       let searchId = uri[3];
       //this.questions.push({"search_id":searchId}),
       axios
-        .post(`http://localhost/user/searches/` + searchId + `/reply`, {
+        .post(`http://${location.host}/user/searches/` + searchId + `/reply`, {
           answers: this.answers,
           searchID: searchId
         })
         .then(response => {
-          window.location = "http://localhost/user/searches";
+          window.location = "http://"+location.host+"/user/searches";
 
           console.log(response);
         })

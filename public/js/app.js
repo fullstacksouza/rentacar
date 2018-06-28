@@ -19834,7 +19834,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      host: "localhost/",
+      host: location.host + "/",
       index: 0,
       uri: location.pathname,
       params: "",
@@ -19941,7 +19941,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           window.location = url;
         } else {
           //url ="http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-          url = location.host + "/admin/search/" + searchId + "/preview";
+          url = "http://" + location.host + "/admin/search/" + searchId + "/preview";
           window.location = url;
         }
       }).catch(function (error) {
@@ -19953,7 +19953,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         url = "http://localhost/admin/search/" + searchId + "/cancel";
       } else {
         // url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
-        url = location.host + "/admin/search/" + searchId + "/cancel";
+        url = "http://" + location.host + "/admin/search/" + searchId + "/cancel";
       }
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
         search: this.questions,
@@ -19966,7 +19966,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else {
           url =
           //"http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-          url = location.host + "/admin/search/" + searchId + "/cancel";
+          url = "http://" + location.host + "/admin/search/" + searchId + "/cancel";
           // window.location = url;
         }
       }).catch(function (error) {
@@ -21751,7 +21751,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      host: "localhost/",
+      host: location.host + "/",
       form: true,
       text_answer: "",
       title: "TITULO",
@@ -21792,11 +21792,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var searchId = uri[3];
       //this.questions.push({"search_id":searchId}),
-      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post("http://localhost/user/searches/" + searchId + "/reply", {
+      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post("http://" + location.host + "/user/searches/" + searchId + "/reply", {
         answers: this.answers,
         searchID: searchId
       }).then(function (response) {
-        window.location = "http://localhost/user/searches";
+        window.location = "http://" + location.host + "/user/searches";
 
         console.log(response);
       }).catch(function (error) {
@@ -22642,7 +22642,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           window.location = url;
         } else {
           //url ="http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-          url = location.host + "/admin/search/" + searchId + "/preview";
+          url = "http://" + location.host + "/admin/search/" + searchId + "/preview";
           console.log(response);
           window.location = url;
         }
