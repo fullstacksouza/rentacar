@@ -134,7 +134,7 @@ export default {
     let searchId = uri[3];
     //this.questions.push({"search_id":searchId}),
     axios
-      .get(`http://localhost/user/searches/` + searchId + `/get`)
+      .get(`http://${location.host}/user/searches/` + searchId + `/get`)
       .then(response => {
         this.search = response.data;
         var i;

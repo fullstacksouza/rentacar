@@ -21815,7 +21815,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     var searchId = uri[3];
     //this.questions.push({"search_id":searchId}),
-    __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get("http://localhost/user/searches/" + searchId + "/get").then(function (response) {
+    __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get("http://" + location.host + "/user/searches/" + searchId + "/get").then(function (response) {
       _this2.search = response.data;
       var i;
       for (i = 0; i < _this2.search.questions.length; i++) {
