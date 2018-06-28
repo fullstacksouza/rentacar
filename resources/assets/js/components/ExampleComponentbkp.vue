@@ -147,13 +147,13 @@ import axios from 'axios';
 
                 let searchId  =  uri[3];
                 //this.questions.push({"search_id":searchId}),
-                axios.post(`http://localhost:8000/admin/search/questions/create`,{
+                axios.post(`http://localhost/admin/search/questions/create`,{
                     search:this.questions,
                     search_id: searchId 
                  })
                 .then(response=>{
 
-                    window.location = "http://localhost:8000/admin/search/"+searchId+"/preview"; 
+                    window.location = "http://localhost/admin/search/"+searchId+"/preview"; 
                     console.log(response);
                     
                 })

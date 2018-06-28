@@ -67,7 +67,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      host: "localhost:8000/",
+      host: "localhost/",
       form: true,
       text_answer: "",
       title: "TITULO",
@@ -110,12 +110,12 @@ export default {
       let searchId = uri[3];
       //this.questions.push({"search_id":searchId}),
       axios
-        .post(`http://localhost:8000/user/searches/` + searchId + `/reply`, {
+        .post(`http://localhost/user/searches/` + searchId + `/reply`, {
           answers: this.answers,
           searchID: searchId
         })
         .then(response => {
-          window.location = "http://localhost:8000/user/searches";
+          window.location = "http://localhost/user/searches";
 
           console.log(response);
         })
@@ -134,7 +134,7 @@ export default {
     let searchId = uri[3];
     //this.questions.push({"search_id":searchId}),
     axios
-      .get(`http://localhost:8000/user/searches/` + searchId + `/get`)
+      .get(`http://localhost/user/searches/` + searchId + `/get`)
       .then(response => {
         this.search = response.data;
         var i;

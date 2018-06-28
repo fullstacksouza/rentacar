@@ -175,7 +175,7 @@ export default {
   data() {
     return {
       index: 0,
-      host: "localhost:8000/",
+      host: "localhost/",
       uri: location.pathname,
       params: "",
       searchId: "",
@@ -199,7 +199,7 @@ export default {
     this.questions.splice(0, 1);
     axios
       .get(
-        "http://localhost:8000/admin/searches/" +
+        "http://localhost/admin/searches/" +
           location.pathname.split("/")[3] +
           "/get"
       )
@@ -343,7 +343,7 @@ export default {
       let searchId = uri[3];
       let url = "";
       if (location.hostname == "localhost") {
-        url = "http://localhost:8000/admin/search/" + searchId + "/update";
+        url = "http://localhost/admin/search/" + searchId + "/update";
       } else {
         url =
           "http://" +
@@ -360,7 +360,7 @@ export default {
         })
         .then(response => {
           if (location.hostname == "localhost") {
-            url = "http://localhost:8000/admin/search/" + searchId + "/preview";
+            url = "http://localhost/admin/search/" + searchId + "/preview";
             console.log(response);
             window.location = url;
           } else {
@@ -388,7 +388,7 @@ console.log(response);
        let searchId = location.pathname.split("/")[3];
        let questionId = this.questions[index].id;
         if (location.hostname == "localhost") {
-          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/delete`;
+          url = `http://localhost/admin/search/${searchId}/question/${questionId}/delete`;
 
         } else {
           url =
@@ -412,7 +412,7 @@ console.log(response);
        let questionId = this.questions[iq].id;
        let answerId = this.questions[iq].answer[index].id;
         if (location.hostname == "localhost") {
-          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
+          url = `http://localhost/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
 
         } else {
           url =
@@ -434,7 +434,7 @@ console.log(response);
        let questionId = this.questions[iq].id;
        let answerId = this.questions[iq].text_answer[index].id;
         if (location.hostname == "localhost") {
-          url = `http://localhost:8000/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
+          url = `http://localhost/admin/search/${searchId}/question/${questionId}/answer/${answerId}/delete`;
 
         } else {
           url =

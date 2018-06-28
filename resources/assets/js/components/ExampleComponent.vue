@@ -174,7 +174,7 @@ import scroller from "vue-scrollto/src/scrollTo";
 export default {
   data() {
     return {
-      host: "localhost:8000/",
+      host: "localhost/",
       index: 0,
       uri: location.pathname,
       params: "",
@@ -280,7 +280,7 @@ export default {
       let url = "";
       if (location.hostname == "localhost") {
         url =
-          "http://localhost:8000/admin/search/" +
+          "http://localhost/admin/search/" +
           searchId +
           "/questions/create";
       } else {
@@ -299,7 +299,7 @@ export default {
         })
         .then(response => {
           if (location.hostname == "localhost") {
-            url = "http://localhost:8000/admin/search/" + searchId + "/preview";
+            url = "http://localhost/admin/search/" + searchId + "/preview";
 
             window.location = url;
           } else {
@@ -315,7 +315,7 @@ export default {
     },
     cancelCreatedQuesions() {
       if (location.hostname == "localhost") {
-        url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
+        url = "http://localhost/admin/search/" + searchId + "/cancel";
       } else {
         url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
       }
@@ -326,7 +326,7 @@ export default {
         })
         .then(response => {
           if (location.hostname == "localhost") {
-            url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
+            url = "http://localhost/admin/search/" + searchId + "/cancel";
 
             // window.location = url;
           } else {
