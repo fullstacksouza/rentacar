@@ -22503,7 +22503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     this.questions.splice(0, 1);
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost/admin/searches/" + location.pathname.split("/")[3] + "/get").then(function (response) {
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://" + location.host + "/admin/searches/" + location.pathname.split("/")[3] + "/get").then(function (response) {
       var i;
       var j;
       var k;

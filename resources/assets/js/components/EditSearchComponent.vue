@@ -199,7 +199,7 @@ export default {
     this.questions.splice(0, 1);
     axios
       .get(
-        "http://localhost/admin/searches/" +
+        "http://"+location.host+"/admin/searches/" +
           location.pathname.split("/")[3] +
           "/get"
       )
