@@ -303,9 +303,8 @@ export default {
 
             window.location = url;
           } else {
-            url =
-              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-
+          //url ="http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+      url = location.host+"/admin/search/" + searchId + "/preview";
             window.location = url;
           }
         })

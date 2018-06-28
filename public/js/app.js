@@ -19940,8 +19940,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
           window.location = url;
         } else {
-          url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
-
+          //url ="http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+          url = location.host + "/admin/search/" + searchId + "/preview";
           window.location = url;
         }
       }).catch(function (error) {
@@ -22484,7 +22484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       index: 0,
-      host: "localhost/",
+      host: location.host + "/",
       uri: location.pathname,
       params: "",
       searchId: "",
@@ -22641,7 +22641,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           console.log(response);
           window.location = url;
         } else {
-          url = "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+          //url ="http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+          url = location.host + "/admin/search/" + searchId + "/preview";
           console.log(response);
           window.location = url;
         }

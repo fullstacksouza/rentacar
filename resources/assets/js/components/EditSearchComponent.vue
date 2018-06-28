@@ -175,7 +175,7 @@ export default {
   data() {
     return {
       index: 0,
-      host: "localhost/",
+      host: location.host+"/",
       uri: location.pathname,
       params: "",
       searchId: "",
@@ -364,8 +364,8 @@ export default {
             console.log(response);
             window.location = url;
           } else {
-            url =
-              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+            //url ="http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+            url =location.host+"/admin/search/" + searchId + "/preview";
 console.log(response);
             window.location = url;
           }
