@@ -175,7 +175,7 @@ export default {
   data() {
     return {
       index: 0,
-      host: "localhost:8000/",
+      host: location.host+"/",
       uri: location.pathname,
       params: "",
       searchId: "",
@@ -199,9 +199,9 @@ export default {
     this.questions.splice(0, 1);
     axios
       .get(
-        "http://localhost:8000/admin/searches/" +
-          location.pathname.split("/")[3] +
-          "/get"
+        `http://${location.host}/admin/searches/
+          ${location.pathname.split("/")[3]}
+          /get`
       )
       .then(response => {
         var i;
@@ -365,7 +365,7 @@ export default {
             window.location = url;
           } else {
             url =
-              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+              "http://"+location.host+"/admin/search/" + searchId + "/preview";
 console.log(response);
             window.location = url;
           }

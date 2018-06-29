@@ -174,7 +174,7 @@ import scroller from "vue-scrollto/src/scrollTo";
 export default {
   data() {
     return {
-      host: "localhost:8000/",
+      host: location.host+"/",
       index: 0,
       uri: location.pathname,
       params: "",
@@ -304,7 +304,7 @@ export default {
             window.location = url;
           } else {
             url =
-              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+              "http://"+location.host+"/admin/search/" + searchId + "/preview";
 
             window.location = url;
           }
@@ -317,7 +317,7 @@ export default {
       if (location.hostname == "localhost") {
         url = "http://localhost:8000/admin/search/" + searchId + "/cancel";
       } else {
-        url = "http://rentacar.esy.es/admin/search/" + searchId + "/cancel";
+        url = "http://"+location.host+"/admin/search/" + searchId + "/cancel";
       }
       axios
         .post(url, {
@@ -331,7 +331,7 @@ export default {
             // window.location = url;
           } else {
             url =
-              "http://rentacar.esy.es/admin/search/" + searchId + "/preview";
+              "http://"+location.host+"/admin/search/" + searchId + "/preview";
 
             // window.location = url;
           }
