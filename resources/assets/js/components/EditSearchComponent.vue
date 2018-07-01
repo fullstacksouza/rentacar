@@ -387,7 +387,7 @@ console.log(response);
 
         } else {
           url =
-            "http://"+window.location.hostname+`/admin/search/${searchId}/question/${questionId}`;
+            "http://"+window.location.hostname+`/admin/search/${searchId}/question/${questionId}/delete`;
         }
 
         axios.post(url)
