@@ -36,8 +36,8 @@ class Kernel extends ConsoleKernel
             if (\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_start)) == 0) {
                 foreach ($search->users as $user) {
 
-                    // $schedule->job(new SendMailJob("dashboard/email/new-search", $user, $search))->dailyAt('08:00');
-                    $schedule->job(new SendMailJob("dashboard/email/new-search", $user, $search))->everyMinute();
+                    $schedule->job(new SendMailJob("dashboard/email/new-search", $user, $search))->dailyAt('08:00');
+
                 }
             }
         } 
