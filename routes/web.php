@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 $this->get('user/change-pass', function () {
     return view("dashboard/users/change-password");
 });
-
+Auth::routes();
 //rotas com o prefixo admin utilizam  os controller na pasta Controller\Admin
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     //USERS ROUTES
