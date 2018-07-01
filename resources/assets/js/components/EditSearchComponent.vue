@@ -345,12 +345,7 @@ export default {
       if (location.hostname == "localhost") {
         url = "http://localhost:8000/admin/search/" + searchId + "/update";
       } else {
-        url =
-          "http://" +
-          window.location.hostname +
-          "/admin/search/" +
-          searchId +
-          "/questions/create";
+        url ="http://" +window.location.hostname +"/admin/search/" +searchId +"/update";
       }
       //this.questions.push({"search_id":searchId}),
       axios
