@@ -29,7 +29,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-       /*  $searches = Search::all();
+         $searches = Search::all();
+         if($searches)
+         {
         foreach ($searches as $search) {
             if (\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($search->date_start)) == 0) {
                 foreach ($search->users as $user) {
@@ -37,7 +39,8 @@ class Kernel extends ConsoleKernel
                     $schedule->job(new SendMailJob("dashboard/email/new-search", $user, $search))->dailyAt('08:00');
                 }
             }
-        } */
+        } 
+    }
     }
 
     /**
