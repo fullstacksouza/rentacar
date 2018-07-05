@@ -17,6 +17,7 @@
 
 @section('content')
 <div class="row">
+  {{config('app.url')." ".url('')}}
   @role("super-admin")
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
