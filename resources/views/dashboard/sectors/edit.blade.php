@@ -3,7 +3,7 @@
 @section('title', 'Realiza Rent a car | Cadastrar Usuário')
 
 @section('content_header')
-    <h1>Criar Usuário</h1>
+    <h1>Atualizar Setor</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
 <!-- Horizontal Form -->
 <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Informe os dados do usuario a ser cadastrado</h3>
+      <h3 class="box-title">Informe os dados do setor  a ser editado</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->

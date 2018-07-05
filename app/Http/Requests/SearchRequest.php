@@ -35,6 +35,7 @@ class SearchRequest extends FormRequest
     {
         return [
             'title.required'            => "O Titulo da pesquisa é Obrigatório",
+            'title.unique'              => "Já existe uma pesquisa com esse nome",
             'date_start.required'       => 'A data de inicio da pesquisa é obrigatória',
             'date_start.after_or_equal' => 'A data de inicio da pesquisa não pode ser menor que a data atual',
             'date_end.required'         => 'A data de expiração da pesquisa é obrigatória',

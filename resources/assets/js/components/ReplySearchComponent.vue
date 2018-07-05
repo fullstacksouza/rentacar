@@ -13,17 +13,18 @@
                                     {{answer.option}}
                             </label>
                               </fieldset>
+
                     </div>
 
 
-
                      <div class="form-group" v-else>
+                     
                          <fieldset :id="'group'+index">
-                        <label>
+                        <label v-if="search.questions[index].answer_options.length > 1">
                         Nenhuma das opçoes acima?
                         </label>
                         </fieldset>
-                        <textarea  v-on:change="unselectRadio(index)" type="text" v-model="answers[index].answer_text" class="form-control" id="inputEmail3"  name="text_answer" ></textarea>
+                        <textarea v-on:change="unselectRadio(index)" type="text" v-model="answers[index].answer_text" class="form-control" id="inputEmail3"  name="text_answer" ></textarea>
                     </div>
 
             </div>

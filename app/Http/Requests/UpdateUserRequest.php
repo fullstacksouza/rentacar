@@ -24,13 +24,13 @@ class UpdateUserRequest extends FormRequest
      public function rules()
      {
          return [
-             'name' => 'required',
-             'email' =>'nullable|email',
-             'rg' => 'required|numeric',
-             'registration'=>'required',
-             'sector'=>'required',
-             'role' =>'required',
-             'dob' =>'required'
+             'name'         => 'required',
+             'email'        => 'nullable|email|',
+             'rg'           => 'required|numeric',
+             'registration' => 'required',
+             'sector'       => 'required',
+             'role'         => 'required',
+             'dob'          => 'required'
 
          ];
      }
@@ -38,15 +38,17 @@ class UpdateUserRequest extends FormRequest
      public function messages()
      {
          return [
-             'name.required' => "O campo nome é obrigatório",
-             'email.email'=>"Digite um email válido",
-             'rg.required'=>"O campo rg é obrigatório",
-             'rg.min'=>"Digite um rg válido",
-             'rg.max'=>"Digite um rg válido",
-             'rg.numeric'=>"Digite um rg válido",
-             'role.required'=> 'O campo perfil é obrigatório',
-             'dob.required'=> 'O campo data de nascimento é obrigatório',
-             'registration.required'=> 'O campo matricula é obrigatório',
+             'name.required'         => "O campo nome é obrigatório",
+             'email.email'           => "Digite um email válido",
+             'email.unique'          => "Este email ja está sendo utilizado",
+             'rg.required'           => "O campo rg é obrigatório",
+             'rg.min'                => "Digite um rg válido",
+             'rg.max'                => "Digite um rg válido",
+             'rg.numeric'            => "Digite um rg válido",
+             'role.required'         => 'O campo perfil é obrigatório',
+             'dob.required'          => 'O campo data de nascimento é obrigatório',
+             'registration.required' => 'O campo matricula é obrigatório',
+            
          ];
      }
 }
